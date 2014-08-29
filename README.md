@@ -1,6 +1,6 @@
 # AeroGear iOS Differential Synchronization Client Engine
-This project represents a client side implementation for AeroGear Differential 
-Synchronization (DS) Server.
+This project represents a client side implementation for [AeroGear Differential 
+Synchronization (DS) Server](https://github.com/danbev/aerogear-sync-server/tree/differential-synchronization).
 
 
 ## Building
