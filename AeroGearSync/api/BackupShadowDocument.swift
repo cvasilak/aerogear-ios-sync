@@ -1,6 +1,6 @@
 import Foundation
 
-protocol BackupShadowDocument {
+public protocol BackupShadowDocument {
     func version() -> Int64
     func shadowDocument() -> ShadowDocument
 }

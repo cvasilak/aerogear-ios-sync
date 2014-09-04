@@ -1,5 +1,13 @@
 import Foundation
 
-class ClientSyncEngine<String> {
+public class ClientSyncEngine<String> {
+    
+    let synchronizer: ClientSynchronizer
+    let datastore: DataStore
+    
+    public init(synchronizer: ClientSynchronizer, datastore: DataStore) {
+        self.synchronizer = synchronizer
+        self.datastore = datastore
+    }
     
 }

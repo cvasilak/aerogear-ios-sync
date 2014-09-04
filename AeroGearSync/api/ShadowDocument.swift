@@ -1,7 +1,7 @@
 import Foundation
 
-protocol ShadowDocument {
-    func serverVersion() -> Int64
-    func clientVersion() -> Int64
-    func clientDocument() -> ClientDocument
+public protocol ShadowDocument {
+    var serverVersion: Int64 { get }
+    var clientVersion: Int64 { get }
+    var clientDocument: ClientDocument { get }
 }

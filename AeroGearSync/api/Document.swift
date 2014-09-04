@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Document {
-    func id() -> String
-    func content() -> String
+public protocol Document {
+    var id: String { get }
+    var content: String { get }
 }

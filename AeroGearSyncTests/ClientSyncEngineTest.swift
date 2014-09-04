@@ -18,7 +18,7 @@
 
 import XCTest
 
-class SyncEngineTests: XCTestCase {
+class ClientSyncEngineTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

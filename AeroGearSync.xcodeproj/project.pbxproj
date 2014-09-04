@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		488B6B84196B1CD1000297C9 /* AeroGearSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; };
-		C53F5B3719B0586700FAC751 /* SyncEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B2319B0554B00FAC751 /* SyncEngineTest.swift */; };
+		C53F5B3719B0586700FAC751 /* ClientSyncEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B2319B0554B00FAC751 /* ClientSyncEngineTest.swift */; };
 		C53F5B4C19B0735100FAC751 /* ClientDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B4B19B0735100FAC751 /* ClientDocument.swift */; };
 		C53F5B5619B0738500FAC751 /* BackupShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B4D19B0738500FAC751 /* BackupShadowDocument.swift */; };
 		C53F5B5719B0738500FAC751 /* ClientSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B4E19B0738500FAC751 /* ClientSynchronizer.swift */; };
@@ -20,6 +20,12 @@
 		C53F5B5E19B0738500FAC751 /* ShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B5519B0738500FAC751 /* ShadowDocument.swift */; };
 		C53F5B6319B073F900FAC751 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B6219B073F900FAC751 /* Queue.m */; };
 		C53F5B6619B0747100FAC751 /* ClientSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5B6519B0747100FAC751 /* ClientSyncEngine.swift */; };
+		C546D95819B8697700451ACE /* InMemoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D95719B8697700451ACE /* InMemoryDataStore.swift */; };
+		C546D96619B89A6600451ACE /* DefaultShadowDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96519B89A6600451ACE /* DefaultShadowDocumentTests.swift */; };
+		C546D96819B89AB000451ACE /* DefaultShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96719B89AB000451ACE /* DefaultShadowDocument.swift */; };
+		C546D96A19B89C8200451ACE /* DefaultClientDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96919B89C8200451ACE /* DefaultClientDocumentTests.swift */; };
+		C546D96C19B89CEB00451ACE /* DefaultClientDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96B19B89CEB00451ACE /* DefaultClientDocument.swift */; };
+		C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +64,7 @@
 		488B6B67196B19BC000297C9 /* AeroGearSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53F5B0A19B0552C00FAC751 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C53F5B2219B0554B00FAC751 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C53F5B2319B0554B00FAC751 /* SyncEngineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncEngineTest.swift; sourceTree = "<group>"; };
+		C53F5B2319B0554B00FAC751 /* ClientSyncEngineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSyncEngineTest.swift; sourceTree = "<group>"; };
 		C53F5B4B19B0735100FAC751 /* ClientDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDocument.swift; sourceTree = "<group>"; };
 		C53F5B4D19B0738500FAC751 /* BackupShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupShadowDocument.swift; sourceTree = "<group>"; };
 		C53F5B4E19B0738500FAC751 /* ClientSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSynchronizer.swift; sourceTree = "<group>"; };
@@ -70,6 +76,12 @@
 		C53F5B5519B0738500FAC751 /* ShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDocument.swift; sourceTree = "<group>"; };
 		C53F5B6219B073F900FAC751 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		C53F5B6519B0747100FAC751 /* ClientSyncEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSyncEngine.swift; sourceTree = "<group>"; };
+		C546D95719B8697700451ACE /* InMemoryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStore.swift; sourceTree = "<group>"; };
+		C546D96519B89A6600451ACE /* DefaultShadowDocumentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultShadowDocumentTests.swift; sourceTree = "<group>"; };
+		C546D96719B89AB000451ACE /* DefaultShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultShadowDocument.swift; sourceTree = "<group>"; };
+		C546D96919B89C8200451ACE /* DefaultClientDocumentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultClientDocumentTests.swift; sourceTree = "<group>"; };
+		C546D96B19B89CEB00451ACE /* DefaultClientDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultClientDocument.swift; path = ../DefaultClientDocument.swift; sourceTree = "<group>"; };
+		C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				C53F5B2219B0554B00FAC751 /* Info.plist */,
-				C53F5B2319B0554B00FAC751 /* SyncEngineTest.swift */,
+				C53F5B2319B0554B00FAC751 /* ClientSyncEngineTest.swift */,
+				C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */,
+				C546D96519B89A6600451ACE /* DefaultShadowDocumentTests.swift */,
+				C546D96919B89C8200451ACE /* DefaultClientDocumentTests.swift */,
 			);
 			path = AeroGearSyncTests;
 			sourceTree = "<group>";
@@ -156,7 +171,10 @@
 		C53F5B6419B0746000FAC751 /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				C546D96B19B89CEB00451ACE /* DefaultClientDocument.swift */,
 				C53F5B6519B0747100FAC751 /* ClientSyncEngine.swift */,
+				C546D95719B8697700451ACE /* InMemoryDataStore.swift */,
+				C546D96719B89AB000451ACE /* DefaultShadowDocument.swift */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -271,6 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C53F5B5919B0738500FAC751 /* Diff.swift in Sources */,
+				C546D96C19B89CEB00451ACE /* DefaultClientDocument.swift in Sources */,
+				C546D96819B89AB000451ACE /* DefaultShadowDocument.swift in Sources */,
+				C546D95819B8697700451ACE /* InMemoryDataStore.swift in Sources */,
 				C53F5B6619B0747100FAC751 /* ClientSyncEngine.swift in Sources */,
 				C53F5B5819B0738500FAC751 /* DataStore.swift in Sources */,
 				C53F5B5E19B0738500FAC751 /* ShadowDocument.swift in Sources */,
@@ -288,7 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C53F5B3719B0586700FAC751 /* SyncEngineTest.swift in Sources */,
+				C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */,
+				C53F5B3719B0586700FAC751 /* ClientSyncEngineTest.swift in Sources */,
+				C546D96A19B89C8200451ACE /* DefaultClientDocumentTests.swift in Sources */,
+				C546D96619B89A6600451ACE /* DefaultShadowDocumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

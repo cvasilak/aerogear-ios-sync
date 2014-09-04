@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Edit {
+public protocol Edit {
     func clientId() -> String
     func documentId() -> String
     func clientVersion() -> Int64

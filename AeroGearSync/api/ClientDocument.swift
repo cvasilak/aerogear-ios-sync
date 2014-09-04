@@ -1,5 +1,5 @@
 import Foundation
 
-protocol ClientDocument: Document {
-    func clientId() -> String
+public protocol ClientDocument: Document {
+    var clientId:String { get }
 }

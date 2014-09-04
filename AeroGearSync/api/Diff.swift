@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Diff {
+public protocol Diff {
     func text() -> String
     func operation() -> Operation
 }
