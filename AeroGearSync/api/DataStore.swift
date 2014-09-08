@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol DataStore {
-    func saveShadowDocument(shadowDocument: ShadowDocument)
+    func saveShadowDocument<S: ShadowDocument>(shadowDocument: S)
     func getShadowDocument(documentId: String, clientId: String)
     
     func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument)

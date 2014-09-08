@@ -5,7 +5,7 @@ public class InMemoryDataStore: DataStore {
     public init() {
     }
     
-    public func saveShadowDocument(shadowDocument: ShadowDocument) {
+    public func saveShadowDocument<S: ShadowDocument>(shadowDocument: S) {
     }
     
     public func getShadowDocument(documentId: String, clientId: String) {

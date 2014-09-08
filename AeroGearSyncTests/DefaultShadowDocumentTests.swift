@@ -4,12 +4,12 @@ import AeroGearSync
 
 class DefaultShadowDocumentTests: XCTestCase {
 
-    func testExample() {
-        let clientDoc = DefaultClientDocument(id: "1234", clientId: "client2", content: "payload")
-        let shadow = DefaultShadowDocument(serverVersion: 1, clientVersion: 2, clientDocument: clientDoc)
+    func testCreateShadowDoc() {
+        var doc = DefaultClientDocument<String>(id: "1234", clientId: "client1", content: "something")
+        let shadow = DefaultShadowDocument(serverVersion: 1, clientVersion: 2, clientDocument: doc)
         XCTAssertEqual(1, shadow.serverVersion)
         XCTAssertEqual(2, shadow.clientVersion)
-        //XCTAssertEqualsObject(clientDoc, shadow.clientDocument)
+        XCTAssertEqual(doc.content, shadow.clientDocument.content)
     }
 
 }
