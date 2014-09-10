@@ -1,20 +1,23 @@
 import Foundation
 
-public class InMemoryDataStore: DataStore {
+public class InMemoryDataStore<T>: DataStore {
     
-    //var shadows = Dictionary<String, ShadowDocument>()
+    typealias ContentType = T
+    var shadows = Dictionary<Key, ShadowDocument<T>>()
     
     public init() {
     }
     
-    public func saveShadowDocument<T>(shadowDocument: ShadowDocument<T>) {
-        //shadows[shadowDocument.clientDocument.id] = shadowDocument
+    public func saveShadowDocument(shadowDocument: ShadowDocument<T>) {
+        let key = Key(id: shadowDocument.clientDocument.id, clientId: shadowDocument.clientDocument.clientId)
+        shadows[key] = shadowDocument
     }
     
-    public func getShadowDocument(documentId: String, clientId: String) {
+    public func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>?{
+        return shadows[Key(id: documentId, clientId: clientId)]
     }
     
-    public func saveBackupShadowDocument<T>(backupShadowDocument: BackupShadowDocument<T>) {
+    public func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<T>) {
     }
     
     public func getBackupShadowDocument(documentId: String, clientId: String) {
@@ -33,4 +36,25 @@ public class InMemoryDataStore: DataStore {
     public func removeEdits(documentId: String, clientId: String) {
     }
     
+}
+
+func ==(lhs: Key, rhs: Key) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
+
+struct Key: Hashable {
+    let id: String
+    let clientId: String
+    
+    init(id: String, clientId: String) {
+        self.id = id
+        self.clientId = clientId
+    }
+        
+    var hashValue: Int {
+        get {
+            return "\(id),\(clientId)".hashValue
+        }
+    }
+        
 }
