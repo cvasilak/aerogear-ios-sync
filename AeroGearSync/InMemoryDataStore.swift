@@ -2,16 +2,19 @@ import Foundation
 
 public class InMemoryDataStore: DataStore {
     
+    //var shadows = Dictionary<String, ShadowDocument>()
+    
     public init() {
     }
     
-    public func saveShadowDocument<S: ShadowDocument>(shadowDocument: S) {
+    public func saveShadowDocument<T>(shadowDocument: ShadowDocument<T>) {
+        //shadows[shadowDocument.clientDocument.id] = shadowDocument
     }
     
     public func getShadowDocument(documentId: String, clientId: String) {
     }
     
-    public func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument) {
+    public func saveBackupShadowDocument<T>(backupShadowDocument: BackupShadowDocument<T>) {
     }
     
     public func getBackupShadowDocument(documentId: String, clientId: String) {
