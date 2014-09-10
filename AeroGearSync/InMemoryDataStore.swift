@@ -4,6 +4,7 @@ public class InMemoryDataStore<T>: DataStore {
     
     typealias ContentType = T
     var shadows = Dictionary<Key, ShadowDocument<T>>()
+    var backups = Dictionary<Key, BackupShadowDocument<T>>()
     
     public init() {
     }
@@ -13,14 +14,17 @@ public class InMemoryDataStore<T>: DataStore {
         shadows[key] = shadowDocument
     }
     
-    public func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>?{
+    public func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>? {
         return shadows[Key(id: documentId, clientId: clientId)]
     }
     
-    public func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<T>) {
+    public func saveBackupShadowDocument(backup: BackupShadowDocument<T>) {
+        let key = Key(id: backup.shadowDocument.clientDocument.id, clientId: backup.shadowDocument.clientDocument.clientId)
+        backups[key] = backup
     }
     
-    public func getBackupShadowDocument(documentId: String, clientId: String) {
+    public func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>? {
+        return backups[Key(id: documentId, clientId: clientId)]
     }
     
     public func saveEdits(edit: Edit) {

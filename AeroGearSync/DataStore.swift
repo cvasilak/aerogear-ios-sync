@@ -8,7 +8,7 @@ public protocol DataStore {
     func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<ContentType>?
     
     func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<ContentType>)
-    func getBackupShadowDocument(documentId: String, clientId: String)
+    func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<ContentType>?
     
     func saveEdits(edit: Edit)
     func getEdits(documentId: String, clientId: String) -> NSMutableArray
