@@ -1,9 +1,9 @@
 import Foundation
 
 public class PatchMessage {
-    let documentId: String
-    let clientId: String
-    let edits: [Edit]
+    public let documentId: String
+    public let clientId: String
+    public let edits: [Edit]
 
     public init(id: String, clientId: String, edits: [Edit]) {
         self.documentId = id

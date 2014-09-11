@@ -16,7 +16,8 @@ public class ClientSyncEngine<T, CS:ClientSynchronizer, D:DataStore> {
         dataStore.saveClientDocument(clientDocument)
     }
 
-    public func diff(clientDocument: ClientDocument<CS.ContentType>) {
+    public func diff(clientDocument: ClientDocument<CS.ContentType>) -> PatchMessage {
+        return PatchMessage(id: clientDocument.id, clientId: clientDocument.clientId, edits: [])
     }
 
     public func patch() {
