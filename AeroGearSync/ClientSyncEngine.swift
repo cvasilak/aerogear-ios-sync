@@ -12,7 +12,8 @@ public class ClientSyncEngine<T, CS:ClientSynchronizer, D:DataStore> {
         self.dataStore = dataStore
     }
 
-    public func addDocument(clientDocument: ClientDocument<T>) {
+    public func addDocument(clientDocument: ClientDocument<D.ContentType>) {
+        dataStore.saveClientDocument(clientDocument)
     }
 
     public func diff(clientDocument: ClientDocument<T>) {
