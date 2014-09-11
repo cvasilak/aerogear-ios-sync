@@ -1,11 +1,16 @@
 import Foundation
 
-public class ClientSyncEngine<T> {
+public class ClientSyncEngine<T, CS:ClientSynchronizer, D:DataStore> {
     
-    let synchronizer: ClientSynchronizer
+    typealias ContentType = T
     
-    public init(synchronizer: ClientSynchronizer) {
+    let synchronizer: CS
+    let dataStore: D
+    
+    public init(synchronizer: CS, dataStore: D) {
         self.synchronizer = synchronizer
+        self.dataStore = dataStore
     }
     
 }
+

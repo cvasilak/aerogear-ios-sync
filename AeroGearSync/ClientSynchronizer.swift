@@ -1,8 +1,14 @@
 import Foundation
 
 public protocol ClientSynchronizer {
-    func patchShadow<T, S: ShadowDocument<T>>(edit: Edit, shadowDocument: S)
-    func patchDocument<T, C: ClientDocument<T>>(edit: Edit, clientDocument: C)
-    func serverDiff<T, C: ClientDocument<T>, S: ShadowDocument<T>>(clientDocument: C, shadowDocument: S)
-    func clientDiff<T, C: ClientDocument<T>, S: ShadowDocument<T>>(clientDocument: C, shadowDocument: S)
+    
+    typealias ContentType
+    
+    func patchShadow(edit: Edit, shadowDocument: ShadowDocument<ContentType>)
+    
+    func patchDocument(edit: Edit, clientDocument: ClientDocument<ContentType>)
+    
+    func serverDiff(clientDocument: ClientDocument<ContentType>, shadowDocument: ShadowDocument<ContentType>)
+    
+    func clientDiff(clientDocument: ClientDocument<ContentType>, shadowDocument: ShadowDocument<ContentType>)
 }
