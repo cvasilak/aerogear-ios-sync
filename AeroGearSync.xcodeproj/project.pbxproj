@@ -11,6 +11,7 @@
 		C5307E1519C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */; };
 		C5307E1719C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */; };
 		C5307E1B19C19D210009EBB2 /* ClientSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */; };
+		C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */; };
 		C546D96619B89A6600451ACE /* ShadowDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96519B89A6600451ACE /* ShadowDocumentTests.swift */; };
 		C546D96A19B89C8200451ACE /* ClientDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96919B89C8200451ACE /* ClientDocumentTests.swift */; };
 		C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846019C046A50049EB34 /* BackupShadowDocument.swift */; };
@@ -65,6 +66,7 @@
 		C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchSynchronizerTests.swift; sourceTree = "<group>"; };
 		C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchSynchronizer.swift; sourceTree = "<group>"; };
 		C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSyncEngineTests.swift; sourceTree = "<group>"; };
+		C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatchMesssage.swift; sourceTree = "<group>"; };
 		C53F5B0A19B0552C00FAC751 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C53F5B2219B0554B00FAC751 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C546D96519B89A6600451ACE /* ShadowDocumentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDocumentTests.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				C589846519C046A50049EB34 /* Diff.swift */,
 				C589846619C046A50049EB34 /* Document.swift */,
 				C589846719C046A50049EB34 /* Edit.swift */,
+				C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */,
 				C589846819C046A50049EB34 /* InMemoryDataStore.swift */,
 				C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */,
 				C589846919C046A50049EB34 /* Operation.swift */,
@@ -272,6 +275,7 @@
 				C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */,
 				C589847319C046A50049EB34 /* Edit.swift in Sources */,
 				C589847619C046A50049EB34 /* Queue.m in Sources */,
+				C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */,
 				C589847419C046A50049EB34 /* InMemoryDataStore.swift in Sources */,
 				C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */,
 				C589847019C046A50049EB34 /* DataStore.swift in Sources */,
