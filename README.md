@@ -3,7 +3,7 @@ This project represents a client side implementation for [AeroGear Differential
 Synchronization (DS) Server](https://github.com/danbev/aerogear-sync-server/tree/differential-synchronization).
 
 ## Prerequisites 
-This project requires Xcode6-beta7 to run.
+This project requires Xcode6.0 to run.
 
 
 ## Building
@@ -13,9 +13,9 @@ Building can be done by opening the project in Xcode:
     open AeroGearSync.xcodeproj
 
 or you can use the command line.
-Make sure you are using Xcode6-beta7: 
+Make sure you are using Xcode6.0: 
 
-    sudo xcode-select -s /Applications/Xcode6-Beta7.app/Contents/Developer
+    sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
     xcodebuild -scheme AeroGearSync build
 
