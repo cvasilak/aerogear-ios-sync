@@ -11,6 +11,14 @@ public class ClientSyncEngine<T, CS:ClientSynchronizer, D:DataStore> {
         self.synchronizer = synchronizer
         self.dataStore = dataStore
     }
-    
+
+    public func addDocument(clientDocument: ClientDocument<T>) {
+    }
+
+    public func diff(clientDocument: ClientDocument<T>) {
+    }
+
+    public func patch() {
+    }
 }
 
