@@ -5,39 +5,59 @@ public class InMemoryDataStore<T>: DataStore {
     typealias ContentType = T
     var shadows = Dictionary<Key, ShadowDocument<T>>()
     var backups = Dictionary<Key, BackupShadowDocument<T>>()
+    var edits = Dictionary<Key, [Edit]>()
     
     public init() {
     }
     
-    public func saveShadowDocument(shadowDocument: ShadowDocument<T>) {
-        let key = Key(id: shadowDocument.clientDocument.id, clientId: shadowDocument.clientDocument.clientId)
-        shadows[key] = shadowDocument
+    public func saveShadowDocument(shadow: ShadowDocument<T>) {
+        let key = InMemoryDataStore.key(shadow.clientDocument.id, shadow.clientDocument.clientId)
+        shadows[key] = shadow
     }
     
     public func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>? {
-        return shadows[Key(id: documentId, clientId: clientId)]
+        return shadows[InMemoryDataStore.key(documentId, clientId)]
     }
     
     public func saveBackupShadowDocument(backup: BackupShadowDocument<T>) {
-        let key = Key(id: backup.shadowDocument.clientDocument.id, clientId: backup.shadowDocument.clientDocument.clientId)
+        let key = InMemoryDataStore.key(backup.shadowDocument.clientDocument.id, backup.shadowDocument.clientDocument.clientId)
         backups[key] = backup
     }
     
     public func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>? {
-        return backups[Key(id: documentId, clientId: clientId)]
+        return backups[InMemoryDataStore.key(documentId, clientId)]
     }
     
     public func saveEdits(edit: Edit) {
+        let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
+        var pendingEdits = edits[key] ?? []
+        pendingEdits.append(edit)
+        edits[key] = pendingEdits
     }
     
-    public func getEdits(documentId: String, clientId: String) -> NSMutableArray {
-        return []
+    public func getEdits(documentId: String, clientId: String) -> [Edit]? {
+        return edits[InMemoryDataStore.key(documentId, clientId)]
     }
     
     public func removeEdit(edit: Edit) {
+        let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
+        if var pendingEdits = edits[key] {
+            let count = pendingEdits.count
+            for i in 0..<count {
+                if edit == pendingEdits[i] {
+                    pendingEdits.removeAtIndex(i)
+                }
+            }
+            edits[key] = pendingEdits
+        }
     }
     
     public func removeEdits(documentId: String, clientId: String) {
+        edits.removeValueForKey(Key(id: documentId, clientId: clientId))
+    }
+
+    private class func key(id: String, _ clientId: String) -> Key {
+        return Key(id: id, clientId: clientId)
     }
     
 }

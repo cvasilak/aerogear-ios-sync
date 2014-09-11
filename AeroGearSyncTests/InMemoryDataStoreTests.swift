@@ -28,6 +28,31 @@ class InMemoryDataStoreTests: XCTestCase {
         assertDefaultShadow(backup.shadowDocument)
     }
     
+    func testSaveEdits() {
+        let edit1 = defaultEdit(clientVersion: 1, serverVersion: 1)
+        dataStore.saveEdits(edit1)
+        XCTAssertEqual(1, dataStore.getEdits(documentId, clientId: clientId)!.count)
+        let edit2 = defaultEdit(clientVersion: 2, serverVersion: 1)
+        dataStore.saveEdits(edit2)
+        XCTAssertEqual(2, dataStore.getEdits(documentId, clientId: clientId)!.count)
+    }
+
+    func testRemoveEdit() {
+        let edit = defaultEdit(clientVersion: 1, serverVersion: 1)
+        dataStore.saveEdits(edit)
+        dataStore.removeEdit(edit)
+        XCTAssertEqual(0, dataStore.getEdits(documentId, clientId: clientId)!.count)
+    }
+
+    func testRemoveEdits() {
+        dataStore.saveEdits(defaultEdit(clientVersion: 1, serverVersion: 1))
+        dataStore.saveEdits(defaultEdit(clientVersion: 2, serverVersion: 1))
+        dataStore.saveEdits(defaultEdit(clientVersion: 3, serverVersion: 1))
+        dataStore.removeEdits(documentId, clientId: clientId)
+        let edits: Optional<[Edit]> = dataStore.getEdits(documentId, clientId: clientId)
+        XCTAssertNil(edits)
+    }
+
     func assertDefaultShadow(shadow: ShadowDocument<String>) {
         XCTAssertEqual(2, shadow.clientVersion)
         XCTAssertEqual(1, shadow.serverVersion)
@@ -45,4 +70,12 @@ class InMemoryDataStoreTests: XCTestCase {
         return BackupShadowDocument<String>(version: 1, shadowDocument: defaultShadowDoc())
     }
 
+    func defaultEdit(# clientVersion: UInt64, serverVersion: UInt64) -> Edit {
+        return Edit(clientId: clientId,
+            documentId: documentId,
+            clientVersion: clientVersion,
+            serverVersion: serverVersion,
+            checksum: "",
+            diffs: [Diff]())
+    }
 }

@@ -11,7 +11,7 @@ public protocol DataStore {
     func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<ContentType>?
     
     func saveEdits(edit: Edit)
-    func getEdits(documentId: String, clientId: String) -> NSMutableArray
+    func getEdits(documentId: String, clientId: String) -> [Edit]?
     func removeEdit(edit: Edit)
     func removeEdits(documentId: String, clientId: String)
     
