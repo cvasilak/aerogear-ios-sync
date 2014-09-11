@@ -15,6 +15,12 @@ class InMemoryDataStoreTests: XCTestCase {
         content = "something"
     }
 
+    func testSaveClientDocument() {
+        dataStore.saveClientDocument(defaultClientDoc())
+        let clientDocument = dataStore.getClientDocument(documentId, clientId: clientId)!
+        assertDefaultClientDocument(clientDocument)
+    }
+
     func testSaveShadowDocument() {
         dataStore.saveShadowDocument(defaultShadowDoc())
         let shadow = dataStore.getShadowDocument(documentId, clientId: clientId)!
@@ -56,14 +62,21 @@ class InMemoryDataStoreTests: XCTestCase {
     func assertDefaultShadow(shadow: ShadowDocument<String>) {
         XCTAssertEqual(2, shadow.clientVersion)
         XCTAssertEqual(1, shadow.serverVersion)
-        XCTAssertEqual(documentId , shadow.clientDocument.id)
-        XCTAssertEqual(clientId, shadow.clientDocument.clientId)
-        XCTAssertEqual(content, shadow.clientDocument.content)
+        assertDefaultClientDocument(shadow.clientDocument)
+    }
+
+    func assertDefaultClientDocument(clientDocument: ClientDocument<String>) {
+        XCTAssertEqual(documentId , clientDocument.id)
+        XCTAssertEqual(clientId, clientDocument.clientId)
+        XCTAssertEqual(content, clientDocument.content)
+    }
+
+    func defaultClientDoc() -> ClientDocument<String> {
+        return ClientDocument<String>(id: documentId, clientId: clientId, content: content)
     }
 
     func defaultShadowDoc() -> ShadowDocument<String> {
-        let doc = ClientDocument<String>(id: documentId, clientId: clientId, content: content)
-        return ShadowDocument<String>(clientVersion: 2, serverVersion: 1, clientDocument: doc)
+        return ShadowDocument<String>(clientVersion: 2, serverVersion: 1, clientDocument: defaultClientDoc())
     }
 
     func defaultBackupShadowDoc() -> BackupShadowDocument<String> {

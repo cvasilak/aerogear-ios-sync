@@ -3,11 +3,21 @@ import Foundation
 public class InMemoryDataStore<T>: DataStore {
     
     typealias ContentType = T
+    var documents = Dictionary<Key, ClientDocument<T>>()
     var shadows = Dictionary<Key, ShadowDocument<T>>()
     var backups = Dictionary<Key, BackupShadowDocument<T>>()
     var edits = Dictionary<Key, [Edit]>()
     
     public init() {
+    }
+
+    public func saveClientDocument(document: ClientDocument<T>) {
+        let key = InMemoryDataStore.key(document.id, document.clientId)
+        documents[key] = document
+    }
+
+    public func getClientDocument(documentId: String, clientId: String) -> ClientDocument<T>? {
+        return documents[InMemoryDataStore.key(documentId, clientId)]
     }
     
     public func saveShadowDocument(shadow: ShadowDocument<T>) {

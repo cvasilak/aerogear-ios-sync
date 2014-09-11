@@ -3,6 +3,9 @@ import Foundation
 public protocol DataStore {
     
     typealias ContentType
+
+    func saveClientDocument(clientDocument: ClientDocument<ContentType>)
+    func getClientDocument(documentId: String, clientId: String) -> ClientDocument<ContentType>?
     
     func saveShadowDocument(shadowDocument: ShadowDocument<ContentType>)
     func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<ContentType>?
