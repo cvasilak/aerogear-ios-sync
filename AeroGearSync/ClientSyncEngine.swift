@@ -1,8 +1,6 @@
 import Foundation
 
-public class ClientSyncEngine<T, CS:ClientSynchronizer, D:DataStore> {
-    
-    typealias ContentType = T
+public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore> {
     
     let synchronizer: CS
     let dataStore: D
