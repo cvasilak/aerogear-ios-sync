@@ -89,6 +89,6 @@ class InMemoryDataStoreTests: XCTestCase {
             clientVersion: clientVersion,
             serverVersion: serverVersion,
             checksum: "",
-            diffs: [Diff]())
+            diffs: [])
     }
 }

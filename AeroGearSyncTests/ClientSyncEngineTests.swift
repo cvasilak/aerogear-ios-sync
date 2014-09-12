@@ -6,8 +6,8 @@ class ClientSyncEngineTests: XCTestCase {
 
     typealias T = String
     var dataStore: InMemoryDataStore<T>!
-    var synchonizer: DiffMatchPatchSynchronizer<T>!
-    var engine: ClientSyncEngine<DiffMatchPatchSynchronizer<T>, InMemoryDataStore<T>>!
+    var synchonizer: DiffMatchPatchSynchronizer!
+    var engine: ClientSyncEngine<DiffMatchPatchSynchronizer, InMemoryDataStore<T>>!
 
     override func setUp() {
         super.setUp()

@@ -1,6 +1,12 @@
 import Foundation
 
-public protocol Diff {
-    func text() -> String
-    func operation() -> Operation
+public class Diff {
+    
+    let operation: Operation
+    let text: String
+    
+    public init(operation: Operation, text: String) {
+        self.operation = operation
+        self.text = text
+    }
 }

@@ -19,14 +19,13 @@
 		C589846E19C046A50049EB34 /* ClientSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846219C046A50049EB34 /* ClientSyncEngine.swift */; };
 		C589846F19C046A50049EB34 /* ClientSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846319C046A50049EB34 /* ClientSynchronizer.swift */; };
 		C589847019C046A50049EB34 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846419C046A50049EB34 /* DataStore.swift */; };
-		C589847119C046A50049EB34 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846519C046A50049EB34 /* Diff.swift */; };
 		C589847219C046A50049EB34 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846619C046A50049EB34 /* Document.swift */; };
 		C589847319C046A50049EB34 /* Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846719C046A50049EB34 /* Edit.swift */; };
 		C589847419C046A50049EB34 /* InMemoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846819C046A50049EB34 /* InMemoryDataStore.swift */; };
-		C589847519C046A50049EB34 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846919C046A50049EB34 /* Operation.swift */; };
 		C589847619C046A50049EB34 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = C589846A19C046A50049EB34 /* Queue.m */; };
 		C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846B19C046A50049EB34 /* ShadowDocument.swift */; };
 		C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */; };
+		C5D316DA19C3184A00C11D9C /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +57,20 @@
 			remoteGlobalIDString = 488B6B5B196B19BC000297C9;
 			remoteInfo = AeroGearSync;
 		};
+		C5D316D619C3183300C11D9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = DiffMatchPatch;
+		};
+		C5D316D819C3183300C11D9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
+			remoteInfo = DiffMatchPatchTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -76,14 +89,14 @@
 		C589846219C046A50049EB34 /* ClientSyncEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSyncEngine.swift; sourceTree = "<group>"; };
 		C589846319C046A50049EB34 /* ClientSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSynchronizer.swift; sourceTree = "<group>"; };
 		C589846419C046A50049EB34 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		C589846519C046A50049EB34 /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		C589846619C046A50049EB34 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		C589846719C046A50049EB34 /* Edit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edit.swift; sourceTree = "<group>"; };
 		C589846819C046A50049EB34 /* InMemoryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStore.swift; sourceTree = "<group>"; };
-		C589846919C046A50049EB34 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		C589846A19C046A50049EB34 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		C589846B19C046A50049EB34 /* ShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDocument.swift; sourceTree = "<group>"; };
 		C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
+		C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "diffmatchpatch-ios/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
+		C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AeroGearSync-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D316DA19C3184A00C11D9C /* DiffMatchPatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +122,7 @@
 		488B6B52196B19BC000297C9 = {
 			isa = PBXGroup;
 			children = (
+				C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */,
 				C53F5B1019B0554B00FAC751 /* AeroGearSyncTests */,
 				C53F5B0719B0552C00FAC751 /* AeroGearSync */,
 				488B6B5D196B19BC000297C9 /* Products */,
@@ -131,16 +146,15 @@
 				C589846219C046A50049EB34 /* ClientSyncEngine.swift */,
 				C589846319C046A50049EB34 /* ClientSynchronizer.swift */,
 				C589846419C046A50049EB34 /* DataStore.swift */,
-				C589846519C046A50049EB34 /* Diff.swift */,
 				C589846619C046A50049EB34 /* Document.swift */,
 				C589846719C046A50049EB34 /* Edit.swift */,
 				C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */,
 				C589846819C046A50049EB34 /* InMemoryDataStore.swift */,
 				C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */,
-				C589846919C046A50049EB34 /* Operation.swift */,
 				C589846A19C046A50049EB34 /* Queue.m */,
 				C589846B19C046A50049EB34 /* ShadowDocument.swift */,
 				C53F5B0A19B0552C00FAC751 /* Info.plist */,
+				C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */,
 			);
 			path = AeroGearSync;
 			sourceTree = "<group>";
@@ -156,6 +170,15 @@
 				C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */,
 			);
 			path = AeroGearSyncTests;
+			sourceTree = "<group>";
+		};
+		C5D316D219C3183300C11D9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */,
+				C5D316D919C3183300C11D9C /* DiffMatchPatchTest.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +260,12 @@
 			mainGroup = 488B6B52196B19BC000297C9;
 			productRefGroup = 488B6B5D196B19BC000297C9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C5D316D219C3183300C11D9C /* Products */;
+					ProjectRef = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				488B6B5B196B19BC000297C9 /* AeroGearSync */,
@@ -244,6 +273,24 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DiffMatchPatch.framework;
+			remoteRef = C5D316D619C3183300C11D9C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D316D919C3183300C11D9C /* DiffMatchPatchTest.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = DiffMatchPatchTest.bundle;
+			path = DiffMatchPatchTest.xctest;
+			remoteRef = C5D316D819C3183300C11D9C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		488B6B5A196B19BC000297C9 /* Resources */ = {
@@ -267,11 +314,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C589847119C046A50049EB34 /* Diff.swift in Sources */,
 				C5307E1719C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift in Sources */,
 				C589846F19C046A50049EB34 /* ClientSynchronizer.swift in Sources */,
 				C589846E19C046A50049EB34 /* ClientSyncEngine.swift in Sources */,
-				C589847519C046A50049EB34 /* Operation.swift in Sources */,
 				C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */,
 				C589847319C046A50049EB34 /* Edit.swift in Sources */,
 				C589847619C046A50049EB34 /* Queue.m in Sources */,
@@ -420,6 +465,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AeroGearSync;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -437,6 +483,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AeroGearSync;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 			};
 			name = Release;
 		};
