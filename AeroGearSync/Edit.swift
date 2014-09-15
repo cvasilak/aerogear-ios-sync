@@ -23,8 +23,8 @@ public class Edit: Equatable {
     
     public class Diff {
     
-        let operation: Operation
-        let text: String
+        public let operation: Operation
+        public let text: String
     
         public init(operation: Operation, text: String) {
             self.operation = operation

@@ -9,26 +9,26 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         self.dmp = DiffMatchPatch()
     }
 
-    public func clientDiff(clientDocument: ClientDocument<String>, shadowDocument: ShadowDocument<String>) {
+    public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) {
     }
 
     public func patchDocument(edit: Edit, clientDocument: ClientDocument<String>) {
     }
 
-    public func patchShadow(edit: Edit, shadowDocument: ShadowDocument<String>) {
+    public func patchShadow(edit: Edit, shadow: ShadowDocument<String>) {
     }
 
-    public func serverDiff(serverDocument: ClientDocument<String>, shadowDocument: ShadowDocument<String>) -> PatchMessage {
-        let diffs = dmp.diff_mainOfOldString(serverDocument.content, andNewString: shadowDocument.clientDocument.content)
-        return PatchMessage(id: serverDocument.id, clientId: serverDocument.clientId, edits: asAeroGearDiffs(diffs))
+    public func serverDiff(serverDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
+        let diffs = dmp.diff_mainOfOldString(shadow.clientDocument.content, andNewString: serverDocument.content)
+        return Edit(clientId: shadow.clientDocument.clientId, documentId: shadow.clientDocument.id, clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, checksum: "", diffs: asAeroGearDiffs(diffs))
     }
     
-    func asAeroGearDiffs(diffs: NSArray) -> [Edit] {
-        var aerogearDiffs = [Edit]()
+    func asAeroGearDiffs(diffs: NSArray) -> [Edit.Diff] {
+        var aerogearDiffs = Array<Edit.Diff>()
         for diff in diffs {
-            //aergearDiffs.append(Edit.Diff(Edit.Operation.Add)
+            aerogearDiffs.append(Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation(diff.operation), text: diff.text));
         }
-        return [];
+        return aerogearDiffs
     }
     
     class func asAeroGearOperation(op: Operation) -> Edit.Operation {
