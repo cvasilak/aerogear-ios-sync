@@ -5,8 +5,8 @@ Synchronization (DS) Server](https://github.com/danbev/aerogear-sync-server/tree
 ## Prerequisites 
 This project requires Xcode6.0 to run.
 
-This project uses a git submodule which is located in [diffmatchpatch-ios](./diffmatchpatch-ios). When first cloned 
-this directory is empty and need to be initialized:
+This project uses a git submodule of [diffmatchpatch-ios](https://github.com/danbev/diffmatchpatch-ios). 
+When this project is first cloned the submodule directory is empty and need to be initialized:
 
     git submodule init
     git submodule update
