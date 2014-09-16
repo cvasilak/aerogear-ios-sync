@@ -42,6 +42,34 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
         XCTAssertEqual(Edit.Operation.Add, edit.diffs[2].operation)
         XCTAssertEqual("!", edit.diffs[2].text)
     }
+
+    func testPatchShadow() {
+        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
+        let shadowDoc = ShadowDocument<String>(clientVersion: 0, serverVersion: 0, clientDocument: clientDoc)
+        var diffs = Array<Edit.Diff>()
+        diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is not try"))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
+        let edit = Edit(clientId: "client1", documentId: "1234", clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
+        let patchedDoc = clientSynchronizer.patchShadow(edit, shadow: shadowDoc)
+        XCTAssertEqual("client1", patchedDoc.clientDocument.clientId)
+        XCTAssertEqual("1234", patchedDoc.clientDocument.id)
+        XCTAssertEqual("Do or do not, there is no try!", patchedDoc.clientDocument.content)
+    }
+
+    func testPatchDocument() {
+        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
+        let shadowDoc = ShadowDocument<String>(clientVersion: 0, serverVersion: 0, clientDocument: clientDoc)
+        var diffs = Array<Edit.Diff>()
+        diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is not try"))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
+        let edit = Edit(clientId: "client1", documentId: "1234", clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
+        let patchedDoc = clientSynchronizer.patchDocument(edit, clientDocument: clientDoc)
+        XCTAssertEqual("client1", patchedDoc.clientId)
+        XCTAssertEqual("1234", patchedDoc.id)
+        XCTAssertEqual("Do or do not, there is no try!", patchedDoc.content)
+    }
     
 }
 
