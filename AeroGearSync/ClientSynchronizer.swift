@@ -8,7 +8,7 @@ public protocol ClientSynchronizer {
     
     func patchDocument(edit: Edit, clientDocument: ClientDocument<ContentType>)
     
-    func clientDiff(clientDocument: ClientDocument<ContentType>, shadow: ShadowDocument<ContentType>)
+    func clientDiff(clientDocument: ClientDocument<ContentType>, shadow: ShadowDocument<ContentType>) -> Edit
     
     func serverDiff(serverDocument: ClientDocument<ContentType>, shadow: ShadowDocument<ContentType>) -> Edit
 }

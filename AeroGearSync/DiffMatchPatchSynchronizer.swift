@@ -9,7 +9,9 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         self.dmp = DiffMatchPatch()
     }
 
-    public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) {
+    public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
+        let diffs = dmp.diff_mainOfOldString(clientDocument.content, andNewString: shadow.clientDocument.content)
+        return Edit(clientId: shadow.clientDocument.clientId, documentId: shadow.clientDocument.id, clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, checksum: "", diffs: asAeroGearDiffs(diffs))
     }
 
     public func patchDocument(edit: Edit, clientDocument: ClientDocument<String>) {
