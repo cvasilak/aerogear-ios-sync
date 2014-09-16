@@ -8,28 +8,27 @@ class ClientSyncEngineTests: XCTestCase {
     var dataStore: InMemoryDataStore<T>!
     var synchonizer: DiffMatchPatchSynchronizer!
     var engine: ClientSyncEngine<DiffMatchPatchSynchronizer, InMemoryDataStore<T>>!
+    var util: DocUtil!
 
     override func setUp() {
         super.setUp()
         self.dataStore = InMemoryDataStore();
         self.synchonizer = DiffMatchPatchSynchronizer()
         self.engine = ClientSyncEngine(synchronizer: synchonizer, dataStore: dataStore)
+        util = DocUtil()
     }
 
     func testInitialize() {
-        let clientDoc = ClientDocument<T>(id: "1234", clientId: "client1", content: "testing")
-        engine.addDocument(clientDoc)
-        let savedDoc = dataStore.getClientDocument("1234", clientId: "client1")!
-        XCTAssertEqual("1234" , savedDoc.id)
-        XCTAssertEqual("client1", savedDoc.clientId)
+        engine.addDocument(util.document("testing"))
+        let savedDoc = dataStore.getClientDocument(util.documentId, clientId: util.clientId)!
+        XCTAssertEqual(util.documentId , savedDoc.id)
+        XCTAssertEqual(util.clientId, savedDoc.clientId)
         XCTAssertEqual("testing", savedDoc.content)
     }
 
     func testDiff() {
-        let clientDoc = ClientDocument<T>(id: "1234", clientId: "client1", content: "testing")
-        engine.addDocument(clientDoc)
-        let updatedDoc = ClientDocument<T>(id: "1234", clientId: "client1", content: "testing2")
-        let patchMessage = engine.diff(updatedDoc)
+        engine.addDocument(util.document("testing"))
+        let patchMessage = engine.diff(util.document("testing2"))
         XCTAssertEqual("1234" , patchMessage.documentId)
         XCTAssertEqual("client1" , patchMessage.clientId)
         // TODO: Update this when the patching is synchronizer is implemented.

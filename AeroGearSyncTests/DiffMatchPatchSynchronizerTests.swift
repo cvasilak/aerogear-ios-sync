@@ -5,19 +5,20 @@ import AeroGearSync
 class DiffMatchPatchSynchronizerTests: XCTestCase {
     
     var clientSynchronizer: DiffMatchPatchSynchronizer!
+    var util: DocUtil!
 
     override func setUp() {
         super.setUp()
         self.clientSynchronizer = DiffMatchPatchSynchronizer()
+        self.util = DocUtil()
     }
 
     func testServerDiff() {
-        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
-        let shadowDoc = ShadowDocument<String>(clientVersion: 2, serverVersion: 1, clientDocument: clientDoc)
-        let serverDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try!")
+        let shadowDoc = util.shadow("Do or do not, there is no try.")
+        let serverDoc = util.document("Do or do not, there is no try!")
         let edit = clientSynchronizer.serverDiff(serverDoc, shadow: shadowDoc)
-        XCTAssertEqual("client1", edit.clientId);
-        XCTAssertEqual("1234", edit.documentId);
+        XCTAssertEqual(util.clientId, edit.clientId);
+        XCTAssertEqual(util.documentId, edit.documentId);
         XCTAssertEqual(3, edit.diffs.count)
         XCTAssertEqual(Edit.Operation.Unchanged, edit.diffs[0].operation)
         XCTAssertEqual("Do or do not, there is no try", edit.diffs[0].text)
@@ -28,12 +29,11 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
     }
 
     func testClientDiff() {
-        let updated = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
-        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try!")
-        let shadowDoc = ShadowDocument<String>(clientVersion: 2, serverVersion: 1, clientDocument: clientDoc)
+        let updated = util.document("Do or do not, there is no try.")
+        let shadowDoc = util.shadow("Do or do not, there is no try!")
         let edit = clientSynchronizer.clientDiff(updated, shadow: shadowDoc)
-        XCTAssertEqual("client1", edit.clientId);
-        XCTAssertEqual("1234", edit.documentId);
+        XCTAssertEqual(util.clientId, edit.clientId);
+        XCTAssertEqual(util.documentId, edit.documentId);
         XCTAssertEqual(3, edit.diffs.count)
         XCTAssertEqual(Edit.Operation.Unchanged, edit.diffs[0].operation)
         XCTAssertEqual("Do or do not, there is no try", edit.diffs[0].text)
@@ -44,13 +44,12 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
     }
 
     func testPatchShadow() {
-        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
-        let shadowDoc = ShadowDocument<String>(clientVersion: 0, serverVersion: 0, clientDocument: clientDoc)
+        let shadowDoc = util.shadow("Do or do not, there is no try.")
         var diffs = Array<Edit.Diff>()
         diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is not try"))
         diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
         diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
-        let edit = Edit(clientId: "client1", documentId: "1234", clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
+        let edit = Edit(clientId: util.clientId, documentId: util.documentId, clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
         let patchedDoc = clientSynchronizer.patchShadow(edit, shadow: shadowDoc)
         XCTAssertEqual("client1", patchedDoc.clientDocument.clientId)
         XCTAssertEqual("1234", patchedDoc.clientDocument.id)
@@ -58,16 +57,15 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
     }
 
     func testPatchDocument() {
-        let clientDoc = ClientDocument<String>(id: "1234", clientId: "client1", content: "Do or do not, there is no try.")
-        let shadowDoc = ShadowDocument<String>(clientVersion: 0, serverVersion: 0, clientDocument: clientDoc)
+        let shadowDoc = util.shadow("Do or do not, there is no try.")
         var diffs = Array<Edit.Diff>()
         diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is not try"))
         diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
         diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
-        let edit = Edit(clientId: "client1", documentId: "1234", clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
-        let patchedDoc = clientSynchronizer.patchDocument(edit, clientDocument: clientDoc)
-        XCTAssertEqual("client1", patchedDoc.clientId)
-        XCTAssertEqual("1234", patchedDoc.id)
+        let edit = Edit(clientId: util.clientId, documentId: util.documentId, clientVersion: 0, serverVersion: 1, checksum: "", diffs: diffs)
+        let patchedDoc = clientSynchronizer.patchDocument(edit, clientDocument: shadowDoc.clientDocument)
+        XCTAssertEqual(util.clientId, patchedDoc.clientId)
+        XCTAssertEqual(util.documentId, patchedDoc.id)
         XCTAssertEqual("Do or do not, there is no try!", patchedDoc.content)
     }
     

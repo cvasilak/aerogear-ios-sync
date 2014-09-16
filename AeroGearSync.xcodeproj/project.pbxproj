@@ -24,6 +24,7 @@
 		C589847419C046A50049EB34 /* InMemoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846819C046A50049EB34 /* InMemoryDataStore.swift */; };
 		C589847619C046A50049EB34 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = C589846A19C046A50049EB34 /* Queue.m */; };
 		C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846B19C046A50049EB34 /* ShadowDocument.swift */; };
+		C58BF97F19C85FBA00274EEE /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58BF97E19C85FBA00274EEE /* DocUtil.swift */; };
 		C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */; };
 		C5D316DA19C3184A00C11D9C /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,7 @@
 		C589846819C046A50049EB34 /* InMemoryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStore.swift; sourceTree = "<group>"; };
 		C589846A19C046A50049EB34 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		C589846B19C046A50049EB34 /* ShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDocument.swift; sourceTree = "<group>"; };
+		C58BF97E19C85FBA00274EEE /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
 		C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
 		C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "diffmatchpatch-ios/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
 		C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AeroGearSync-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				C546D96919B89C8200451ACE /* ClientDocumentTests.swift */,
 				C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */,
 				C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */,
+				C58BF97E19C85FBA00274EEE /* DocUtil.swift */,
 			);
 			path = AeroGearSyncTests;
 			sourceTree = "<group>";
@@ -176,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */,
-				C5D316D919C3183300C11D9C /* DiffMatchPatchTest.bundle */,
+				C5D316D919C3183300C11D9C /* DiffMatchPatchTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,10 +285,9 @@
 			remoteRef = C5D316D619C3183300C11D9C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C5D316D919C3183300C11D9C /* DiffMatchPatchTest.bundle */ = {
+		C5D316D919C3183300C11D9C /* DiffMatchPatchTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = DiffMatchPatchTest.bundle;
 			path = DiffMatchPatchTest.xctest;
 			remoteRef = C5D316D819C3183300C11D9C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -337,6 +339,7 @@
 				C546D96A19B89C8200451ACE /* ClientDocumentTests.swift in Sources */,
 				C5307E1B19C19D210009EBB2 /* ClientSyncEngineTests.swift in Sources */,
 				C5307E1519C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift in Sources */,
+				C58BF97F19C85FBA00274EEE /* DocUtil.swift in Sources */,
 				C546D96619B89A6600451ACE /* ShadowDocumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
