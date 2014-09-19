@@ -70,7 +70,7 @@ class InMemoryDataStoreTests: XCTestCase {
         XCTAssertEqual(util.content, clientDocument.content)
     }
 
-    func defaultEdit(# clientVersion: UInt64, serverVersion: UInt64) -> Edit {
+    func defaultEdit(# clientVersion: Int, serverVersion: Int) -> Edit {
         return Edit(clientId: util.clientId,
             documentId: util.documentId,
             clientVersion: clientVersion,

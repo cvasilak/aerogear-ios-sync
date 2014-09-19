@@ -3,12 +3,12 @@ import Foundation
 public class Edit: Equatable {
     public let clientId: String
     public let documentId: String
-    public let clientVersion: UInt64
-    public let serverVersion: UInt64
+    public let clientVersion: Int
+    public let serverVersion: Int
     public let checksum: String
     public let diffs: Array<Edit.Diff>
 
-    public init(clientId: String, documentId: String, clientVersion: UInt64, serverVersion: UInt64, checksum: String, diffs: Array<Edit.Diff>) {
+    public init(clientId: String, documentId: String, clientVersion: Int, serverVersion: Int, checksum: String, diffs: Array<Edit.Diff>) {
         self.clientId = clientId
         self.documentId = documentId
         self.clientVersion = clientVersion

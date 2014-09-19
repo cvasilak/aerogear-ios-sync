@@ -40,5 +40,18 @@ class ClientSyncEngineTests: XCTestCase {
         XCTAssertEqual(Edit.Operation.Add, diffs[1].operation)
         XCTAssertEqual("2", diffs[1].text)
     }
+
+    func testPatch() {
+        let doc = util.document("Do or do not, there is no try.")
+        engine.addDocument(doc)
+        var diffs = Array<Edit.Diff>()
+        diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
+        diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
+        let edit = Edit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs)
+        engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit]))
+        let patched = dataStore.getClientDocument(util.documentId, clientId: util.clientId)!
+        XCTAssertEqual("Do or do not, there is no try!", patched.content)
+    }
 }
 
