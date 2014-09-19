@@ -2,7 +2,6 @@ import Foundation
 
 public class InMemoryDataStore<T>: DataStore {
     
-    typealias ContentType = T
     var documents = Dictionary<Key, ClientDocument<T>>()
     var shadows = Dictionary<Key, ShadowDocument<T>>()
     var backups = Dictionary<Key, BackupShadowDocument<T>>()

@@ -2,7 +2,6 @@ import Foundation
 
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
-    typealias ContentType = String
     let dmp: DiffMatchPatch
     
     public init() {
