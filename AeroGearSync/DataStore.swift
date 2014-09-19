@@ -2,16 +2,16 @@ import Foundation
 
 public protocol DataStore {
     
-    typealias ContentType
+    typealias T
 
-    func saveClientDocument(clientDocument: ClientDocument<ContentType>)
-    func getClientDocument(documentId: String, clientId: String) -> ClientDocument<ContentType>?
+    func saveClientDocument(clientDocument: ClientDocument<T>)
+    func getClientDocument(documentId: String, clientId: String) -> ClientDocument<T>?
     
-    func saveShadowDocument(shadowDocument: ShadowDocument<ContentType>)
-    func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<ContentType>?
+    func saveShadowDocument(shadowDocument: ShadowDocument<T>)
+    func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>?
     
-    func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<ContentType>)
-    func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<ContentType>?
+    func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<T>)
+    func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>?
     
     func saveEdits(edit: Edit)
     func getEdits(documentId: String, clientId: String) -> [Edit]?
