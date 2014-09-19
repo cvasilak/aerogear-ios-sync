@@ -38,7 +38,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     }
 
     private func patchShadow(patchMessage: PatchMessage) -> ShadowDocument<T>? {
-        if var shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
+        if let shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
             return patchMessage.edits.reduce(shadow) { (shadow, edit) -> ShadowDocument<T> in
                 if (edit.clientVersion < shadow.clientVersion && !self.isSeedVersion(edit)) {
                     return self.restoreBackup(shadow, edit: edit)!
