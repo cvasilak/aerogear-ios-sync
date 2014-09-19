@@ -19,8 +19,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     }
 
     public func diff(clientDocument: ClientDocument<T>) -> PatchMessage? {
-        let optionalShadow = dataStore.getShadowDocument(clientDocument.id, clientId: clientDocument.clientId)
-        if let shadow = optionalShadow {
+        if let shadow = dataStore.getShadowDocument(clientDocument.id, clientId: clientDocument.clientId) {
             let edit = diffAgainstShadow(clientDocument, shadow: shadow)
             dataStore.saveEdits(edit)
             let patched = synchronizer.patchShadow(edit, shadow: shadow)
@@ -33,43 +32,39 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     }
 
     public func patch(patchMessage: PatchMessage) {
-        let patched = patchShadow(patchMessage)
-        patchDocument(patched!)
-        dataStore.saveBackupShadowDocument(BackupShadowDocument(version: patched!.clientVersion, shadowDocument: patched!))
+        if let patched = patchShadow(patchMessage) {
+            patchDocument(patched)
+            dataStore.saveBackupShadowDocument(BackupShadowDocument(version: patched.clientVersion, shadowDocument: patched))
+        }
     }
 
     private func patchShadow(patchMessage: PatchMessage) -> ShadowDocument<T>? {
-        var optionalShadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId)
-        if var shadow = optionalShadow {
-            for edit in patchMessage.edits {
-                if (edit.clientVersion < shadow.clientVersion && !isSeedVersion(edit)) {
-                    shadow = restoreBackup(shadow, edit: edit)!
-                    continue
+        if var shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
+            return patchMessage.edits.reduce(shadow) { (shadow, edit) -> ShadowDocument<T> in
+                if (edit.clientVersion < shadow.clientVersion && !self.isSeedVersion(edit)) {
+                    return self.restoreBackup(shadow, edit: edit)!
                 }
                 if edit.serverVersion < shadow.serverVersion {
-                    dataStore.removeEdit(edit)
-                    continue
+                    self.dataStore.removeEdit(edit)
+                    return shadow
                 }
-                if edit.serverVersion == shadow.serverVersion && edit.clientVersion == shadow.clientVersion || isSeedVersion(edit) {
-                    let patchedShadow = synchronizer.patchShadow(edit, shadow: shadow)
-                    dataStore.removeEdit(edit)
-                    if isSeedVersion(edit) {
-                        shadow = ShadowDocument(clientVersion: 0, serverVersion: patchedShadow.serverVersion, clientDocument: patchedShadow.clientDocument)
-                    } else {
-                        shadow = ShadowDocument(clientVersion: 0, serverVersion: patchedShadow.serverVersion + 1, clientDocument: patchedShadow.clientDocument)
-                    }
-                    dataStore.saveShadowDocument(shadow)
+                if edit.serverVersion == shadow.serverVersion && edit.clientVersion == shadow.clientVersion || self.isSeedVersion(edit) {
+                    let patchedShadow = self.synchronizer.patchShadow(edit, shadow: shadow)
+                    self.dataStore.removeEdit(edit)
+                    let serverVersion = self.isSeedVersion(edit) ? patchedShadow.serverVersion:patchedShadow.serverVersion + 1
+                    let newShadow = ShadowDocument(clientVersion: 0, serverVersion: serverVersion, clientDocument: patchedShadow.clientDocument)
+                    self.dataStore.saveShadowDocument(newShadow)
+                    return newShadow
                 }
+                return shadow
             }
-            return shadow
         } else {
             return Optional.None
         }
     }
 
     private func restoreBackup(shadow: ShadowDocument<T>, edit: Edit) -> ShadowDocument<T>? {
-        let optionalBackup = dataStore.getBackupShadowDocument(edit.documentId, clientId: edit.clientId)
-        if let backup = optionalBackup {
+        if let backup = dataStore.getBackupShadowDocument(edit.documentId, clientId: edit.clientId) {
             if edit.clientVersion == backup.version {
                 let patchedShadow = synchronizer.patchShadow(edit, shadow: ShadowDocument(clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, clientDocument: shadow.clientDocument))
                 dataStore.removeEdits(edit.documentId, clientId: edit.clientId)
@@ -89,14 +84,11 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     }
 
     private func incrementServerVersion(shadow: ShadowDocument<T>) -> ShadowDocument<T> {
-        return ShadowDocument(clientVersion: shadow.clientVersion,
-            serverVersion: shadow.serverVersion + 1,
-            clientDocument: shadow.clientDocument)
+        return ShadowDocument(clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion + 1, clientDocument: shadow.clientDocument)
     }
 
     private func patchDocument(shadow: ShadowDocument<T>) -> Document<T>? {
-        let optionalDocument = dataStore.getClientDocument(shadow.clientDocument.id, clientId: shadow.clientDocument.clientId)
-        if let document = optionalDocument {
+        if let document = dataStore.getClientDocument(shadow.clientDocument.id, clientId: shadow.clientDocument.clientId) {
             let edit = synchronizer.clientDiff(document, shadow: shadow)
             let patched = synchronizer.patchDocument(edit, clientDocument: document)
             dataStore.saveClientDocument(patched)
