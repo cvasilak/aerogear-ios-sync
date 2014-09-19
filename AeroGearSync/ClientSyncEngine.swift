@@ -26,9 +26,8 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
             dataStore.saveShadowDocument(incrementServerVersion(patched))
             let edits = dataStore.getEdits(clientDocument.id, clientId: clientDocument.clientId)
             return PatchMessage(id: clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
-        } else {
-            return Optional.None
         }
+        return Optional.None
     }
 
     public func patch(patchMessage: PatchMessage) {
@@ -58,9 +57,8 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
                 }
                 return shadow
             }
-        } else {
-            return Optional.None
         }
+        return Optional.None
     }
 
     private func restoreBackup(shadow: ShadowDocument<T>, edit: Edit) -> ShadowDocument<T>? {
