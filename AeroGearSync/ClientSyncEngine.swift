@@ -5,17 +5,19 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     typealias T = CS.T
     let synchronizer: CS
     let dataStore: D
-    
+    var callbacks = Dictionary<String, (ClientDocument<T>) -> ()>()
+
     public init(synchronizer: CS, dataStore: D) {
         self.synchronizer = synchronizer
         self.dataStore = dataStore
     }
 
-    public func addDocument(clientDocument: ClientDocument<T>) {
+    public func addDocument(clientDocument: ClientDocument<T>, callback: ClientDocument<T> -> ()) {
         dataStore.saveClientDocument(clientDocument)
         let shadow = ShadowDocument(clientVersion: 0, serverVersion: 0, clientDocument: clientDocument)
         dataStore.saveShadowDocument(shadow)
         dataStore.saveBackupShadowDocument(BackupShadowDocument(version: 0, shadowDocument: shadow))
+        callbacks[clientDocument.id] = callback
     }
 
     public func diff(clientDocument: ClientDocument<T>) -> PatchMessage? {
@@ -32,7 +34,8 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
 
     public func patch(patchMessage: PatchMessage) {
         if let patched = patchShadow(patchMessage) {
-            patchDocument(patched)
+            let callback = callbacks[patchMessage.documentId]!
+            callback(patchDocument(patched)!)
             dataStore.saveBackupShadowDocument(BackupShadowDocument(version: patched.clientVersion, shadowDocument: patched))
         }
     }
@@ -85,7 +88,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         return ShadowDocument(clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion + 1, clientDocument: shadow.clientDocument)
     }
 
-    private func patchDocument(shadow: ShadowDocument<T>) -> Document<T>? {
+    private func patchDocument(shadow: ShadowDocument<T>) -> ClientDocument<T>? {
         if let document = dataStore.getClientDocument(shadow.clientDocument.id, clientId: shadow.clientDocument.clientId) {
             let edit = synchronizer.clientDiff(document, shadow: shadow)
             let patched = synchronizer.patchDocument(edit, clientDocument: document)

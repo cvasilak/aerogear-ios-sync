@@ -9,17 +9,19 @@ class ClientSyncEngineTests: XCTestCase {
     var synchonizer: DiffMatchPatchSynchronizer!
     var engine: ClientSyncEngine<DiffMatchPatchSynchronizer, InMemoryDataStore<T>>!
     var util: DocUtil!
+    var emptyCallback: ((ClientDocument<T>) -> ())!
 
     override func setUp() {
         super.setUp()
-        self.dataStore = InMemoryDataStore();
+        self.dataStore = InMemoryDataStore()
         self.synchonizer = DiffMatchPatchSynchronizer()
         self.engine = ClientSyncEngine(synchronizer: synchonizer, dataStore: dataStore)
-        util = DocUtil()
+        self.util = DocUtil()
+        self.emptyCallback = { (doc:ClientDocument<T>) -> () in }
     }
 
     func testInitialize() {
-        engine.addDocument(util.document("testing"))
+        engine.addDocument(util.document("testing"), callback: emptyCallback)
         let savedDoc = dataStore.getClientDocument(util.documentId, clientId: util.clientId)!
         XCTAssertEqual(util.documentId , savedDoc.id)
         XCTAssertEqual(util.clientId, savedDoc.clientId)
@@ -27,7 +29,7 @@ class ClientSyncEngineTests: XCTestCase {
     }
 
     func testDiff() {
-        engine.addDocument(util.document("testing"))
+        engine.addDocument(util.document("testing"), callback: emptyCallback)
         let patchMessage = engine.diff(util.document("testing2"))
         XCTAssertNotNil(patchMessage)
         XCTAssertEqual("1234" , patchMessage!.documentId)
@@ -43,15 +45,41 @@ class ClientSyncEngineTests: XCTestCase {
 
     func testPatch() {
         let doc = util.document("Do or do not, there is no try.")
-        engine.addDocument(doc)
+        engine.addDocument(doc, callback: { (doc:ClientDocument<T>) -> () in
+            XCTAssertEqual("Do or do not, there is no try!", doc.content)
+        })
         var diffs = Array<Edit.Diff>()
         diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"))
         diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
         diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
         let edit = Edit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs)
         engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit]))
-        let patched = dataStore.getClientDocument(util.documentId, clientId: util.clientId)!
-        XCTAssertEqual("Do or do not, there is no try!", patched.content)
+    }
+
+    func testPatchTwoDocuments() {
+        let doc1 = ClientDocument<String>(id: "1234", clientId: "client1", content: "Doc1")
+
+        engine.addDocument(doc1, callback: { (doc:ClientDocument<T>) -> () in
+            XCTAssertEqual("Document1", doc.content)
+        })
+        let doc2 = ClientDocument<String>(id: "5678", clientId: "client2", content: "Doc2")
+        engine.addDocument(doc2, callback: { (doc:ClientDocument<T>) -> () in
+            XCTAssertEqual("Document2", doc.content)
+        })
+        var diffs1 = Array<Edit.Diff>()
+        diffs1.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Doc"))
+        diffs1.append(Edit.Diff(operation: Edit.Operation.Add, text: "ument"))
+        diffs1.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "1"))
+        let edit1 = Edit(clientId: doc1.clientId, documentId: doc1.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs1)
+
+        var diffs2 = Array<Edit.Diff>()
+        diffs2.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Doc"))
+        diffs2.append(Edit.Diff(operation: Edit.Operation.Add, text: "ument"))
+        diffs2.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "2"))
+        let edit2 = Edit(clientId: doc2.clientId, documentId: doc2.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs2)
+
+        engine.patch(PatchMessage(id: doc1.id, clientId: doc1.clientId, edits: [edit1]))
+        engine.patch(PatchMessage(id: doc2.id, clientId: doc2.clientId, edits: [edit2]))
     }
 }
 
