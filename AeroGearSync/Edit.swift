@@ -20,7 +20,7 @@ public class Edit: Equatable {
     public enum Operation {
         case Add, Delete, Unchanged
 
-        func name() -> String {
+        public func name() -> String {
             switch self {
             case .Add:
                 return "Add"
