@@ -17,19 +17,10 @@ public class Edit: Equatable {
         self.diffs = diffs
     }
 
-    public enum Operation {
-        case Add, Delete, Unchanged
-
-        public func name() -> String {
-            switch self {
-            case .Add:
-                return "ADD"
-            case .Delete:
-                return "DELETE"
-            case .Unchanged:
-                return "UNCHANGED"
-            }
-        }
+    public enum Operation : String {
+        case Add = "ADD"
+        case Delete = "DELETE"
+        case Unchanged = "UNCHANGED"
     }
     
     public class Diff {
