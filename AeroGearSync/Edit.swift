@@ -16,9 +16,20 @@ public class Edit: Equatable {
         self.checksum = checksum
         self.diffs = diffs
     }
-    
+
     public enum Operation {
         case Add, Delete, Unchanged
+
+        func name() -> String {
+            switch self {
+            case .Add:
+                return "Add"
+            case .Delete:
+                return "Delete"
+            case .Unchanged:
+                return "Unchanged"
+            }
+        }
     }
     
     public class Diff {
