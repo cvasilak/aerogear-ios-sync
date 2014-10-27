@@ -23,11 +23,11 @@ public class Edit: Equatable {
         public func name() -> String {
             switch self {
             case .Add:
-                return "Add"
+                return "ADD"
             case .Delete:
-                return "Delete"
+                return "DELETE"
             case .Unchanged:
-                return "Unchanged"
+                return "UNCHANGED"
             }
         }
     }
