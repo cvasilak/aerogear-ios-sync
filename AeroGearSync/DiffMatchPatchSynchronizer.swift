@@ -36,8 +36,7 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
 
     private func patchesFrom(edit: Edit) -> NSArray {
-        let diffs = asDmpDiffs(edit.diffs)
-        return dmp.patch_makeFromDiffs(diffs)
+        return dmp.patch_makeFromDiffs(asDmpDiffs(edit.diffs))
     }
 
     private func asDmpOperation(op: Edit.Operation) -> Operation {
@@ -52,11 +51,9 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
 
     private func asAeroGearDiffs(diffs: NSArray) -> [Edit.Diff] {
-        var aerogearDiffs = Array<Edit.Diff>()
-        for diff in diffs {
-            aerogearDiffs.append(Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation(diff.operation), text: diff.text));
+        return (diffs as [AnyObject]).map {
+            Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation($0.operation), text: $0.text)
         }
-        return aerogearDiffs
     }
 
     private func edit(clientDoc: ClientDocument<String>, shadow: ShadowDocument<String>, diffs: NSArray) -> Edit {
