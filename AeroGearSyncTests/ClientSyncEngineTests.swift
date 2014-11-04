@@ -48,12 +48,27 @@ class ClientSyncEngineTests: XCTestCase {
         engine.addDocument(doc, callback: { (doc:ClientDocument<T>) -> () in
             XCTAssertEqual("Do or do not, there is no try!", doc.content)
         })
-        var diffs = Array<Edit.Diff>()
-        diffs.append(Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"))
-        diffs.append(Edit.Diff(operation: Edit.Operation.Delete, text: "."))
-        diffs.append(Edit.Diff(operation: Edit.Operation.Add, text: "!"))
+        var diffs = [Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"),
+            Edit.Diff(operation: Edit.Operation.Delete, text: "."),
+            Edit.Diff(operation: Edit.Operation.Add, text: "!")]
         let edit = Edit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs)
         engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit]))
+    }
+
+    func testPatchMultipleEdits() {
+        let doc = util.document("Do or do not, there is no try.")
+        engine.addDocument(doc, callback: { (doc:ClientDocument<T>) -> () in
+            XCTAssertEqual("Do or do not, there is no try?", doc.content)
+        })
+        let edit1 = Edit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 0, checksum: "",
+            diffs: [Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"),
+                Edit.Diff(operation: Edit.Operation.Delete, text: "."),
+                Edit.Diff(operation: Edit.Operation.Add, text: "!")])
+        let edit2 = Edit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 1, checksum: "",
+            diffs: [Edit.Diff(operation: Edit.Operation.Unchanged, text: "Do or do not, there is no try"),
+                Edit.Diff(operation: Edit.Operation.Delete, text: "!"),
+                Edit.Diff(operation: Edit.Operation.Add, text: "?")])
+        engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit1, edit2]))
     }
 
     func testPatchTwoDocuments() {

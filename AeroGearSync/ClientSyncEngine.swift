@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+The client side implementation of a Differential Synchronization Engine.
+*/
 public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T> {
     
     typealias T = CS.T
@@ -41,25 +44,26 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     }
 
     private func patchShadow(patchMessage: PatchMessage) -> ShadowDocument<T>? {
-        if let shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
-            return patchMessage.edits.reduce(shadow) { (shadow, edit) -> ShadowDocument<T> in
+        if var shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
+            for edit in patchMessage.edits {
                 if (edit.clientVersion < shadow.clientVersion && !self.isSeedVersion(edit)) {
-                    return self.restoreBackup(shadow, edit: edit)!
+                    shadow = restoreBackup(shadow, edit: edit)!
+                    continue
                 }
                 if edit.serverVersion < shadow.serverVersion {
-                    self.dataStore.removeEdit(edit)
-                    return shadow
+                    dataStore.removeEdit(edit)
+                    continue
                 }
-                if edit.serverVersion == shadow.serverVersion && edit.clientVersion == shadow.clientVersion || self.isSeedVersion(edit) {
-                    let patchedShadow = self.synchronizer.patchShadow(edit, shadow: shadow)
-                    self.dataStore.removeEdit(edit)
-                    let serverVersion = self.isSeedVersion(edit) ? patchedShadow.serverVersion:patchedShadow.serverVersion + 1
+                if edit.serverVersion == shadow.serverVersion && edit.clientVersion == shadow.clientVersion || isSeedVersion(edit) {
+                    let patchedShadow = synchronizer.patchShadow(edit, shadow: shadow)
+                    dataStore.removeEdit(edit)
+                    let serverVersion = isSeedVersion(edit) ? patchedShadow.serverVersion:patchedShadow.serverVersion + 1
                     let newShadow = ShadowDocument(clientVersion: 0, serverVersion: serverVersion, clientDocument: patchedShadow.clientDocument)
-                    self.dataStore.saveShadowDocument(newShadow)
-                    return newShadow
+                    dataStore.saveShadowDocument(newShadow)
+                    shadow = newShadow
                 }
-                return shadow
             }
+            return shadow
         }
         return Optional.None
     }
