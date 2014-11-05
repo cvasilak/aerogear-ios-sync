@@ -43,9 +43,16 @@ class InMemoryDataStoreTests: XCTestCase {
     }
 
     func testRemoveEdit() {
-        let edit = defaultEdit(clientVersion: 1, serverVersion: 1)
-        dataStore.saveEdits(edit)
-        dataStore.removeEdit(edit)
+        let edit1 = defaultEdit(clientVersion: 0, serverVersion: 0)
+        let edit2 = defaultEdit(clientVersion: 1, serverVersion: 1)
+        dataStore.saveEdits(edit1)
+        dataStore.saveEdits(edit2)
+        dataStore.removeEdit(edit1)
+        let savedEdits = dataStore.getEdits(util.documentId, clientId: util.clientId)!
+        XCTAssertEqual(1, savedEdits.count)
+        XCTAssertEqual(1, savedEdits[0].clientVersion)
+        XCTAssertEqual(1, savedEdits[0].serverVersion)
+        dataStore.removeEdit(edit2)
         XCTAssertEqual(0, dataStore.getEdits(util.documentId, clientId: util.clientId)!.count)
     }
 

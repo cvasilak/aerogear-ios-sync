@@ -41,7 +41,7 @@ public class InMemoryDataStore<T>: DataStore {
         let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
         var pendingEdits = edits[key] ?? []
         pendingEdits.append(edit)
-        edits[key] = pendingEdits
+        edits.updateValue(pendingEdits, forKey: key)
     }
     
     public func getEdits(documentId: String, clientId: String) -> [Edit]? {
@@ -51,13 +51,7 @@ public class InMemoryDataStore<T>: DataStore {
     public func removeEdit(edit: Edit) {
         let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
         if var pendingEdits = edits[key] {
-            let count = pendingEdits.count
-            for i in 0..<count {
-                if edit == pendingEdits[i] {
-                    pendingEdits.removeAtIndex(i)
-                }
-            }
-            edits[key] = pendingEdits
+            edits.updateValue(pendingEdits.filter { edit.serverVersion != $0.serverVersion }, forKey: key)
         }
     }
     
