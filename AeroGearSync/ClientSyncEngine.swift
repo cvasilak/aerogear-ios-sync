@@ -55,17 +55,31 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
                     continue
                 }
                 if edit.serverVersion == shadow.serverVersion && edit.clientVersion == shadow.clientVersion || isSeedVersion(edit) {
-                    let patchedShadow = synchronizer.patchShadow(edit, shadow: shadow)
+                    let patched = synchronizer.patchShadow(edit, shadow: shadow)
                     dataStore.removeEdit(edit)
-                    let serverVersion = isSeedVersion(edit) ? patchedShadow.serverVersion:patchedShadow.serverVersion + 1
-                    let newShadow = ShadowDocument(clientVersion: 0, serverVersion: serverVersion, clientDocument: patchedShadow.clientDocument)
-                    dataStore.saveShadowDocument(newShadow)
-                    shadow = newShadow
+                    if isSeedVersion(edit) {
+                        shadow = saveShadow(seededShadowDocument(patched))
+                    } else {
+                        shadow = saveShadow(incrementServerVersion(patched))
+                    }
                 }
             }
             return shadow
         }
         return Optional.None
+    }
+
+    private func seededShadowDocument(from: ShadowDocument<T>) -> ShadowDocument<T> {
+        return ShadowDocument(clientVersion: 0, serverVersion: from.serverVersion, clientDocument: from.clientDocument)
+    }
+
+    private func incrementServerVersion(shadow: ShadowDocument<T>) -> ShadowDocument<T> {
+        return ShadowDocument(clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion + 1, clientDocument: shadow.clientDocument)
+    }
+
+    private func saveShadow(shadow: ShadowDocument<T>) -> ShadowDocument<T> {
+        dataStore.saveShadowDocument(shadow)
+        return shadow
     }
 
     private func restoreBackup(shadow: ShadowDocument<T>, edit: Edit) -> ShadowDocument<T>? {
@@ -86,10 +100,6 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
 
     private func diffAgainstShadow(clientDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> Edit {
         return synchronizer.serverDiff(clientDocument, shadow: shadow)
-    }
-
-    private func incrementServerVersion(shadow: ShadowDocument<T>) -> ShadowDocument<T> {
-        return ShadowDocument(clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion + 1, clientDocument: shadow.clientDocument)
     }
 
     private func patchDocument(shadow: ShadowDocument<T>) -> ClientDocument<T>? {
