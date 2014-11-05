@@ -28,7 +28,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
             let edit = diffAgainstShadow(clientDocument, shadow: shadow)
             dataStore.saveEdits(edit)
             let patched = synchronizer.patchShadow(edit, shadow: shadow)
-            dataStore.saveShadowDocument(incrementServerVersion(patched))
+            dataStore.saveShadowDocument(incrementClientVersion(patched))
             let edits = dataStore.getEdits(clientDocument.id, clientId: clientDocument.clientId)
             return PatchMessage(id: clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
         }
@@ -71,6 +71,10 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
 
     private func seededShadowDocument(from: ShadowDocument<T>) -> ShadowDocument<T> {
         return ShadowDocument(clientVersion: 0, serverVersion: from.serverVersion, clientDocument: from.clientDocument)
+    }
+
+    private func incrementClientVersion(shadow: ShadowDocument<T>) -> ShadowDocument<T> {
+        return ShadowDocument(clientVersion: shadow.clientVersion + 1, serverVersion: shadow.serverVersion, clientDocument: shadow.clientDocument)
     }
 
     private func incrementServerVersion(shadow: ShadowDocument<T>) -> ShadowDocument<T> {

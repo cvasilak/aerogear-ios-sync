@@ -41,6 +41,9 @@ class ClientSyncEngineTests: XCTestCase {
         XCTAssertEqual("testing", diffs[0].text)
         XCTAssertEqual(Edit.Operation.Add, diffs[1].operation)
         XCTAssertEqual("2", diffs[1].text)
+        let shadow = dataStore.getShadowDocument(patchMessage!.documentId, clientId: patchMessage!.clientId)!
+        XCTAssertEqual(1, shadow.clientVersion)
+        XCTAssertEqual(0, shadow.serverVersion)
     }
 
     func testPatch() {
