@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		488B6B84196B1CD1000297C9 /* AeroGearSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; };
+		6FFA3CFEB503C995961C291D /* libPods-AeroGearSyncTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */; };
+		884FC79F192DD3BDC2F856C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E39EC25D1CDF91D6145562 /* libPods.a */; };
+		C52535651A40333F0051DD9B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C52535641A40333F0051DD9B /* libPods.a */; };
 		C5307E1519C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */; };
 		C5307E1719C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */; };
 		C5307E1B19C19D210009EBB2 /* ClientSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */; };
@@ -25,7 +28,6 @@
 		C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846B19C046A50049EB34 /* ShadowDocument.swift */; };
 		C58BF97F19C85FBA00274EEE /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58BF97E19C85FBA00274EEE /* DocUtil.swift */; };
 		C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */; };
-		C5D316DA19C3184A00C11D9C /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,25 +59,19 @@
 			remoteGlobalIDString = 488B6B5B196B19BC000297C9;
 			remoteInfo = AeroGearSync;
 		};
-		C5D316D619C3183300C11D9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = DiffMatchPatch;
-		};
-		C5D316D819C3183300C11D9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
-			remoteInfo = DiffMatchPatchTest;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AeroGearSyncTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C3D5D176E950E40AEA10E7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		488B6B5C196B19BC000297C9 /* AeroGearSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AeroGearSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		488B6B67196B19BC000297C9 /* AeroGearSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E39EC25D1CDF91D6145562 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8823EED278BFD1A5A54C74D0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BB3F6790E798391B10D85421 /* Pods-AeroGearSyncTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSyncTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSyncTests/Pods-AeroGearSyncTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C525355E1A402E620051DD9B /* libPods-DiffMatchPatch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-DiffMatchPatch.a"; path = "Pods/build/Debug-iphoneos/libPods-DiffMatchPatch.a"; sourceTree = "<group>"; };
+		C52535601A402E6A0051DD9B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C52535641A40333F0051DD9B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchSynchronizerTests.swift; sourceTree = "<group>"; };
 		C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchSynchronizer.swift; sourceTree = "<group>"; };
 		C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSyncEngineTests.swift; sourceTree = "<group>"; };
@@ -95,8 +91,8 @@
 		C589846B19C046A50049EB34 /* ShadowDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDocument.swift; sourceTree = "<group>"; };
 		C58BF97E19C85FBA00274EEE /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
 		C5A153DF19B85A8E00077E0E /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
-		C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "diffmatchpatch-ios/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
 		C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AeroGearSync-Bridging-Header.h"; sourceTree = "<group>"; };
+		DF4A2439F300AF4D447D991F /* Pods-AeroGearSyncTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSyncTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSyncTests/Pods-AeroGearSyncTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5D316DA19C3184A00C11D9C /* DiffMatchPatch.framework in Frameworks */,
+				884FC79F192DD3BDC2F856C9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,20 +108,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52535651A40333F0051DD9B /* libPods.a in Frameworks */,
 				488B6B84196B1CD1000297C9 /* AeroGearSync.framework in Frameworks */,
+				6FFA3CFEB503C995961C291D /* libPods-AeroGearSyncTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		131A9678EDA46992C7F9774B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C52535641A40333F0051DD9B /* libPods.a */,
+				C52535601A402E6A0051DD9B /* libPods.a */,
+				C525355E1A402E620051DD9B /* libPods-DiffMatchPatch.a */,
+				75E39EC25D1CDF91D6145562 /* libPods.a */,
+				31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		488B6B52196B19BC000297C9 = {
 			isa = PBXGroup;
 			children = (
-				C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */,
 				C53F5B1019B0554B00FAC751 /* AeroGearSyncTests */,
 				C53F5B0719B0552C00FAC751 /* AeroGearSync */,
 				488B6B5D196B19BC000297C9 /* Products */,
+				74B112C87D9A8DDB3F490A96 /* Pods */,
+				131A9678EDA46992C7F9774B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +147,17 @@
 				488B6B67196B19BC000297C9 /* AeroGearSyncTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		74B112C87D9A8DDB3F490A96 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8823EED278BFD1A5A54C74D0 /* Pods.debug.xcconfig */,
+				3C3D5D176E950E40AEA10E7C /* Pods.release.xcconfig */,
+				BB3F6790E798391B10D85421 /* Pods-AeroGearSyncTests.debug.xcconfig */,
+				DF4A2439F300AF4D447D991F /* Pods-AeroGearSyncTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C53F5B0719B0552C00FAC751 /* AeroGearSync */ = {
@@ -172,15 +194,6 @@
 			path = AeroGearSyncTests;
 			sourceTree = "<group>";
 		};
-		C5D316D219C3183300C11D9C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */,
-				C5D316D919C3183300C11D9C /* DiffMatchPatchTest.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -198,10 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 488B6B72196B19BC000297C9 /* Build configuration list for PBXNativeTarget "AeroGearSync" */;
 			buildPhases = (
+				90596C27C825F749AB5B559F /* Check Pods Manifest.lock */,
 				488B6B57196B19BC000297C9 /* Sources */,
 				488B6B58196B19BC000297C9 /* Frameworks */,
 				488B6B59196B19BC000297C9 /* Headers */,
 				488B6B5A196B19BC000297C9 /* Resources */,
+				4BB09C6AAC803BE9F8150681 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -216,9 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 488B6B75196B19BC000297C9 /* Build configuration list for PBXNativeTarget "AeroGearSyncTests" */;
 			buildPhases = (
+				0835E899F5FA8976D5AD2CFE /* Check Pods Manifest.lock */,
 				488B6B63196B19BC000297C9 /* Sources */,
 				488B6B64196B19BC000297C9 /* Frameworks */,
 				488B6B65196B19BC000297C9 /* Resources */,
+				6D36798B7B2647971EF52E5E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,12 +277,6 @@
 			mainGroup = 488B6B52196B19BC000297C9;
 			productRefGroup = 488B6B5D196B19BC000297C9 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C5D316D219C3183300C11D9C /* Products */;
-					ProjectRef = C5D316D119C3183300C11D9C /* DiffMatchPatch.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				488B6B5B196B19BC000297C9 /* AeroGearSync */,
@@ -273,23 +284,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		C5D316D719C3183300C11D9C /* DiffMatchPatch.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DiffMatchPatch.framework;
-			remoteRef = C5D316D619C3183300C11D9C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C5D316D919C3183300C11D9C /* DiffMatchPatchTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = DiffMatchPatchTest.xctest;
-			remoteRef = C5D316D819C3183300C11D9C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		488B6B5A196B19BC000297C9 /* Resources */ = {
@@ -307,6 +301,69 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0835E899F5FA8976D5AD2CFE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4BB09C6AAC803BE9F8150681 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D36798B7B2647971EF52E5E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSyncTests/Pods-AeroGearSyncTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90596C27C825F749AB5B559F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		488B6B57196B19BC000297C9 /* Sources */ = {
@@ -453,6 +510,7 @@
 		};
 		488B6B73196B19BC000297C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8823EED278BFD1A5A54C74D0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -471,6 +529,7 @@
 		};
 		488B6B74196B19BC000297C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C3D5D176E950E40AEA10E7C /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -488,6 +547,7 @@
 		};
 		488B6B76196B19BC000297C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB3F6790E798391B10D85421 /* Pods-AeroGearSyncTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -499,13 +559,19 @@
 				);
 				INFOPLIST_FILE = AeroGearSyncTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = AeroGearSyncTests;
+				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		488B6B77196B19BC000297C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF4A2439F300AF4D447D991F /* Pods-AeroGearSyncTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -513,8 +579,13 @@
 				);
 				INFOPLIST_FILE = AeroGearSyncTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = AeroGearSyncTests;
+				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 			};
 			name = Release;
 		};
