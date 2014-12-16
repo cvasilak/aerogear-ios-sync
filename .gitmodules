@@ -1,3 +1,0 @@
-[submodule "diffmatchpatch-ios"]
-	path = diffmatchpatch-ios
-	url = git@github.com:danbev/diffmatchpatch-ios.git
