@@ -51,7 +51,7 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
 
     private func asAeroGearDiffs(diffs: NSArray) -> [Edit.Diff] {
-        return (diffs as [AnyObject]).map {
+        return (diffs as [Diff]).map {
             Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation($0.operation), text: $0.text)
         }
     }
