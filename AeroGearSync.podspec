@@ -9,5 +9,4 @@ Pod::Spec.new do |s|
   s.platform     = :ios, 8.0
   s.source_files = 'AeroGearSync/*.{h,swift}'
   s.dependency  'DiffMatchPatch', '0.1.0'
-  s.dependency  'Starscream', '0.9.1'
 end
