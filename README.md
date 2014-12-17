@@ -11,6 +11,12 @@ must be run prior to building:
     bundle install
     bundle exec pod install
 
+This project is also a Cocoapod and can be pushed to the Cocoapods specs repository.
+Currently we are using a private/local Cocoapods repo before publishing the real ones. This is only for testing. Please
+follow the instructions [here](https://github.com/danbev/Cocoapods-repo) to set up a local repo.
+
+    bundle exec pod spec lint AeroGearSync.podspec --sources='$HOME/.cocoapods/repos/local' --verbose --allow-warnings
+
 ## Building
 
 Building can be done by opening the project in Xcode:
@@ -29,4 +35,5 @@ Tests can be run from with in Xcode using Product->Test menu option (CMD+U).
 You can also run test from the command:
 
     xcodebuild -workspace AeroGearSync.xcworkspace -scheme AeroGearSync -destination 'platform=iOS Simulator,name=iPhone 5s' test
+
 
