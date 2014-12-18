@@ -7,8 +7,7 @@
 //
 
 #ifndef AeroGearSync_AeroGearSync_Bridging_Header_h
-#define AeroGearSync_AeroGearSync_Bridging_Header_h
-
 #import "DiffMatchPatch/DiffMatchPatch.h"
+#define AeroGearSync_AeroGearSync_Bridging_Header_h
 
 #endif
