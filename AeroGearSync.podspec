@@ -8,5 +8,5 @@ Pod::Spec.new do |s|
   s.source       = {:git => 'https://github.com/danbev/aerogear-ios-sync.git',  :branch => 'master'}
   s.platform     = :ios, 8.0
   s.source_files = 'AeroGearSync/*.{h,swift}'
-  s.dependency  'DiffMatchPatch', '0.1.0'
+  s.dependency  'DiffMatchPatch', '0.1.1'
 end
