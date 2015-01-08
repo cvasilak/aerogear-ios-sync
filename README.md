@@ -8,14 +8,14 @@ This project requires Xcode6.0 to run.
 This project used [CocoaPods](http://cocoapods.org/) to managed its dependencies. The following command 
 must be run prior to building:
     
-    bundle install
-    bundle exec pod install
+    sudo gem install cocoapods --pre
+    pod install
 
 This project is also a Cocoapod and can be pushed to the Cocoapods specs repository.
 Currently we are using a private/local Cocoapods repo before publishing the real ones. This is only for testing. Please
 follow the instructions [here](https://github.com/danbev/Cocoapods-repo) to set up a local repo.
 
-    bundle exec pod spec lint AeroGearSync.podspec --sources='$HOME/.cocoapods/repos/local' --verbose --allow-warnings
+    pod spec lint AeroGearSync.podspec --sources='https://github.com/danbev/Cocoapods-repo.git' --verbose --allow-warnings
 
 ## Building
 
