@@ -17,7 +17,7 @@
 		C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */; };
 		C546D96619B89A6600451ACE /* ShadowDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96519B89A6600451ACE /* ShadowDocumentTests.swift */; };
 		C546D96A19B89C8200451ACE /* ClientDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546D96919B89C8200451ACE /* ClientDocumentTests.swift */; };
-		C55933801A42C2B900DCF4DF /* AeroGearSync-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */; };
+		C55933801A42C2B900DCF4DF /* AeroGearSync-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846019C046A50049EB34 /* BackupShadowDocument.swift */; };
 		C589846D19C046A50049EB34 /* ClientDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846119C046A50049EB34 /* ClientDocument.swift */; };
 		C589846E19C046A50049EB34 /* ClientSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846219C046A50049EB34 /* ClientSyncEngine.swift */; };
