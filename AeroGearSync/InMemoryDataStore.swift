@@ -2,10 +2,10 @@ import Foundation
 
 public class InMemoryDataStore<T>: DataStore {
     
-    var documents = Dictionary<Key, ClientDocument<T>>()
-    var shadows = Dictionary<Key, ShadowDocument<T>>()
-    var backups = Dictionary<Key, BackupShadowDocument<T>>()
-    var edits = Dictionary<Key, [Edit]>()
+    private var documents = Dictionary<Key, ClientDocument<T>>()
+    private var shadows = Dictionary<Key, ShadowDocument<T>>()
+    private var backups = Dictionary<Key, BackupShadowDocument<T>>()
+    private var edits = Dictionary<Key, [Edit]?>()
     
     public init() {
     }
@@ -39,18 +39,21 @@ public class InMemoryDataStore<T>: DataStore {
     
     public func saveEdits(edit: Edit) {
         let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
-        var pendingEdits = edits[key] ?? []
-        pendingEdits.append(edit)
-        edits.updateValue(pendingEdits, forKey: key)
+        if var pendingEdits = self.edits[key] {
+            pendingEdits!.append(edit)
+            self.edits.updateValue(pendingEdits, forKey: key)
+        } else {
+            self.edits.updateValue([edit], forKey: key)
+        }
     }
     
     public func getEdits(documentId: String, clientId: String) -> [Edit]? {
-        return edits[InMemoryDataStore.key(documentId, clientId)]
+        return edits[InMemoryDataStore.key(documentId, clientId)]?
     }
     
     public func removeEdit(edit: Edit) {
         let key = InMemoryDataStore.key(edit.documentId, edit.clientId)
-        if var pendingEdits = edits[key] {
+        if var pendingEdits = edits[key]? {
             edits.updateValue(pendingEdits.filter { edit.serverVersion != $0.serverVersion }, forKey: key)
         }
     }
