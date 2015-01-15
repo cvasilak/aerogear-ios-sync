@@ -3,13 +3,13 @@ import Foundation
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
     let dmp: DiffMatchPatch
-    
+
     public init() {
         self.dmp = DiffMatchPatch()
     }
 
     public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
-        let diffs = dmp.diff_mainOfOldString(clientDocument.content, andNewString: shadow.clientDocument.content)
+        let diffs = dmp.diff_mainOfOldString(clientDocument.content, andNewString: shadow.clientDocument.content).copy() as [Diff]
         return edit(shadow.clientDocument, shadow: shadow, diffs: diffs)
     }
 
@@ -23,14 +23,14 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
 
     public func serverDiff(serverDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
-        let diffs = dmp.diff_mainOfOldString(shadow.clientDocument.content, andNewString: serverDocument.content)
+        let diffs = dmp.diff_mainOfOldString(shadow.clientDocument.content, andNewString: serverDocument.content).copy() as [Diff]
         return edit(shadow.clientDocument, shadow: shadow, diffs: diffs)
     }
 
     private func asDmpDiffs(diffs: [Edit.Diff]) -> NSMutableArray {
         var dmpDiffs = NSMutableArray()
         for diff in diffs {
-           dmpDiffs.addObject(Diff(operation: asDmpOperation(diff.operation), andText: diff.text))
+            dmpDiffs.addObject(Diff(operation: asDmpOperation(diff.operation), andText: diff.text))
         }
         return dmpDiffs
     }
@@ -50,16 +50,16 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         }
     }
 
-    private func asAeroGearDiffs(diffs: NSArray) -> [Edit.Diff] {
-        return (diffs as [Diff]).map {
+    private func asAeroGearDiffs(diffs: [Diff]) -> [Edit.Diff] {
+        return (diffs).map {
             Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation($0.operation), text: $0.text)
         }
     }
 
-    private func edit(clientDoc: ClientDocument<String>, shadow: ShadowDocument<String>, diffs: NSArray) -> Edit {
+    private func edit(clientDoc: ClientDocument<String>, shadow: ShadowDocument<String>, diffs: [Diff]) -> Edit {
         return Edit(clientId: clientDoc.clientId, documentId: clientDoc.id, clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, checksum: "", diffs: asAeroGearDiffs(diffs))
     }
-    
+
     private class func asAeroGearOperation(op: Operation) -> Edit.Operation {
         switch op {
         case .DiffDelete:
@@ -70,5 +70,5 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
             return Edit.Operation.Unchanged
         }
     }
-
+    
 }
