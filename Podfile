@@ -3,8 +3,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 xcodeproj 'AeroGearSync.xcodeproj'
 platform :ios, '8.0'
 
-pod 'DiffMatchPatch', :git => "https://github.com/danbev/diffmatchpatch-ios.git", :tag => "0.1.1"
+pod 'DiffMatchPatch', '0.1.2'
 
 target 'AeroGearSyncTests' do
-    pod 'DiffMatchPatch', :git => "https://github.com/danbev/diffmatchpatch-ios.git", :tag => "0.1.1"
+    pod 'DiffMatchPatch', '0.1.2'
 end
