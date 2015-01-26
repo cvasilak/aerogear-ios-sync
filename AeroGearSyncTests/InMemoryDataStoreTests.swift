@@ -62,7 +62,7 @@ class InMemoryDataStoreTests: XCTestCase {
         dataStore.saveEdits(defaultEdit(clientVersion: 3, serverVersion: 1))
         dataStore.removeEdits(util.documentId, clientId: util.clientId)
         let edits: Optional<[Edit]> = dataStore.getEdits(util.documentId, clientId: util.clientId)
-        XCTAssertNil(edits)
+        XCTAssertTrue(edits == nil)
     }
 
     func assertDefaultShadow(shadow: ShadowDocument<String>) {

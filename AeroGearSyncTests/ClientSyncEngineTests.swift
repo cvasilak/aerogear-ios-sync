@@ -72,7 +72,7 @@ class ClientSyncEngineTests: XCTestCase {
                 Edit.Diff(operation: Edit.Operation.Delete, text: "!"),
                 Edit.Diff(operation: Edit.Operation.Add, text: "?")])
         engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit1, edit2]))
-        XCTAssertNil(dataStore.getEdits(doc.id, clientId: doc.clientId))
+        XCTAssertTrue(dataStore.getEdits(doc.id, clientId: doc.clientId) == nil)
     }
 
     func testPatchTwoDocuments() {
@@ -99,8 +99,8 @@ class ClientSyncEngineTests: XCTestCase {
 
         engine.patch(PatchMessage(id: doc1.id, clientId: doc1.clientId, edits: [edit1]))
         engine.patch(PatchMessage(id: doc2.id, clientId: doc2.clientId, edits: [edit2]))
-        XCTAssertNil(dataStore.getEdits(doc1.id, clientId: doc1.clientId))
-        XCTAssertNil(dataStore.getEdits(doc2.id, clientId: doc2.clientId))
+        XCTAssertTrue(dataStore.getEdits(doc1.id, clientId: doc1.clientId) == nil)
+        XCTAssertTrue(dataStore.getEdits(doc2.id, clientId: doc2.clientId) == nil)
     }
 }
 
