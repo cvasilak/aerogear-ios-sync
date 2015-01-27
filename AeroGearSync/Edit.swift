@@ -1,6 +1,6 @@
 import Foundation
 
-public class Edit: Equatable {
+public struct Edit: Equatable {
     public let clientId: String
     public let documentId: String
     public let clientVersion: Int
@@ -23,7 +23,7 @@ public class Edit: Equatable {
         case Unchanged = "UNCHANGED"
     }
     
-    public class Diff {
+    public struct Diff {
     
         public let operation: Operation
         public let text: String
@@ -33,7 +33,6 @@ public class Edit: Equatable {
             self.text = text
         }
     }
-
 }
 
 public func ==(lhs: Edit, rhs: Edit) -> Bool {

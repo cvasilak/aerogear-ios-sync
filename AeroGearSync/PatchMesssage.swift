@@ -1,6 +1,6 @@
 import Foundation
 
-public class PatchMessage {
+public struct PatchMessage {
     public let documentId: String
     public let clientId: String
     public let edits: [Edit]
