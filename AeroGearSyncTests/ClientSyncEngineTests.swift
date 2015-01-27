@@ -31,7 +31,7 @@ class ClientSyncEngineTests: XCTestCase {
     func testDiff() {
         engine.addDocument(util.document("testing"), callback: emptyCallback)
         let patchMessage = engine.diff(util.document("testing2"))
-        XCTAssertNotNil(patchMessage)
+        XCTAssertTrue(patchMessage != nil)
         XCTAssertEqual("1234" , patchMessage!.documentId)
         XCTAssertEqual("client1" , patchMessage!.clientId)
         XCTAssertFalse(patchMessage!.edits.isEmpty)
