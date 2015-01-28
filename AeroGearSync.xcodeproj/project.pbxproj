@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		488B6B84196B1CD1000297C9 /* AeroGearSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; };
+		48D7D5E61A7968B2000116C5 /* AeroGearSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FFA3CFEB503C995961C291D /* libPods-AeroGearSyncTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */; };
 		884FC79F192DD3BDC2F856C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E39EC25D1CDF91D6145562 /* libPods.a */; };
 		C52535651A40333F0051DD9B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C52535641A40333F0051DD9B /* libPods.a */; };
@@ -61,6 +62,19 @@
 			remoteInfo = AeroGearSync;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		48D7D5E51A796899000116C5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				48D7D5E61A7968B2000116C5 /* AeroGearSync.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AeroGearSyncTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +252,7 @@
 				488B6B64196B19BC000297C9 /* Frameworks */,
 				488B6B65196B19BC000297C9 /* Resources */,
 				6D36798B7B2647971EF52E5E /* Copy Pods Resources */,
+				48D7D5E51A796899000116C5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
