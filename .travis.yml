@@ -1,0 +1,15 @@
+language: objective-c
+osx_image: xcode611
+xcode_workspace: AeroGearSync.xcworkspace
+xcode_scheme: AeroGearSyncTests
+xcode_sdk: iphonesimulator
+
+before_install:
+    - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+
+notifications:
+  irc: "irc.freenode.org#aerogear"
+
+branches:
+  only:
+    - master
