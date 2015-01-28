@@ -1,7 +1,7 @@
 language: objective-c
 osx_image: xcode611
 xcode_workspace: AeroGearSync.xcworkspace
-xcode_scheme: AeroGearSyncTests
+xcode_scheme: AeroGearSync
 xcode_sdk: iphonesimulator
 
 before_install:
