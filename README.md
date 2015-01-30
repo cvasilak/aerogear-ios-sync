@@ -1,6 +1,6 @@
 # AeroGear iOS Differential Synchronization Client Engine [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-sync.png)](https://travis-ci.org/aerogear/aerogear-ios-sync)
 This project represents a client side implementation for [AeroGear Differential 
-Synchronization (DS) Server](https://github.com/aerogear/aerogear-sync-server/tree/differential-synchronization).
+Synchronization (DS) Server](https://github.com/aerogear/aerogear-sync-server/).
 
 ## Prerequisites 
 This project requires Xcode6.0 to run.
