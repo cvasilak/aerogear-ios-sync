@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482ADAF21A7F7338001F17AF /* JsonPatchSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482ADAF11A7F7338001F17AF /* JsonPatchSynchronizer.swift */; };
+		483AE2F21A7FDEC200C11EBC /* JsonPatchSynchronizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F11A7FDEC200C11EBC /* JsonPatchSynchronizerTests.swift */; };
+		483AE2F41A81332D00C11EBC /* DiffMatchPatchEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F31A81332D00C11EBC /* DiffMatchPatchEdit.swift */; };
+		483AE2F61A814B3B00C11EBC /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F51A814B3B00C11EBC /* Diff.swift */; };
+		483AE2F81A814B7300C11EBC /* DiffMatchPatchDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F71A814B7300C11EBC /* DiffMatchPatchDiff.swift */; };
+		483AE2FA1A814BCA00C11EBC /* JsonPatchDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F91A814BCA00C11EBC /* JsonPatchDiff.swift */; };
+		483AE2FC1A814E5800C11EBC /* JsonPatchEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2FB1A814E5800C11EBC /* JsonPatchEdit.swift */; };
 		488B6B84196B1CD1000297C9 /* AeroGearSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; };
 		48D7D5E61A7968B2000116C5 /* AeroGearSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FFA3CFEB503C995961C291D /* libPods-AeroGearSyncTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */; };
@@ -79,6 +86,13 @@
 /* Begin PBXFileReference section */
 		31CB34B9E7291B6B3897A2DC /* libPods-AeroGearSyncTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AeroGearSyncTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C3D5D176E950E40AEA10E7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		482ADAF11A7F7338001F17AF /* JsonPatchSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchSynchronizer.swift; sourceTree = "<group>"; };
+		483AE2F11A7FDEC200C11EBC /* JsonPatchSynchronizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchSynchronizerTests.swift; sourceTree = "<group>"; };
+		483AE2F31A81332D00C11EBC /* DiffMatchPatchEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchEdit.swift; sourceTree = "<group>"; };
+		483AE2F51A814B3B00C11EBC /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		483AE2F71A814B7300C11EBC /* DiffMatchPatchDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchDiff.swift; sourceTree = "<group>"; };
+		483AE2F91A814BCA00C11EBC /* JsonPatchDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchDiff.swift; sourceTree = "<group>"; };
+		483AE2FB1A814E5800C11EBC /* JsonPatchEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchEdit.swift; sourceTree = "<group>"; };
 		488B6B5C196B19BC000297C9 /* AeroGearSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AeroGearSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		488B6B67196B19BC000297C9 /* AeroGearSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E39EC25D1CDF91D6145562 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,9 +199,15 @@
 				C589846419C046A50049EB34 /* DataStore.swift */,
 				C589846619C046A50049EB34 /* Document.swift */,
 				C589846719C046A50049EB34 /* Edit.swift */,
+				483AE2F31A81332D00C11EBC /* DiffMatchPatchEdit.swift */,
+				483AE2FB1A814E5800C11EBC /* JsonPatchEdit.swift */,
+				483AE2F51A814B3B00C11EBC /* Diff.swift */,
+				483AE2F71A814B7300C11EBC /* DiffMatchPatchDiff.swift */,
+				483AE2F91A814BCA00C11EBC /* JsonPatchDiff.swift */,
 				C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */,
 				C589846819C046A50049EB34 /* InMemoryDataStore.swift */,
 				C5307E1619C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift */,
+				482ADAF11A7F7338001F17AF /* JsonPatchSynchronizer.swift */,
 				C589846B19C046A50049EB34 /* ShadowDocument.swift */,
 				C53F5B0A19B0552C00FAC751 /* Info.plist */,
 				C5D316DB19C3187100C11D9C /* AeroGearSync-Bridging-Header.h */,
@@ -203,6 +223,7 @@
 				C546D96519B89A6600451ACE /* ShadowDocumentTests.swift */,
 				C546D96919B89C8200451ACE /* ClientDocumentTests.swift */,
 				C5307E1419C18D090009EBB2 /* DiffMatchPatchSynchronizerTests.swift */,
+				483AE2F11A7FDEC200C11EBC /* JsonPatchSynchronizerTests.swift */,
 				C5307E1A19C19D210009EBB2 /* ClientSyncEngineTests.swift */,
 				C58BF97E19C85FBA00274EEE /* DocUtil.swift */,
 			);
@@ -232,7 +253,6 @@
 				488B6B58196B19BC000297C9 /* Frameworks */,
 				488B6B59196B19BC000297C9 /* Headers */,
 				488B6B5A196B19BC000297C9 /* Resources */,
-				4BB09C6AAC803BE9F8150681 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,7 +271,6 @@
 				488B6B63196B19BC000297C9 /* Sources */,
 				488B6B64196B19BC000297C9 /* Frameworks */,
 				488B6B65196B19BC000297C9 /* Resources */,
-				6D36798B7B2647971EF52E5E /* Copy Pods Resources */,
 				48D7D5E51A796899000116C5 /* CopyFiles */,
 			);
 			buildRules = (
@@ -335,36 +354,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4BB09C6AAC803BE9F8150681 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6D36798B7B2647971EF52E5E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSyncTests/Pods-AeroGearSyncTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		90596C27C825F749AB5B559F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -387,12 +376,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483AE2F61A814B3B00C11EBC /* Diff.swift in Sources */,
+				483AE2FC1A814E5800C11EBC /* JsonPatchEdit.swift in Sources */,
+				483AE2FA1A814BCA00C11EBC /* JsonPatchDiff.swift in Sources */,
 				C5307E1719C191CF0009EBB2 /* DiffMatchPatchSynchronizer.swift in Sources */,
 				C589846F19C046A50049EB34 /* ClientSynchronizer.swift in Sources */,
+				482ADAF21A7F7338001F17AF /* JsonPatchSynchronizer.swift in Sources */,
 				C589846E19C046A50049EB34 /* ClientSyncEngine.swift in Sources */,
 				C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */,
+				483AE2F81A814B7300C11EBC /* DiffMatchPatchDiff.swift in Sources */,
 				C589847319C046A50049EB34 /* Edit.swift in Sources */,
 				C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */,
+				483AE2F41A81332D00C11EBC /* DiffMatchPatchEdit.swift in Sources */,
 				C589847419C046A50049EB34 /* InMemoryDataStore.swift in Sources */,
 				C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */,
 				C589847019C046A50049EB34 /* DataStore.swift in Sources */,
@@ -405,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483AE2F21A7FDEC200C11EBC /* JsonPatchSynchronizerTests.swift in Sources */,
 				C5A153E019B85A8E00077E0E /* InMemoryDataStoreTests.swift in Sources */,
 				C546D96A19B89C8200451ACE /* ClientDocumentTests.swift in Sources */,
 				C5307E1B19C19D210009EBB2 /* ClientSyncEngineTests.swift in Sources */,
@@ -583,6 +579,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = AeroGearSyncTests;
 				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 			};
@@ -603,6 +600,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				METAL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = AeroGearSyncTests;
 				SWIFT_OBJC_BRIDGING_HEADER = "AeroGearSync/AeroGearSync-Bridging-Header.h";
 			};

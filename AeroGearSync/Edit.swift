@@ -1,45 +1,15 @@
 import Foundation
 
-public struct Edit: Equatable {
-    public let clientId: String
-    public let documentId: String
-    public let clientVersion: Int
-    public let serverVersion: Int
-    public let checksum: String
-    public let diffs: Array<Edit.Diff>
+public protocol Edit: Equatable {
 
-    public init(clientId: String, documentId: String, clientVersion: Int, serverVersion: Int, checksum: String, diffs: Array<Edit.Diff>) {
-        self.clientId = clientId
-        self.documentId = documentId
-        self.clientVersion = clientVersion
-        self.serverVersion = serverVersion
-        self.checksum = checksum
-        self.diffs = diffs
-    }
-
-    public enum Operation : String {
-        case Add = "ADD"
-        case Delete = "DELETE"
-        case Unchanged = "UNCHANGED"
-    }
+    typealias D
     
-    public struct Diff {
-    
-        public let operation: Operation
-        public let text: String
-    
-        public init(operation: Operation, text: String) {
-            self.operation = operation
-            self.text = text
-        }
-    }
+    var clientId: String {get}
+    var documentId: String {get}
+    var clientVersion: Int {get}
+    var serverVersion: Int {get}
+    var checksum: String {get}
+    var diffs: Array<D> {get}
 }
 
-public func ==(lhs: Edit, rhs: Edit) -> Bool {
-    return lhs.clientId == rhs.clientId &&
-        lhs.documentId == rhs.documentId &&
-        lhs.serverVersion == rhs.serverVersion &&
-        lhs.checksum == rhs.checksum &&
-        lhs.diffs.count == rhs.diffs.count
-}
 
