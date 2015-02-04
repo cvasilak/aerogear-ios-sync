@@ -1,5 +1,5 @@
 import Foundation
-
+/*
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
     let dmp: DiffMatchPatch
@@ -72,3 +72,4 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
     
 }
+*/

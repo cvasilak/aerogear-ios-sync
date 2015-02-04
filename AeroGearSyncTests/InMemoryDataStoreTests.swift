@@ -5,12 +5,12 @@ import AeroGearSync
 class InMemoryDataStoreTests: XCTestCase {
 
     var documentId, clientId, content: String!
-    var dataStore: InMemoryDataStore<String>!
+    var dataStore: InMemoryDataStore<String, DiffMatchPatchEdit>!
     var util: DocUtil!
 
     override func setUp() {
         super.setUp()
-        dataStore = InMemoryDataStore<String>();
+        dataStore = InMemoryDataStore<String, DiffMatchPatchEdit>();
         util = DocUtil();
     }
 
@@ -61,7 +61,7 @@ class InMemoryDataStoreTests: XCTestCase {
         dataStore.saveEdits(defaultEdit(clientVersion: 2, serverVersion: 1))
         dataStore.saveEdits(defaultEdit(clientVersion: 3, serverVersion: 1))
         dataStore.removeEdits(util.documentId, clientId: util.clientId)
-        let edits: Optional<[Edit]> = dataStore.getEdits(util.documentId, clientId: util.clientId)
+        let edits: Optional<[DiffMatchPatchEdit]> = dataStore.getEdits(util.documentId, clientId: util.clientId)
         XCTAssertTrue(edits == nil)
     }
 
@@ -77,8 +77,8 @@ class InMemoryDataStoreTests: XCTestCase {
         XCTAssertEqual(util.content, clientDocument.content)
     }
 
-    func defaultEdit(# clientVersion: Int, serverVersion: Int) -> Edit {
-        return Edit(clientId: util.clientId,
+    func defaultEdit(# clientVersion: Int, serverVersion: Int) -> DiffMatchPatchEdit {
+        return DiffMatchPatchEdit(clientId: util.clientId,
             documentId: util.documentId,
             clientVersion: clientVersion,
             serverVersion: serverVersion,
