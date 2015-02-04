@@ -1,5 +1,5 @@
 
-public struct JsonPatchDiff: Diff {
+public struct JsonPatchDiff: Difference {
     
     public let operation: Operation
     public let path: String

@@ -1,1 +1,1 @@
-public protocol Diff {}
+public protocol Difference {}

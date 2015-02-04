@@ -1,5 +1,5 @@
 
-public struct DiffMatchPatchDiff: Diff {
+public struct DiffMatchPatchDiff: Difference {
     
     public let operation: Operation
     public let text: String
