@@ -1,3 +1,4 @@
+import AeroGearSync
 
 public struct JsonPatchDiff: Difference {
     

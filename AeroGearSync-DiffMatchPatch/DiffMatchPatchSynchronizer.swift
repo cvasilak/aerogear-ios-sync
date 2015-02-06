@@ -1,4 +1,4 @@
-import Foundation
+import AeroGearSync
 
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 

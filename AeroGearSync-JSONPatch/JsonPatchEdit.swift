@@ -1,3 +1,5 @@
+import AeroGearSync
+
 public struct JsonPatchEdit: Edit {
     public let clientId: String
     public let documentId: String
