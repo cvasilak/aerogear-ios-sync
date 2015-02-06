@@ -1,3 +1,5 @@
+import AeroGearSync
+
 public struct DiffMatchPatchEdit: Edit {
     public let clientId: String
     public let documentId: String

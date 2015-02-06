@@ -1,6 +1,7 @@
 import UIKit
 import XCTest
 import AeroGearSync
+import AeroGearSyncDiffMatchPatch
 
 class DiffMatchPatchSynchronizerTests: XCTestCase {
     
