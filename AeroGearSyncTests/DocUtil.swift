@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 aerogear. All rights reserved.
 //
 
-import Foundation
+import XCTest
 import AeroGearSync
 
 class DocUtil {
