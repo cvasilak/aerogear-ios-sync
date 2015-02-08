@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |core|
        core.source_files = 'AeroGearSync/*.{h,swift}'
   end
-  
+
   s.subspec 'DiffMatchPatch' do |diffmatchpatch|
      diffmatchpatch.source_files = 'AeroGearSync-DiffMatchPatch/*.{h,swift}'
      diffmatchpatch.dependency  'AeroGearSync/Core'
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.subspec 'JSONPatch' do |jsonpatch|
      jsonpatch.source_files = 'AeroGearSync-JSONPatch/*.{h,swift}'
      jsonpatch.dependency  'AeroGearSync/Core'     
-     jsonpatch.dependency  'JSONTools', '1.0.4'
+     jsonpatch.dependency  'JSONTools', '1.0.4-patched'
   end
   
 end
