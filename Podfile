@@ -1,14 +1,15 @@
+source 'https://github.com/cvasilak/Cocoapods-repo.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 xcodeproj 'AeroGearSync.xcodeproj'
 platform :ios, '8.0'
 
 target 'AeroGearSync-JSONPatch' do
-    pod 'JSONTools', '1.0.4'
+    pod 'JSONTools', '1.0.4-patched'
 end
 
 target 'AeroGearSync-JSONPatchTests' do
-    pod 'JSONTools', '1.0.4'
+    pod 'JSONTools', '1.0.4-patched'
 end
 
 target 'AeroGearSync-DiffMatchPatch' do
