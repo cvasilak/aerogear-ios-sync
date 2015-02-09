@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Edit: Equatable {
+public struct Edit: Equatable, Printable {
     public let clientId: String
     public let documentId: String
     public let clientVersion: Int
@@ -17,13 +17,16 @@ public struct Edit: Equatable {
         self.diffs = diffs
     }
 
-    public enum Operation : String {
+    public enum Operation : String, Printable {
         case Add = "ADD"
         case Delete = "DELETE"
         case Unchanged = "UNCHANGED"
+        public var description : String {
+            return self.rawValue
+        }
     }
     
-    public struct Diff {
+    public struct Diff: Printable {
     
         public let operation: Operation
         public let text: String
@@ -32,6 +35,14 @@ public struct Edit: Equatable {
             self.operation = operation
             self.text = text
         }
+
+        public var description: String {
+            return "Diff[operation=\(operation), text=\(text)]"
+        }
+    }
+
+    public var description: String {
+        return "Edit[clientId=\(clientId), documentId=\(documentId), clientVersion=\(clientVersion), serverVersion=\(serverVersion), checksum=\(checksum), diffs=\(diffs)]"
     }
 }
 
