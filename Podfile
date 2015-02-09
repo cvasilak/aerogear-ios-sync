@@ -1,4 +1,4 @@
-source 'https://github.com/cvasilak/Cocoapods-repo.git'
+source 'https://github.com/aerogear/Cocoapods-repo.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 xcodeproj 'AeroGearSync.xcodeproj'

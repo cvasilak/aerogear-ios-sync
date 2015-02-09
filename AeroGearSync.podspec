@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/aerogear/aerogear-sync-server"
   s.license      = 'Apache License, Version 2.0'
   s.author       = "Red Hat, Inc."
-  s.source       = {:git => 'https://github.com/cvasilak/aerogear-ios-sync.git',  :branch => 'json.synchronizer'}
+  s.source       = {:git => 'https://github.com/aerogear/aerogear-ios-sync.git',  :branch => 'master'}
   s.platform     = :ios, 8.0
   s.requires_arc = 'true'  
   s.default_subspec = 'JSONPatch'
