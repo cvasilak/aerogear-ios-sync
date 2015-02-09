@@ -30,18 +30,18 @@ class ClientSyncEngineTests: XCTestCase {
 
     func testDiff() {
         engine.addDocument(util.document("testing"), callback: emptyCallback)
-        let patchMessage = engine.diff(util.document("testing2"))
+        let patchMessage: PatchMessage! = engine.diff(util.document("testing2"))
         XCTAssertTrue(patchMessage != nil)
-        XCTAssertEqual("1234" , patchMessage!.documentId)
-        XCTAssertEqual("client1" , patchMessage!.clientId)
-        XCTAssertFalse(patchMessage!.edits.isEmpty)
-        XCTAssertEqual(1, patchMessage!.edits.count)
-        let diffs:Array<Edit.Diff> = patchMessage!.edits[0].diffs
+        XCTAssertEqual("1234" , patchMessage.documentId)
+        XCTAssertEqual("client1" , patchMessage.clientId)
+        XCTAssertFalse(patchMessage.edits.isEmpty)
+        XCTAssertEqual(1, patchMessage.edits.count)
+        let diffs:Array<Edit.Diff> = patchMessage.edits[0].diffs
         XCTAssertEqual(Edit.Operation.Unchanged, diffs[0].operation)
         XCTAssertEqual("testing", diffs[0].text)
         XCTAssertEqual(Edit.Operation.Add, diffs[1].operation)
         XCTAssertEqual("2", diffs[1].text)
-        let shadow = dataStore.getShadowDocument(patchMessage!.documentId, clientId: patchMessage!.clientId)!
+        let shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId)!
         XCTAssertEqual(1, shadow.clientVersion)
         XCTAssertEqual(0, shadow.serverVersion)
     }
