@@ -1,6 +1,6 @@
 import AeroGearSync
 
-public typealias JsonNode = AnyObject
+public typealias JsonNode = [String: AnyObject]
 
 public class JsonPatchSynchronizer: ClientSynchronizer {
     
@@ -45,9 +45,21 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
     }
     
     public func patchDocument(edit: JsonPatchEdit, clientDocument: ClientDocument<JsonNode>) -> ClientDocument<JsonNode> {
-        let results: AnyObject! = JSONPatch.applyPatches(asJsonPatchDiffs(edit.diffs), toCollection: clientDocument.content)
-        println("RESULT::\(results)")
-        return ClientDocument<JsonNode>(id: clientDocument.id, clientId: clientDocument.clientId, content: results[0] ?? [])
+        // we need a mutable copy of the json node
+        // https://github.com/grgcombs/JSONTools/blob/master/JSONTools%2FJSONPatch.m#L424
+        let collection = clientDocument.content as NSDictionary
+        var mutableCollection: NSMutableDictionary = collection.mutableCopy() as NSMutableDictionary
+        
+        // To get a patched document, we need to add a _get operation at he end of each diff as described in
+        // https://github.com/grgcombs/JSONTools/blob/master/JSONTools%2FJSONPatch.h#L26
+        // this operation is not part of JSON Patch spec though
+        // https://tools.ietf.org/html/rfc6902
+        var diffWithGetOperation = edit.diffs
+        diffWithGetOperation.append(JsonPatchDiff(operation: JsonPatchDiff.Operation.Get, path: "", value: nil))
+        
+        let results: AnyObject! = JSONPatch.applyPatches(asJsonPatchDiffs(diffWithGetOperation), toCollection: mutableCollection)
+        //println("RESULT of applying \(edit.diffs) to \(collection)::\(results)")
+        return ClientDocument<JsonNode>(id: clientDocument.id, clientId: clientDocument.clientId, content: results as JsonNode)
     }
     
     public func patchShadow(edit: JsonPatchEdit, shadow: ShadowDocument<JsonNode>) -> ShadowDocument<JsonNode> {
@@ -62,7 +74,6 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
     private func asJsonPatchDiffs(diffs: [JsonPatchDiff]) -> NSMutableArray {
         var dmpDiffs = NSMutableArray()
         for diff in diffs {
-            //`{"op":"add",  "path": "/foo/0/bar",  "value": "thing"}`
             dmpDiffs.addObject(["op": diff.operation.rawValue, "path": diff.path, "value": diff.value ?? ""])
         }
         return dmpDiffs
