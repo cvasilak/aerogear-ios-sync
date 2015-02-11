@@ -20,6 +20,6 @@ public struct DiffMatchPatchDiff: Difference {
     }
     
     public var description: String {
-        return "Diff[operation=\(operation), text=\(text)]"
+        return "DiffMatchPatchDiff[operation=\(operation), text=\(text)]"
     }
 }

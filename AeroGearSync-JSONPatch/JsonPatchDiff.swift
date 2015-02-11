@@ -26,7 +26,13 @@ public struct JsonPatchDiff: Difference {
         self.value = value
     }
     
+    public init(operation: Operation) {
+        self.operation = operation
+        self.path = ""
+        self.value = nil
+    }
+    
     public var description: String {
-        return "JSonPatchDiff[operation=\(operation), path=\(path) value=\(value)]"
+        return "JsonPatchDiff[operation=\(operation), path=\(path) value=\(value)]"
     }
 }

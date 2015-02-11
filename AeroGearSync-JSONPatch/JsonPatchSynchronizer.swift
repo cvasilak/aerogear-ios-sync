@@ -55,10 +55,9 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
         // this operation is not part of JSON Patch spec though
         // https://tools.ietf.org/html/rfc6902
         var diffWithGetOperation = edit.diffs
-        diffWithGetOperation.append(JsonPatchDiff(operation: JsonPatchDiff.Operation.Get, path: "", value: nil))
+        diffWithGetOperation.append(JsonPatchDiff(operation: JsonPatchDiff.Operation.Get))
         
         let results: AnyObject! = JSONPatch.applyPatches(asJsonPatchDiffs(diffWithGetOperation), toCollection: mutableCollection)
-        //println("RESULT of applying \(edit.diffs) to \(collection)::\(results)")
         return ClientDocument<JsonNode>(id: clientDocument.id, clientId: clientDocument.clientId, content: results as JsonNode)
     }
     
@@ -71,12 +70,8 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
         return edit(shadow.clientDocument, shadow: shadow, diffs: diffsList)
     }
 
-    private func asJsonPatchDiffs(diffs: [JsonPatchDiff]) -> NSMutableArray {
-        var dmpDiffs = NSMutableArray()
-        for diff in diffs {
-            dmpDiffs.addObject(["op": diff.operation.rawValue, "path": diff.path, "value": diff.value ?? ""])
-        }
-        return dmpDiffs
+    private func asJsonPatchDiffs(diffs: [JsonPatchDiff]) -> NSArray {
+        return diffs.map { ["op": $0.operation.rawValue, "path": $0.path, "value": $0.value ?? ""] }
     }
     
 }

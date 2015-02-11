@@ -18,7 +18,7 @@ public struct DiffMatchPatchEdit: Edit {
     }
     
     public var description: String {
-        return "Edit[clientId=\(clientId), documentId=\(documentId), clientVersion=\(clientVersion), serverVersion=\(serverVersion), checksum=\(checksum), diffs=\(diffs)]"
+        return "DiffMatchPatchEdit[clientId=\(clientId), documentId=\(documentId), clientVersion=\(clientVersion), serverVersion=\(serverVersion), checksum=\(checksum), diffs=\(diffs)]"
     }
 }
 
