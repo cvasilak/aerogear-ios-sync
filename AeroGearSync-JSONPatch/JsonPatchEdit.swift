@@ -16,6 +16,10 @@ public struct JsonPatchEdit: Edit {
         self.checksum = checksum
         self.diffs = diffs
     }
+    
+    public var description: String {
+        return "Edit[clientId=\(clientId), documentId=\(documentId), clientVersion=\(clientVersion), serverVersion=\(serverVersion), checksum=\(checksum), diffs=\(diffs)]"
+    }
 }
 
 public func ==(lhs: JsonPatchEdit, rhs: JsonPatchEdit) -> Bool {

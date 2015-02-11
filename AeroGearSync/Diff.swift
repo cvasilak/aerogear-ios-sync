@@ -1,1 +1,1 @@
-public protocol Difference {}
+public protocol Difference: Printable {}
