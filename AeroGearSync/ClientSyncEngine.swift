@@ -117,6 +117,10 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         }
         return Optional.None
     }
+    
+    public func patchMessageFromJson(json: String) -> PatchMessage<E>? {
+        return synchronizer.patchMessageFromJson(json)
+    }
 
 }
 
