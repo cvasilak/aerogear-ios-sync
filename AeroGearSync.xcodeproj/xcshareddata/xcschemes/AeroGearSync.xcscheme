@@ -32,9 +32,29 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "488B6B66196B19BC000297C9"
+               BlueprintIdentifier = "6F20741F1A84D270005A73C7"
                BuildableName = "AeroGearSyncTests.xctest"
                BlueprintName = "AeroGearSyncTests"
+               ReferencedContainer = "container:AeroGearSync.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F4F454E1A84AF4200970512"
+               BuildableName = "AeroGearSyncJSONPatchTests.xctest"
+               BlueprintName = "AeroGearSync-JSONPatchTests"
+               ReferencedContainer = "container:AeroGearSync.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F4F452C1A84AEC400970512"
+               BuildableName = "AeroGearSyncDiffMatchPatchTests.xctest"
+               BlueprintName = "AeroGearSync-DiffMatchPatchTests"
                ReferencedContainer = "container:AeroGearSync.xcodeproj">
             </BuildableReference>
          </TestableReference>

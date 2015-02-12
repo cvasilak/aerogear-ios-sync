@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		27E0915B146FB400B89AFBC3 /* libPods-AeroGearSync-JSONPatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB1E58B4F933BD49E94C3F5 /* libPods-AeroGearSync-JSONPatch.a */; };
 		483AE2F61A814B3B00C11EBC /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AE2F51A814B3B00C11EBC /* Diff.swift */; };
+		48DCC1841A8CBB7100D22FC7 /* AeroGearSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48DCC1851A8CBB7900D22FC7 /* AeroGearSyncJSONPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F4F45451A84AF4200970512 /* AeroGearSyncJSONPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48DCC1871A8CBB8E00D22FC7 /* AeroGearSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48DCC1881A8CBB9900D22FC7 /* AeroGearSyncDiffMatchPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F4F45231A84AEC400970512 /* AeroGearSyncDiffMatchPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48DCC18A1A8CBBAF00D22FC7 /* AeroGearSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2074261A84D270005A73C7 /* AeroGearSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488B6B5C196B19BC000297C9 /* AeroGearSync.framework */; };
 		6F2074301A84D340005A73C7 /* ClientDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20742C1A84D340005A73C7 /* ClientDocumentTests.swift */; };
 		6F2074321A84D340005A73C7 /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20742E1A84D340005A73C7 /* DocUtil.swift */; };
@@ -83,6 +88,41 @@
 			remoteInfo = AeroGearSync;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		48DCC1831A8CBB5A00D22FC7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				48DCC1851A8CBB7900D22FC7 /* AeroGearSyncJSONPatch.framework in CopyFiles */,
+				48DCC1841A8CBB7100D22FC7 /* AeroGearSync.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48DCC1861A8CBB7F00D22FC7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				48DCC1881A8CBB9900D22FC7 /* AeroGearSyncDiffMatchPatch.framework in CopyFiles */,
+				48DCC1871A8CBB8E00D22FC7 /* AeroGearSync.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48DCC1891A8CBBA200D22FC7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				48DCC18A1A8CBBAF00D22FC7 /* AeroGearSync.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		39CB253ACB64DD9B58669AF0 /* Pods-AeroGearSync-DiffMatchPatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSync-DiffMatchPatch.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSync-DiffMatchPatch/Pods-AeroGearSync-DiffMatchPatch.release.xcconfig"; sourceTree = "<group>"; };
@@ -422,6 +462,7 @@
 				6F20741C1A84D270005A73C7 /* Sources */,
 				6F20741D1A84D270005A73C7 /* Frameworks */,
 				6F20741E1A84D270005A73C7 /* Resources */,
+				48DCC1891A8CBBA200D22FC7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -463,6 +504,7 @@
 				6F4F452A1A84AEC400970512 /* Frameworks */,
 				6F4F452B1A84AEC400970512 /* Resources */,
 				2B78237016D8798507268850 /* Copy Pods Resources */,
+				48DCC1861A8CBB7F00D22FC7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -504,6 +546,7 @@
 				6F4F454C1A84AF4200970512 /* Frameworks */,
 				6F4F454D1A84AF4200970512 /* Resources */,
 				F338D4EDA4176D49D76ECE5A /* Copy Pods Resources */,
+				48DCC1831A8CBB5A00D22FC7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
