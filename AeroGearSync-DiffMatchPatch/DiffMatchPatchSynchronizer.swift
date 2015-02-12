@@ -1,4 +1,4 @@
-import Foundation
+import AeroGearSync
 
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
@@ -8,26 +8,26 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         self.dmp = DiffMatchPatch()
     }
 
-    public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
+    public func clientDiff(clientDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> DiffMatchPatchEdit {
         let diffs = dmp.diff_mainOfOldString(clientDocument.content, andNewString: shadow.clientDocument.content).copy() as [Diff]
         return edit(shadow.clientDocument, shadow: shadow, diffs: diffs)
     }
 
-    public func patchDocument(edit: Edit, clientDocument: ClientDocument<String>) -> ClientDocument<String> {
+    public func patchDocument(edit: DiffMatchPatchEdit, clientDocument: ClientDocument<String>) -> ClientDocument<String> {
         let results = dmp.patch_apply(patchesFrom(edit), toString: clientDocument.content)
         return ClientDocument<String>(id: clientDocument.id, clientId: clientDocument.clientId, content: results[0] as String)
     }
 
-    public func patchShadow(edit: Edit, shadow: ShadowDocument<String>) -> ShadowDocument<String> {
+    public func patchShadow(edit: DiffMatchPatchEdit, shadow: ShadowDocument<String>) -> ShadowDocument<String> {
         return ShadowDocument(clientVersion: edit.clientVersion, serverVersion: shadow.serverVersion, clientDocument: patchDocument(edit, clientDocument: shadow.clientDocument))
     }
 
-    public func serverDiff(serverDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> Edit {
+    public func serverDiff(serverDocument: ClientDocument<String>, shadow: ShadowDocument<String>) -> DiffMatchPatchEdit {
         let diffs = dmp.diff_mainOfOldString(shadow.clientDocument.content, andNewString: serverDocument.content).copy() as [Diff]
         return edit(shadow.clientDocument, shadow: shadow, diffs: diffs)
     }
 
-    private func asDmpDiffs(diffs: [Edit.Diff]) -> NSMutableArray {
+    private func asDmpDiffs(diffs: [DiffMatchPatchDiff]) -> NSMutableArray {
         var dmpDiffs = NSMutableArray()
         for diff in diffs {
             dmpDiffs.addObject(Diff(operation: asDmpOperation(diff.operation), andText: diff.text))
@@ -35,11 +35,11 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         return dmpDiffs
     }
 
-    private func patchesFrom(edit: Edit) -> NSArray {
+    private func patchesFrom(edit: DiffMatchPatchEdit) -> NSArray {
         return dmp.patch_makeFromDiffs(asDmpDiffs(edit.diffs))
     }
 
-    private func asDmpOperation(op: Edit.Operation) -> Operation {
+    private func asDmpOperation(op: DiffMatchPatchDiff.Operation) -> Operation {
         switch op {
         case .Delete:
             return Operation.DiffDelete
@@ -50,24 +50,24 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         }
     }
 
-    private func asAeroGearDiffs(diffs: [Diff]) -> [Edit.Diff] {
+    private func asAeroGearDiffs(diffs: [Diff]) -> [DiffMatchPatchDiff] {
         return (diffs).map {
-            Edit.Diff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation($0.operation), text: $0.text)
+            DiffMatchPatchDiff(operation: DiffMatchPatchSynchronizer.asAeroGearOperation($0.operation), text: $0.text)
         }
     }
 
-    private func edit(clientDoc: ClientDocument<String>, shadow: ShadowDocument<String>, diffs: [Diff]) -> Edit {
-        return Edit(clientId: clientDoc.clientId, documentId: clientDoc.id, clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, checksum: "", diffs: asAeroGearDiffs(diffs))
+    private func edit(clientDoc: ClientDocument<String>, shadow: ShadowDocument<String>, diffs: [Diff]) -> DiffMatchPatchEdit {
+        return DiffMatchPatchEdit(clientId: clientDoc.clientId, documentId: clientDoc.id, clientVersion: shadow.clientVersion, serverVersion: shadow.serverVersion, checksum: "", diffs: asAeroGearDiffs(diffs))
     }
 
-    private class func asAeroGearOperation(op: Operation) -> Edit.Operation {
+    private class func asAeroGearOperation(op: Operation) -> DiffMatchPatchDiff.Operation {
         switch op {
         case .DiffDelete:
-            return Edit.Operation.Delete
+            return DiffMatchPatchDiff.Operation.Delete
         case .DiffInsert:
-            return Edit.Operation.Add
+            return DiffMatchPatchDiff.Operation.Add
         case .DiffEqual:
-            return Edit.Operation.Unchanged
+            return DiffMatchPatchDiff.Operation.Unchanged
         }
     }
     

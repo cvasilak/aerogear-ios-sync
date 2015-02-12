@@ -3,6 +3,7 @@ import Foundation
 public protocol DataStore {
     
     typealias T
+    typealias D
 
     func saveClientDocument(clientDocument: ClientDocument<T>)
     func getClientDocument(documentId: String, clientId: String) -> ClientDocument<T>?
@@ -13,9 +14,9 @@ public protocol DataStore {
     func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<T>)
     func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>?
     
-    func saveEdits(edit: Edit)
-    func getEdits(documentId: String, clientId: String) -> [Edit]?
-    func removeEdit(edit: Edit)
+    func saveEdits(edit: D)
+    func getEdits(documentId: String, clientId: String) -> [D]?
+    func removeEdit(edit: D)
     func removeEdits(documentId: String, clientId: String)
     
 }

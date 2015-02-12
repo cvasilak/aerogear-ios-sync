@@ -5,9 +5,25 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/aerogear/aerogear-sync-server"
   s.license      = 'Apache License, Version 2.0'
   s.author       = "Red Hat, Inc."
-  s.source       = {:git => 'https://github.com/aerogear/aerogear-ios-sync.git',  :tag => '0.1.0'}
+  s.source       = {:git => 'https://github.com/aerogear/aerogear-ios-sync.git',  :branch => 'master'}
   s.platform     = :ios, 8.0
-  s.source_files = 'AeroGearSync/*.{h,swift}'
-  s.dependency  'DiffMatchPatch', '0.1.2'
-  s.requires_arc = 'true'
+  s.requires_arc = 'true'  
+  s.default_subspec = 'JSONPatch'
+  
+  s.subspec 'Core' do |core|
+       core.source_files = 'AeroGearSync/*.{h,swift}'
+  end
+
+  s.subspec 'DiffMatchPatch' do |diffmatchpatch|
+     diffmatchpatch.source_files = 'AeroGearSync-DiffMatchPatch/*.{h,swift}'
+     diffmatchpatch.dependency  'AeroGearSync/Core'
+     diffmatchpatch.dependency  'DiffMatchPatch', '0.1.2'
+  end
+
+  s.subspec 'JSONPatch' do |jsonpatch|
+     jsonpatch.source_files = 'AeroGearSync-JSONPatch/*.{h,swift}'
+     jsonpatch.dependency  'AeroGearSync/Core'     
+     jsonpatch.dependency  'JSONTools', '1.0.4-patched'
+  end
+  
 end
