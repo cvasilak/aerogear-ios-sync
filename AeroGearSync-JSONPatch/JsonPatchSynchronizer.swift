@@ -74,5 +74,9 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
         return diffs.map { ["op": $0.operation.rawValue, "path": $0.path, "value": $0.value ?? ""] }
     }
     
+    public func patchMessageFromJson(json: String) -> PatchMessage<JsonPatchEdit>? {
+        return JsonPatchMessage<JsonPatchEdit>().fromJson(json)
+    }
+    
 }
 

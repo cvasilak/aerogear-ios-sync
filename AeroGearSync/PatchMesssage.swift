@@ -2,9 +2,11 @@ import Foundation
 
 public class PatchMessage<E:Edit>: Printable, Payload {
     
-    public let documentId: String
-    public let clientId: String
-    public let edits: [E]
+    public let documentId: String!
+    public let clientId: String!
+    public let edits: [E]!
+    
+    public init() {}
     
     public init(id: String, clientId: String, edits: [E]) {
         self.documentId = id

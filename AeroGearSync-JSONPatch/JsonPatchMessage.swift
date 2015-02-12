@@ -9,7 +9,11 @@
 import Foundation
 import AeroGearSync
 
-public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit> {
+public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
+    
+    public override init() {
+        super.init()
+    }    
     
     override public func asJson() -> String {
         var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
