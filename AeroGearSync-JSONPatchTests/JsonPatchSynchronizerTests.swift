@@ -50,10 +50,11 @@ class JsonPatchSynchronizerTests: XCTestCase {
         XCTAssertEqual(util.clientId, edit.clientId);
         XCTAssertEqual(util.documentId, edit.documentId);
         XCTAssertEqual(2, edit.diffs.count)
-        XCTAssertEqual(JsonPatchDiff.Operation.Replace, edit.diffs[0].operation)
-        XCTAssertEqual("/key3", edit.diffs[0].path)
-        let val: JsonNode = edit.diffs[0].value! as JsonNode
-        println("\(val)")
+        let ops = edit.diffs.map {(op: $0.operation, path: $0.path, val: $0.value)}
+        let sortedOps = ops.sorted {$0.1 < $1.1}
+        XCTAssertEqual(JsonPatchDiff.Operation.Replace, sortedOps[1].op)
+        XCTAssertEqual("/key3", sortedOps[1].path)
+        let val: JsonNode = sortedOps[1].val! as JsonNode
         XCTAssertTrue(val as NSObject == ["key2.1": "value2.1"])
     }
     
@@ -66,13 +67,15 @@ class JsonPatchSynchronizerTests: XCTestCase {
         XCTAssertEqual(util.clientId, edit.clientId);
         XCTAssertEqual(util.documentId, edit.documentId);
         XCTAssertEqual(2, edit.diffs.count)
-        XCTAssertEqual(JsonPatchDiff.Operation.Remove, edit.diffs[0].operation)
-        XCTAssertEqual("/key3", edit.diffs[0].path)
-        XCTAssertNil(edit.diffs[0].value)
-        XCTAssertEqual(JsonPatchDiff.Operation.Add, edit.diffs[1].operation)
-        XCTAssertEqual("/key2/key3", edit.diffs[1].path)
-        let val = edit.diffs[1].value! as String
-        println("\(val)")
+        let ops = edit.diffs.map {(op: $0.operation, path: $0.path, val: $0.value)}
+        let sortedOps = ops.sorted {$0.0.rawValue < $1.0.rawValue}
+        
+        XCTAssertEqual(JsonPatchDiff.Operation.Remove, sortedOps[1].op)
+        XCTAssertEqual("/key3", sortedOps[1].path)
+        XCTAssertNil(sortedOps[1].val)
+        XCTAssertEqual(JsonPatchDiff.Operation.Add, sortedOps[0].op)
+        XCTAssertEqual("/key2/key3", sortedOps[0].path)
+        let val = sortedOps[0].val! as String
         XCTAssertTrue(val as NSObject == "value3")
     }
     
