@@ -122,5 +122,11 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         return synchronizer.patchMessageFromJson(json)
     }
 
+    public func documentToJson(clientDocument:ClientDocument<T>) -> String {
+        var str = "{\"msgType\":\"add\",\"id\":\"" + clientDocument.id + "\",\"clientId\":\"" + clientDocument.clientId + "\","
+        synchronizer.addContent(clientDocument, fieldName: "content", objectNode: &str)
+        str += "}"
+        return str
+    }
 }
 

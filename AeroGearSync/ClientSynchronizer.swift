@@ -14,4 +14,6 @@ public protocol ClientSynchronizer {
     func serverDiff(serverDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
     
     func patchMessageFromJson(json: String) -> PatchMessage<D>?
+    
+    func addContent(content:ClientDocument<T>, fieldName:String, inout objectNode:String)
 }
