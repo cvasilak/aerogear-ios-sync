@@ -36,6 +36,7 @@
 		6F4F45731A84B6AB00970512 /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F45721A84B6AB00970512 /* InMemoryDataStoreTests.swift */; };
 		6F62659C1A84E32E00696742 /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F62659B1A84E32E00696742 /* DocUtil.swift */; };
 		6F62659E1A84E33B00696742 /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F62659D1A84E33B00696742 /* DocUtil.swift */; };
+		6F7144961A8E051000A550F3 /* DiffMatchPatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */; };
 		6F7752F21A8D3722008B9289 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7752F11A8D3722008B9289 /* Payload.swift */; };
 		6F7752F51A8D525B008B9289 /* JsonPatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7752F41A8D525B008B9289 /* JsonPatchMessage.swift */; };
 		C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */; };
@@ -161,6 +162,7 @@
 		6F4F45721A84B6AB00970512 /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
 		6F62659B1A84E32E00696742 /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
 		6F62659D1A84E33B00696742 /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
+		6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchMessage.swift; sourceTree = "<group>"; };
 		6F7752F11A8D3722008B9289 /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		6F7752F41A8D525B008B9289 /* JsonPatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchMessage.swift; sourceTree = "<group>"; };
 		7371D5D7E3601D4B5847F8F1 /* Pods-AeroGearSync-JSONPatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSync-JSONPatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSync-JSONPatch/Pods-AeroGearSync-JSONPatch.debug.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				6F4F45271A84AEC400970512 /* AeroGearSync-DiffMatchPatch.h */,
 				6F4F45621A84AFB100970512 /* DiffMatchPatchDiff.swift */,
 				6F4F453E1A84AF2700970512 /* DiffMatchPatchEdit.swift */,
+				6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */,
 				6F4F45641A84AFD000970512 /* DiffMatchPatchSynchronizer.swift */,
 				6F4F45251A84AEC400970512 /* Supporting Files */,
 			);
@@ -818,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F4F45631A84AFB100970512 /* DiffMatchPatchDiff.swift in Sources */,
+				6F7144961A8E051000A550F3 /* DiffMatchPatchMessage.swift in Sources */,
 				6F4F453F1A84AF2700970512 /* DiffMatchPatchEdit.swift in Sources */,
 				6F4F45651A84AFD000970512 /* DiffMatchPatchSynchronizer.swift in Sources */,
 			);
