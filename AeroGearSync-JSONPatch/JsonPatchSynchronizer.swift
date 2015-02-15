@@ -78,6 +78,10 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
         return JsonPatchMessage<JsonPatchEdit>().fromJson(json)
     }
     
+    public func createPatchMessage(id: String, clientId: String, edits: [JsonPatchEdit]) -> PatchMessage<JsonPatchEdit>? {
+        return JsonPatchMessage<JsonPatchEdit>(id: id, clientId: clientId, edits: edits)
+    }
+    
     public func addContent(clientDocument:ClientDocument<JsonNode>, fieldName:String, inout objectNode:String) {
         objectNode += "\"content\":"
         // convert client document to json
