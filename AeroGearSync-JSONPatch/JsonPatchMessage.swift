@@ -13,7 +13,11 @@ public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
     
     public override init() {
         super.init()
-    }    
+    }
+    
+    public override init(id: String, clientId: String, edits: [JsonPatchEdit]) {
+        super.init(id: id, clientId: clientId, edits: edits)
+    }
     
     override public func asJson() -> String {
         var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
@@ -41,29 +45,43 @@ public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
                     str += ","
                 }
             }
-            str += "]}]}"
+            
+            str += "]}"
+            
+            if i != count {
+                str += ","
+            }
         }
-
+            
+        str += "]}"
+    
+        println("-----------------patch-message-----------------")
+        println(str)
         return str
     }
     
     override public func fromJson(var json:String) -> PatchMessage<JsonPatchEdit>? {
         if let dict = asDictionary(json) {
+            println(dict)
+            
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
             var edits = Array<JsonPatchEdit>()
-            for (key: String, jsonEdit) in dict["edits"] as [String: AnyObject] {
-                var diffs = Array<JsonPatchDiff>()
-                for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
-                    diffs.append(JsonPatchDiff(operation: JsonPatchDiff.Operation(rawValue: jsonDiff["operation"] as String)!,
-                        path: jsonDiff["path"] as String, value: jsonDiff["value"] as String))
+            
+            if let e = dict["edits"] as? [String: AnyObject] {
+                for (key: String, jsonEdit) in e {
+                    var diffs = Array<JsonPatchDiff>()
+                    for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
+                        diffs.append(JsonPatchDiff(operation: JsonPatchDiff.Operation(rawValue: jsonDiff["operation"] as String)!,
+                            path: jsonDiff["path"] as String, value: jsonDiff["value"] as String))
+                    }
+                    edits.append(JsonPatchEdit(clientId: clientId,
+                        documentId: id,
+                        clientVersion: jsonEdit["clientVersion"] as Int,
+                        serverVersion: jsonEdit["serverVersion"] as Int,
+                        checksum: jsonEdit["checksum"] as String,
+                        diffs: diffs))
                 }
-                edits.append(JsonPatchEdit(clientId: clientId,
-                    documentId: id,
-                    clientVersion: jsonEdit["clientVersion"] as Int,
-                    serverVersion: jsonEdit["serverVersion"] as Int,
-                    checksum: jsonEdit["checksum"] as String,
-                    diffs: diffs))
             }
             return PatchMessage(id: id, clientId: clientId, edits: edits)
         }
