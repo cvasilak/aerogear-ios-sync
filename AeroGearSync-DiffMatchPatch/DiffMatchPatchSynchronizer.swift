@@ -75,6 +75,10 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         return DiffMatchPatchMessage<DiffMatchPatchEdit>().fromJson(json)
     }
     
+    public func createPatchMessage(id: String, clientId: String, edits: [DiffMatchPatchEdit]) -> PatchMessage<DiffMatchPatchEdit>? {
+        return DiffMatchPatchMessage<DiffMatchPatchEdit>(id: id, clientId: clientId, edits: edits)
+    }
+    
     public func addContent(clientDocument:ClientDocument<String>, fieldName:String, inout objectNode:String) {
         objectNode += "\"content\":"
         // convert client document to json

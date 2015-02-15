@@ -13,7 +13,11 @@ public class DiffMatchPatchMessage<E>:PatchMessage<DiffMatchPatchEdit>, Printabl
     
     public override init() {
         super.init()
-    }    
+    }
+    
+    public override init(id: String, clientId: String, edits: [DiffMatchPatchEdit]) {
+        super.init(id: id, clientId: clientId, edits: edits)
+    }
     
     override public func asJson() -> String {
         // TODO: This should be solved on the server side.
