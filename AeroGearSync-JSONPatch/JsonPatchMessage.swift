@@ -55,35 +55,34 @@ public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
             
         str += "]}"
     
-        println("-----------------patch-message-----------------")
-        println(str)
         return str
     }
     
     override public func fromJson(var json:String) -> PatchMessage<JsonPatchEdit>? {
         if let dict = asDictionary(json) {
-            println(dict)
-            
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
             var edits = Array<JsonPatchEdit>()
             
-            if let e = dict["edits"] as? [String: AnyObject] {
-                for (key: String, jsonEdit) in e {
-                    var diffs = Array<JsonPatchDiff>()
-                    for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
-                        diffs.append(JsonPatchDiff(operation: JsonPatchDiff.Operation(rawValue: jsonDiff["operation"] as String)!,
-                            path: jsonDiff["path"] as String, value: jsonDiff["value"] as String))
+            if let e = dict["edits"] as? [[String: AnyObject]] {
+                for edit in e {
+                    var diffs = Array<JsonPatchDiff>()                    
+                    if let d = edit["diffs"] as? [[String: AnyObject]] {
+                        for diff in d {
+                            diffs.append(JsonPatchDiff(operation: JsonPatchDiff.Operation(rawValue: diff["op"] as String)!,
+                                path: diff["path"] as String, value: diff["value"] as? String))
+                        }
                     }
+                    
                     edits.append(JsonPatchEdit(clientId: clientId,
                         documentId: id,
-                        clientVersion: jsonEdit["clientVersion"] as Int,
-                        serverVersion: jsonEdit["serverVersion"] as Int,
-                        checksum: jsonEdit["checksum"] as String,
+                        clientVersion: edit["clientVersion"] as Int,
+                        serverVersion: edit["serverVersion"] as Int,
+                        checksum: edit["checksum"] as String,
                         diffs: diffs))
                 }
             }
-            return PatchMessage(id: id, clientId: clientId, edits: edits)
+            return JsonPatchMessage(id: id, clientId: clientId, edits: edits)
         }
         return Optional.None
     }
