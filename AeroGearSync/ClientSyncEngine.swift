@@ -31,7 +31,8 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
             let patched = synchronizer.patchShadow(edit, shadow: shadow)
             dataStore.saveShadowDocument(incrementClientVersion(patched))
             let edits = dataStore.getEdits(clientDocument.id, clientId: clientDocument.clientId)
-            return PatchMessage(id: clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
+
+            return synchronizer.createPatchMessage(clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
         }
         return Optional.None
     }
@@ -40,6 +41,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         if let patched = patchShadow(patchMessage) {
             let callback = callbacks[patchMessage.documentId]!
             callback(patchDocument(patched)!)
+
             dataStore.saveBackupShadowDocument(BackupShadowDocument(version: patched.clientVersion, shadowDocument: patched))
         }
     }
