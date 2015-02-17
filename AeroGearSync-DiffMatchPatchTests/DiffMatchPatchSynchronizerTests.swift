@@ -63,7 +63,7 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
 
     func testPatchShadow() {
         let shadowDoc = util.shadow("Do or do not, there is no try.")
-        var diffs = Array<DiffMatchPatchDiff>()
+        var diffs = [DiffMatchPatchDiff]()
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Unchanged, text: "Do or do not, there is not try"))
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Delete, text: "."))
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Add, text: "!"))
@@ -76,7 +76,7 @@ class DiffMatchPatchSynchronizerTests: XCTestCase {
 
     func testPatchDocument() {
         let shadowDoc = util.shadow("Do or do not, there is no try.")
-        var diffs = Array<DiffMatchPatchDiff>()
+        var diffs = [DiffMatchPatchDiff]()
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Unchanged, text: "Do or do not, there is not try"))
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Delete, text: "."))
         diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Add, text: "!"))
