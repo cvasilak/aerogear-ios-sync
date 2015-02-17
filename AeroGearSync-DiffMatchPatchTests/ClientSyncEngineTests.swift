@@ -49,7 +49,7 @@ class ClientSyncEngineTests: XCTestCase {
 
     func testDiff() {
         engine.addDocument(util.document("testing"), callback: emptyCallback)
-        let patchMessage: PatchMessage! = engine.diff(util.document("testing2"))
+        let patchMessage: DiffMatchPatchMessage! = engine.diff(util.document("testing2"))
         XCTAssertTrue(patchMessage != nil)
         XCTAssertEqual("1234" , patchMessage.documentId)
         XCTAssertEqual("client1" , patchMessage.clientId)
@@ -74,7 +74,7 @@ class ClientSyncEngineTests: XCTestCase {
             DiffMatchPatchDiff(operation: .Delete, text: "."),
             DiffMatchPatchDiff(operation: .Add, text: "!")]
         let edit = DiffMatchPatchEdit(clientId: doc.clientId, documentId: doc.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs)
-        engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit]))
+        engine.patch(DiffMatchPatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit]))
     }
 
     func testPatchMultipleEdits() {
@@ -90,7 +90,7 @@ class ClientSyncEngineTests: XCTestCase {
             diffs: [DiffMatchPatchDiff(operation: .Unchanged, text: "Do or do not, there is no try"),
                 DiffMatchPatchDiff(operation: .Delete, text: "!"),
                 DiffMatchPatchDiff(operation: .Add, text: "?")])
-        engine.patch(PatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit1, edit2]))
+        engine.patch(DiffMatchPatchMessage(id: doc.id, clientId: doc.clientId, edits: [edit1, edit2]))
         XCTAssertTrue(dataStore.getEdits(doc.id, clientId: doc.clientId) == nil)
     }
 
@@ -116,8 +116,8 @@ class ClientSyncEngineTests: XCTestCase {
         diffs2.append(DiffMatchPatchDiff(operation: .Unchanged, text: "2"))
         let edit2 = DiffMatchPatchEdit(clientId: doc2.clientId, documentId: doc2.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs2)
 
-        engine.patch(PatchMessage(id: doc1.id, clientId: doc1.clientId, edits: [edit1]))
-        engine.patch(PatchMessage(id: doc2.id, clientId: doc2.clientId, edits: [edit2]))
+        engine.patch(DiffMatchPatchMessage(id: doc1.id, clientId: doc1.clientId, edits: [edit1]))
+        engine.patch(DiffMatchPatchMessage(id: doc2.id, clientId: doc2.clientId, edits: [edit2]))
         XCTAssertTrue(dataStore.getEdits(doc1.id, clientId: doc1.clientId) == nil)
         XCTAssertTrue(dataStore.getEdits(doc2.id, clientId: doc2.clientId) == nil)
     }
