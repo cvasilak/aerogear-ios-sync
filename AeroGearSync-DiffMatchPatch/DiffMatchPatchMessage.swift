@@ -18,17 +18,24 @@
 import Foundation
 import AeroGearSync
 
-public class DiffMatchPatchMessage<E>:PatchMessage<DiffMatchPatchEdit>, Printable {
+public struct DiffMatchPatchMessage:PatchMessage, Printable {
+    public let documentId: String!
+    public let clientId: String!
+    public let edits: [DiffMatchPatchEdit]!
     
-    public override init() {
-        super.init()
+    public var description: String {
+        return "DiffMatchPatchMessage[documentId=\(documentId), clientId=\(clientId), edits=\(edits)]"
     }
     
-    public override init(id: String, clientId: String, edits: [DiffMatchPatchEdit]) {
-        super.init(id: id, clientId: clientId, edits: edits)
+    public init() {}
+    
+    public init(id: String, clientId: String, edits: [DiffMatchPatchEdit]) {
+        self.documentId = id
+        self.clientId = clientId
+        self.edits = edits
     }
     
-    override public func asJson() -> String {
+    public func asJson() -> String {
         // TODO: This should be solved on the server side.
         var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
         str += ",\"edits\":["
@@ -52,11 +59,11 @@ public class DiffMatchPatchMessage<E>:PatchMessage<DiffMatchPatchEdit>, Printabl
         return str
     }
     
-    override public func fromJson(var json:String) -> PatchMessage<DiffMatchPatchEdit>? {
+    public func fromJson(var json:String) -> DiffMatchPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
-            var edits = Array<DiffMatchPatchEdit>()
+            var edits = [DiffMatchPatchEdit]()
             for (key: String, jsonEdit) in dict["edits"] as [String: AnyObject] {
                 var diffs = Array<DiffMatchPatchDiff>()
                 for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
@@ -70,7 +77,7 @@ public class DiffMatchPatchMessage<E>:PatchMessage<DiffMatchPatchEdit>, Printabl
                     checksum: jsonEdit["checksum"] as String,
                     diffs: diffs))
             }
-            return PatchMessage(id: id, clientId: clientId, edits: edits)
+            return DiffMatchPatchMessage(id: id, clientId: clientId, edits: edits)
         }
         return Optional.None
     }

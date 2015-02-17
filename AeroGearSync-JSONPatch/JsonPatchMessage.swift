@@ -18,17 +18,24 @@
 import Foundation
 import AeroGearSync
 
-public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
+public struct JsonPatchMessage: PatchMessage, Printable {
+    public let documentId: String!
+    public let clientId: String!
+    public let edits: [JsonPatchEdit]!
     
-    public override init() {
-        super.init()
+    public var description: String {
+        return "JsonPatchMessage[documentId=\(documentId), clientId=\(clientId), edits=\(edits)]"
     }
     
-    public override init(id: String, clientId: String, edits: [JsonPatchEdit]) {
-        super.init(id: id, clientId: clientId, edits: edits)
+    public init() {}
+    
+    public init(id: String, clientId: String, edits: [JsonPatchEdit]) {
+        self.documentId = id
+        self.clientId = clientId
+        self.edits = edits
     }
     
-    override public func asJson() -> String {
+    public func asJson() -> String {
         var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
         str += ",\"edits\":["
         let count = edits.count-1
@@ -67,7 +74,7 @@ public class JsonPatchMessage<E>:PatchMessage<JsonPatchEdit>, Printable {
         return str
     }
     
-    override public func fromJson(var json:String) -> PatchMessage<JsonPatchEdit>? {
+    public func fromJson(var json:String) -> JsonPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String

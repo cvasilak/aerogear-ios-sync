@@ -21,6 +21,7 @@ public protocol ClientSynchronizer {
     
     typealias T
     typealias D: Edit
+    typealias P: PatchMessage
 
     func patchShadow(edit: D, shadow: ShadowDocument<T>) -> ShadowDocument<T>
     
@@ -30,9 +31,9 @@ public protocol ClientSynchronizer {
     
     func serverDiff(serverDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
     
-    func patchMessageFromJson(json: String) -> PatchMessage<D>?
+    func patchMessageFromJson(json: String) -> P?
 
-    func createPatchMessage(id: String, clientId: String, edits: [D]) -> PatchMessage<D>?
+    func createPatchMessage(id: String, clientId: String, edits: [D]) -> P?
     
     func addContent(content:ClientDocument<T>, fieldName:String, inout objectNode:String)
 }

@@ -20,10 +20,11 @@ import Foundation
 /**
 The client side implementation of a Differential Synchronization Engine.
 */
-public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T, CS.D == D.D> {
+public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T, CS.D == D.D, CS.P.E == CS.D > {
     
     typealias T = CS.T
     typealias E = CS.D
+    typealias P = CS.P
     let synchronizer: CS
     let dataStore: D
     var callbacks = Dictionary<String, (ClientDocument<T>) -> ()>()
@@ -41,7 +42,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         callbacks[clientDocument.id] = callback
     }
 
-    public func diff(clientDocument: ClientDocument<T>) -> PatchMessage<E>? {
+    public func diff(clientDocument: ClientDocument<T>) -> P? {
         if let shadow = dataStore.getShadowDocument(clientDocument.id, clientId: clientDocument.clientId) {
             let edit = diffAgainstShadow(clientDocument, shadow: shadow)
             dataStore.saveEdits(edit)
@@ -54,7 +55,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         return Optional.None
     }
 
-    public func patch(patchMessage: PatchMessage<E>) {
+    public func patch(patchMessage: P) {
         if let patched = patchShadow(patchMessage) {
             let callback = callbacks[patchMessage.documentId]!
             callback(patchDocument(patched)!)
@@ -63,7 +64,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         }
     }
 
-    private func patchShadow(patchMessage: PatchMessage<E>) -> ShadowDocument<T>? {
+    private func patchShadow(patchMessage: P) -> ShadowDocument<T>? {
         if var shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
             for edit in patchMessage.edits {
                 if (edit.clientVersion < shadow.clientVersion && !self.isSeedVersion(edit)) {
@@ -137,7 +138,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         return Optional.None
     }
     
-    public func patchMessageFromJson(json: String) -> PatchMessage<E>? {
+    public func patchMessageFromJson(json: String) -> P? {
         return synchronizer.patchMessageFromJson(json)
     }
 
