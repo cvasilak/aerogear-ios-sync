@@ -23,9 +23,9 @@ public struct DiffMatchPatchEdit: Edit {
     public let clientVersion: Int
     public let serverVersion: Int
     public let checksum: String
-    public let diffs: Array<DiffMatchPatchDiff>
+    public let diffs: [DiffMatchPatchDiff]
     
-    public init(clientId: String, documentId: String, clientVersion: Int, serverVersion: Int, checksum: String, diffs: Array<DiffMatchPatchDiff>) {
+    public init(clientId: String, documentId: String, clientVersion: Int, serverVersion: Int, checksum: String, diffs: [DiffMatchPatchDiff]) {
         self.clientId = clientId
         self.documentId = documentId
         self.clientVersion = clientVersion

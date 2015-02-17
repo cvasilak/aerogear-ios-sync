@@ -19,10 +19,10 @@ import Foundation
 
 public class InMemoryDataStore<T, E: Edit>: DataStore {
     
-    private var documents = Dictionary<Key, ClientDocument<T>>()
-    private var shadows = Dictionary<Key, ShadowDocument<T>>()
-    private var backups = Dictionary<Key, BackupShadowDocument<T>>()
-    private var edits = Dictionary<Key, [E]?>()
+    private var documents = [Key: ClientDocument<T>]()
+    private var shadows = [Key: ShadowDocument<T>]()
+    private var backups = [Key: BackupShadowDocument<T>]()
+    private var edits = [Key: [E]?]()
     
     public init() {
     }

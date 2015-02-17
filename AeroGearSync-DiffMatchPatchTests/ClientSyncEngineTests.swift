@@ -55,7 +55,7 @@ class ClientSyncEngineTests: XCTestCase {
         XCTAssertEqual("client1" , patchMessage.clientId)
         XCTAssertFalse(patchMessage.edits.isEmpty)
         XCTAssertEqual(1, patchMessage.edits.count)
-        let diffs:Array<DiffMatchPatchDiff> = patchMessage.edits[0].diffs
+        let diffs:[DiffMatchPatchDiff] = patchMessage.edits[0].diffs
         XCTAssertEqual(DiffMatchPatchDiff.Operation.Unchanged, diffs[0].operation)
         XCTAssertEqual("testing", diffs[0].text)
         XCTAssertEqual(DiffMatchPatchDiff.Operation.Add, diffs[1].operation)
@@ -104,13 +104,13 @@ class ClientSyncEngineTests: XCTestCase {
         engine.addDocument(doc2, callback: { (doc:ClientDocument<T>) -> () in
             XCTAssertEqual("Document2", doc.content)
         })
-        var diffs1 = Array<DiffMatchPatchDiff>()
+        var diffs1 = [DiffMatchPatchDiff]()
         diffs1.append(DiffMatchPatchDiff(operation: .Unchanged, text: "Doc"))
         diffs1.append(DiffMatchPatchDiff(operation: .Add, text: "ument"))
         diffs1.append(DiffMatchPatchDiff(operation: .Unchanged, text: "1"))
         let edit1 = DiffMatchPatchEdit(clientId: doc1.clientId, documentId: doc1.id, clientVersion: 0, serverVersion: 0, checksum: "", diffs: diffs1)
 
-        var diffs2 = Array<DiffMatchPatchDiff>()
+        var diffs2 = [DiffMatchPatchDiff]()
         diffs2.append(DiffMatchPatchDiff(operation: .Unchanged, text: "Doc"))
         diffs2.append(DiffMatchPatchDiff(operation: .Add, text: "ument"))
         diffs2.append(DiffMatchPatchDiff(operation: .Unchanged, text: "2"))

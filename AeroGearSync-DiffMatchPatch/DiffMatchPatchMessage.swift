@@ -36,7 +36,6 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     }
     
     public func asJson() -> String {
-        // TODO: This should be solved on the server side.
         var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
         str += ",\"edits\":["
         let count = edits.count-1
@@ -65,7 +64,7 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
             let clientId = dict["clientId"] as String
             var edits = [DiffMatchPatchEdit]()
             for (key: String, jsonEdit) in dict["edits"] as [String: AnyObject] {
-                var diffs = Array<DiffMatchPatchDiff>()
+                var diffs = [DiffMatchPatchDiff]()
                 for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
                     diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation(rawValue: jsonDiff["operation"] as String)!,
                        text: jsonDiff["text"] as String))
@@ -88,10 +87,10 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     :param: jsonString the JSON string to convert into a Dictionary
     :returns: Optional Dictionary<String, AnyObject>
     */
-    public func asDictionary(jsonString: String) -> Dictionary<String, AnyObject>? {
+    public func asDictionary(jsonString: String) -> [String: AnyObject]? {
         var jsonErrorOptional: NSError?
         return NSJSONSerialization.JSONObjectWithData((jsonString as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-            options: NSJSONReadingOptions(0), error: &jsonErrorOptional) as? Dictionary<String, AnyObject>
+            options: NSJSONReadingOptions(0), error: &jsonErrorOptional) as? [String: AnyObject]
     }
     
     /**
@@ -100,7 +99,7 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     :param: the Dictionary<String, AnyObject> to try to convert.
     :returns: optionally the JSON string representation for the dictionary.
     */
-    public func asJsonString(dict: Dictionary<String, AnyObject>) -> String? {
+    public func asJsonString(dict: [String: AnyObject]) -> String? {
         var jsonErrorOptional: NSError?
         var data = NSJSONSerialization.dataWithJSONObject(dict, options:NSJSONWritingOptions(0), error: &jsonErrorOptional)
         return NSString(data: data!, encoding: NSUTF8StringEncoding)

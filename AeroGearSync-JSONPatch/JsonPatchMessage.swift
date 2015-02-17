@@ -78,11 +78,11 @@ public struct JsonPatchMessage: PatchMessage, Printable {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
-            var edits = Array<JsonPatchEdit>()
+            var edits = [JsonPatchEdit]()
             
             if let e = dict["edits"] as? [[String: AnyObject]] {
                 for edit in e {
-                    var diffs = Array<JsonPatchDiff>()                    
+                    var diffs = [JsonPatchDiff]()
                     if let d = edit["diffs"] as? [[String: AnyObject]] {
                         for diff in d {
                             diffs.append(JsonPatchDiff(operation: JsonPatchDiff.Operation(rawValue: diff["op"] as String)!,
@@ -109,10 +109,10 @@ public struct JsonPatchMessage: PatchMessage, Printable {
     :param: jsonString the JSON string to convert into a Dictionary
     :returns: Optional Dictionary<String, AnyObject>
     */
-    public func asDictionary(jsonString: String) -> Dictionary<String, AnyObject>? {
+    public func asDictionary(jsonString: String) -> [String: AnyObject]? {
         var jsonErrorOptional: NSError?
         return NSJSONSerialization.JSONObjectWithData((jsonString as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-            options: NSJSONReadingOptions(0), error: &jsonErrorOptional) as? Dictionary<String, AnyObject>
+            options: NSJSONReadingOptions(0), error: &jsonErrorOptional) as? [String: AnyObject]
     }
     
     /**
@@ -121,7 +121,7 @@ public struct JsonPatchMessage: PatchMessage, Printable {
     :param: the Dictionary<String, AnyObject> to try to convert.
     :returns: optionally the JSON string representation for the dictionary.
     */
-    public func asJsonString(dict: Dictionary<String, AnyObject>) -> String? {
+    public func asJsonString(dict: [String:  AnyObject]) -> String? {
         var jsonErrorOptional: NSError?
         var data = NSJSONSerialization.dataWithJSONObject(dict, options:NSJSONWritingOptions(0), error: &jsonErrorOptional)
         return NSString(data: data!, encoding: NSUTF8StringEncoding)

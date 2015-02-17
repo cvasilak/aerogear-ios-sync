@@ -26,7 +26,7 @@ public protocol Edit: Equatable, Printable {
     var clientVersion: Int {get}
     var serverVersion: Int {get}
     var checksum: String {get}
-    var diffs: Array<D> {get}
+    var diffs: [D] {get}
 }
 
 
