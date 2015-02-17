@@ -17,23 +17,11 @@
 
 import Foundation
 
-public protocol ClientSynchronizer {
+public protocol Payload {
     
     typealias T
-    typealias D: Edit
-    typealias P: PatchMessage
-
-    func patchShadow(edit: D, shadow: ShadowDocument<T>) -> ShadowDocument<T>
     
-    func patchDocument(edit: D, clientDocument: ClientDocument<T>) -> ClientDocument<T>
+    func asJson() -> String
     
-    func clientDiff(clientDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
-    
-    func serverDiff(serverDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
-    
-    func patchMessageFromJson(json: String) -> P?
-
-    func createPatchMessage(id: String, clientId: String, edits: [D]) -> P?
-    
-    func addContent(content:ClientDocument<T>, fieldName:String, inout objectNode:String)
+    func fromJson(var json:String) -> T?
 }

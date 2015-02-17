@@ -1,12 +1,30 @@
+/*
+* JBoss, Home of Professional Open Source.
+* Copyright Red Hat, Inc., and individual contributors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 import Foundation
 
 /**
 The client side implementation of a Differential Synchronization Engine.
 */
-public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T, CS.D == D.D> {
+public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T, CS.D == D.D, CS.P.E == CS.D > {
     
     typealias T = CS.T
     typealias E = CS.D
+    typealias P = CS.P
     let synchronizer: CS
     let dataStore: D
     var callbacks = Dictionary<String, (ClientDocument<T>) -> ()>()
@@ -24,27 +42,29 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         callbacks[clientDocument.id] = callback
     }
 
-    public func diff(clientDocument: ClientDocument<T>) -> PatchMessage<E>? {
+    public func diff(clientDocument: ClientDocument<T>) -> P? {
         if let shadow = dataStore.getShadowDocument(clientDocument.id, clientId: clientDocument.clientId) {
             let edit = diffAgainstShadow(clientDocument, shadow: shadow)
             dataStore.saveEdits(edit)
             let patched = synchronizer.patchShadow(edit, shadow: shadow)
             dataStore.saveShadowDocument(incrementClientVersion(patched))
             let edits = dataStore.getEdits(clientDocument.id, clientId: clientDocument.clientId)
-            return PatchMessage(id: clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
+
+            return synchronizer.createPatchMessage(clientDocument.id, clientId: clientDocument.clientId, edits: edits!)
         }
         return Optional.None
     }
 
-    public func patch(patchMessage: PatchMessage<E>) {
+    public func patch(patchMessage: P) {
         if let patched = patchShadow(patchMessage) {
             let callback = callbacks[patchMessage.documentId]!
             callback(patchDocument(patched)!)
+
             dataStore.saveBackupShadowDocument(BackupShadowDocument(version: patched.clientVersion, shadowDocument: patched))
         }
     }
 
-    private func patchShadow(patchMessage: PatchMessage<E>) -> ShadowDocument<T>? {
+    private func patchShadow(patchMessage: P) -> ShadowDocument<T>? {
         if var shadow = dataStore.getShadowDocument(patchMessage.documentId, clientId: patchMessage.clientId) {
             for edit in patchMessage.edits {
                 if (edit.clientVersion < shadow.clientVersion && !self.isSeedVersion(edit)) {
@@ -117,6 +137,16 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         }
         return Optional.None
     }
+    
+    public func patchMessageFromJson(json: String) -> P? {
+        return synchronizer.patchMessageFromJson(json)
+    }
 
+    public func documentToJson(clientDocument:ClientDocument<T>) -> String {
+        var str = "{\"msgType\":\"add\",\"id\":\"" + clientDocument.id + "\",\"clientId\":\"" + clientDocument.clientId + "\","
+        synchronizer.addContent(clientDocument, fieldName: "content", objectNode: &str)
+        str += "}"
+        return str
+    }
 }
 

@@ -1,3 +1,20 @@
+/*
+* JBoss, Home of Professional Open Source.
+* Copyright Red Hat, Inc., and individual contributors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 import AeroGearSync
 
 public typealias JsonNode = [String: AnyObject]
@@ -74,5 +91,20 @@ public class JsonPatchSynchronizer: ClientSynchronizer {
         return diffs.map { ["op": $0.operation.rawValue, "path": $0.path, "value": $0.value ?? ""] }
     }
     
+    public func patchMessageFromJson(json: String) -> JsonPatchMessage? {
+        return JsonPatchMessage().fromJson(json)
+    }
+    
+    public func createPatchMessage(id: String, clientId: String, edits: [JsonPatchEdit]) -> JsonPatchMessage? {
+        return JsonPatchMessage(id: id, clientId: clientId, edits: edits)
+    }
+    
+    public func addContent(clientDocument:ClientDocument<JsonNode>, fieldName:String, inout objectNode:String) {
+        objectNode += "\"content\":"
+        // convert client document to json
+        var jsonErrorOptional: NSError?
+        var data = NSJSONSerialization.dataWithJSONObject(clientDocument.content, options:NSJSONWritingOptions(0), error: &jsonErrorOptional)
+        objectNode += NSString(data: data!, encoding: NSUTF8StringEncoding)!
+    }
 }
 

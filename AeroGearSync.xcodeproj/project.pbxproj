@@ -36,6 +36,9 @@
 		6F4F45731A84B6AB00970512 /* InMemoryDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F45721A84B6AB00970512 /* InMemoryDataStoreTests.swift */; };
 		6F62659C1A84E32E00696742 /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F62659B1A84E32E00696742 /* DocUtil.swift */; };
 		6F62659E1A84E33B00696742 /* DocUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F62659D1A84E33B00696742 /* DocUtil.swift */; };
+		6F7144961A8E051000A550F3 /* DiffMatchPatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */; };
+		6F7752F21A8D3722008B9289 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7752F11A8D3722008B9289 /* Payload.swift */; };
+		6F7752F51A8D525B008B9289 /* JsonPatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7752F41A8D525B008B9289 /* JsonPatchMessage.swift */; };
 		C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */; };
 		C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846019C046A50049EB34 /* BackupShadowDocument.swift */; };
 		C589846D19C046A50049EB34 /* ClientDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C589846119C046A50049EB34 /* ClientDocument.swift */; };
@@ -159,6 +162,9 @@
 		6F4F45721A84B6AB00970512 /* InMemoryDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataStoreTests.swift; sourceTree = "<group>"; };
 		6F62659B1A84E32E00696742 /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
 		6F62659D1A84E33B00696742 /* DocUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocUtil.swift; sourceTree = "<group>"; };
+		6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffMatchPatchMessage.swift; sourceTree = "<group>"; };
+		6F7752F11A8D3722008B9289 /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
+		6F7752F41A8D525B008B9289 /* JsonPatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPatchMessage.swift; sourceTree = "<group>"; };
 		7371D5D7E3601D4B5847F8F1 /* Pods-AeroGearSync-JSONPatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSync-JSONPatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSync-JSONPatch/Pods-AeroGearSync-JSONPatch.debug.xcconfig"; sourceTree = "<group>"; };
 		79762A95A79D0C87935E221A /* Pods-AeroGearSync-JSONPatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSync-JSONPatchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSync-JSONPatchTests/Pods-AeroGearSync-JSONPatchTests.release.xcconfig"; sourceTree = "<group>"; };
 		A910D4231379112C104D8CEB /* Pods-AeroGearSync-JSONPatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSync-JSONPatchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSync-JSONPatchTests/Pods-AeroGearSync-JSONPatchTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +293,7 @@
 				6F4F45271A84AEC400970512 /* AeroGearSync-DiffMatchPatch.h */,
 				6F4F45621A84AFB100970512 /* DiffMatchPatchDiff.swift */,
 				6F4F453E1A84AF2700970512 /* DiffMatchPatchEdit.swift */,
+				6F7144951A8E051000A550F3 /* DiffMatchPatchMessage.swift */,
 				6F4F45641A84AFD000970512 /* DiffMatchPatchSynchronizer.swift */,
 				6F4F45251A84AEC400970512 /* Supporting Files */,
 			);
@@ -328,6 +335,7 @@
 				6F4F45491A84AF4200970512 /* AeroGearSync-JSONPatch.h */,
 				6F4F45601A84AF7E00970512 /* JsonPatchEdit.swift */,
 				6F4F45661A84AFEE00970512 /* JsonPatchDiff.swift */,
+				6F7752F41A8D525B008B9289 /* JsonPatchMessage.swift */,
 				6F4F45681A84B00600970512 /* JsonPatchSynchronizer.swift */,
 				6F4F45471A84AF4200970512 /* Supporting Files */,
 			);
@@ -390,6 +398,7 @@
 				C5307E1C19C1B8660009EBB2 /* PatchMesssage.swift */,
 				C589846819C046A50049EB34 /* InMemoryDataStore.swift */,
 				C589846B19C046A50049EB34 /* ShadowDocument.swift */,
+				6F7752F11A8D3722008B9289 /* Payload.swift */,
 				C53F5B0A19B0552C00FAC751 /* Info.plist */,
 			);
 			path = AeroGearSync;
@@ -788,6 +797,7 @@
 				C589847719C046A50049EB34 /* ShadowDocument.swift in Sources */,
 				C589847319C046A50049EB34 /* Edit.swift in Sources */,
 				C5307E1D19C1B8660009EBB2 /* PatchMesssage.swift in Sources */,
+				6F7752F21A8D3722008B9289 /* Payload.swift in Sources */,
 				C589847419C046A50049EB34 /* InMemoryDataStore.swift in Sources */,
 				C589846C19C046A50049EB34 /* BackupShadowDocument.swift in Sources */,
 				C589847019C046A50049EB34 /* DataStore.swift in Sources */,
@@ -811,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F4F45631A84AFB100970512 /* DiffMatchPatchDiff.swift in Sources */,
+				6F7144961A8E051000A550F3 /* DiffMatchPatchMessage.swift in Sources */,
 				6F4F453F1A84AF2700970512 /* DiffMatchPatchEdit.swift in Sources */,
 				6F4F45651A84AFD000970512 /* DiffMatchPatchSynchronizer.swift in Sources */,
 			);
@@ -831,6 +842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F7752F51A8D525B008B9289 /* JsonPatchMessage.swift in Sources */,
 				6F4F45611A84AF7E00970512 /* JsonPatchEdit.swift in Sources */,
 				6F4F45671A84AFEE00970512 /* JsonPatchDiff.swift in Sources */,
 				6F4F45691A84B00600970512 /* JsonPatchSynchronizer.swift in Sources */,
