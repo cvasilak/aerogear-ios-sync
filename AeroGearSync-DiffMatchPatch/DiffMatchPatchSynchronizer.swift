@@ -88,12 +88,12 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
         }
     }
     
-    public func patchMessageFromJson(json: String) -> PatchMessage<DiffMatchPatchEdit>? {
-        return DiffMatchPatchMessage<DiffMatchPatchEdit>().fromJson(json)
+    public func patchMessageFromJson(json: String) -> DiffMatchPatchMessage? {
+        return DiffMatchPatchMessage().fromJson(json)
     }
     
-    public func createPatchMessage(id: String, clientId: String, edits: [DiffMatchPatchEdit]) -> PatchMessage<DiffMatchPatchEdit>? {
-        return DiffMatchPatchMessage<DiffMatchPatchEdit>(id: id, clientId: clientId, edits: edits)
+    public func createPatchMessage(id: String, clientId: String, edits: [DiffMatchPatchEdit]) -> DiffMatchPatchMessage? {
+        return DiffMatchPatchMessage(id: id, clientId: clientId, edits: edits)
     }
     
     public func addContent(clientDocument:ClientDocument<String>, fieldName:String, inout objectNode:String) {
