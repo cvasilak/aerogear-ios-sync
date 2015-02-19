@@ -58,7 +58,7 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
         return str
     }
     
-    public func fromJson(var json:String) -> DiffMatchPatchMessage? {
+    public func fromJson(var json: String) -> DiffMatchPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
