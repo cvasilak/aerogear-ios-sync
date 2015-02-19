@@ -63,19 +63,25 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
             let id = dict["id"] as String
             let clientId = dict["clientId"] as String
             var edits = [DiffMatchPatchEdit]()
-            for (key: String, jsonEdit) in dict["edits"] as [String: AnyObject] {
-                var diffs = [DiffMatchPatchDiff]()
-                for (key: String, jsonDiff) in jsonEdit["diffs"] as [String: AnyObject] {
-                    diffs.append(DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation(rawValue: jsonDiff["operation"] as String)!,
-                       text: jsonDiff["text"] as String))
+            if let e = dict["edits"] as? [[String: AnyObject]] {
+                for edit in e {
+                    var diffs = [DiffMatchPatchDiff]()
+                    if let d = edit["diffs"] as? [[String: AnyObject]] {
+                        for diff in d {
+                            diffs.append(DiffMatchPatchDiff(operation:  DiffMatchPatchDiff.Operation(rawValue: diff["operation"] as String)!,
+                                text: diff["text"] as String))
+                        }
+                    }
+                    
+                    edits.append(DiffMatchPatchEdit(clientId: clientId,
+                        documentId: id,
+                        clientVersion: edit["clientVersion"] as Int,
+                        serverVersion: edit["serverVersion"] as Int,
+                        checksum: edit["checksum"] as String,
+                        diffs: diffs))
                 }
-                edits.append(DiffMatchPatchEdit(clientId: clientId,
-                    documentId: id,
-                    clientVersion: jsonEdit["clientVersion"] as Int,
-                    serverVersion: jsonEdit["serverVersion"] as Int,
-                    checksum: jsonEdit["checksum"] as String,
-                    diffs: diffs))
             }
+            
             return DiffMatchPatchMessage(id: id, clientId: clientId, edits: edits)
         }
         return Optional.None

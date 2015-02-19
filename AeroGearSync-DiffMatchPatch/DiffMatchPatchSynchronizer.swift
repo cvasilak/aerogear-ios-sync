@@ -97,10 +97,6 @@ public class DiffMatchPatchSynchronizer: ClientSynchronizer {
     }
     
     public func addContent(clientDocument:ClientDocument<String>, fieldName:String, inout objectNode:String) {
-        objectNode += "\"content\":"
-        // convert client document to json
-        var jsonErrorOptional: NSError?
-        var data = NSJSONSerialization.dataWithJSONObject(clientDocument.content, options:NSJSONWritingOptions(0), error: &jsonErrorOptional)
-        objectNode += NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        objectNode += "\"content\":\(clientDocument.content)"
     }
 }
