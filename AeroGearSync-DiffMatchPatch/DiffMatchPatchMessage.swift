@@ -36,26 +36,18 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     }
     
     public func asJson() -> String {
-        var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
-        str += ",\"edits\":["
-        let count = edits.count-1
-        for i in 0...count {
-            let edit = edits[i]
-            str += "{\"clientVersion\":\(edit.clientVersion)"
-            str += ",\"serverVersion\":\(edit.serverVersion)"
-            str += ",\"checksum\":\"\(edit.checksum)"
-            str += "\",\"diffs\":["
-            let diffscount = edit.diffs.count-1
-            for y in 0...diffscount {
-                let text = edit.diffs[y].text.stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                str += "{\"operation\":\"" + edit.diffs[y].operation.rawValue + "\",\"text\":\"" + text + "\"}"
-                if y != diffscount {
-                    str += ","
-                }
-            }
-            str += "]}]}"
-        }
-        return str
+        let initStr = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\",\"edits\":["
+        return reduce(self.edits, initStr) { (acc: String, edit: DiffMatchPatchEdit) -> String in
+            let initial = "{\"clientVersion\":\(edit.clientVersion),\"serverVersion\":\(edit.serverVersion),\"checksum\":\"\(edit.checksum)\",\"diffs\":["
+            let maybeComma = (edit == self.edits.last) ? "" : ", "
+            let result = reduce(enumerate(edit.diffs), initial
+                , { (acc: String, tuple: (index: Int, diff: DiffMatchPatchDiff )) -> String in
+                    let text = tuple.diff.text.stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    let maybeComma = (tuple.index == edit.diffs.count - 1) ? "" : ", "
+                    return "\(acc){\"operation\":\"" + tuple.diff.operation.rawValue + "\",\"text\":\"" + text + "\"}\(maybeComma)"
+            })
+            return "\(acc)\(result)]}\(maybeComma)"
+        } + "]}"
     }
     
     public func fromJson(var json: String) -> DiffMatchPatchMessage? {
