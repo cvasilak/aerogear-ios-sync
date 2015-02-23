@@ -40,8 +40,6 @@ class DiffMatchPatchMessageTests: XCTestCase {
         let jsonString = message.asJson()
         
         XCTAssertEqual(jsonString, "{\"msgType\":\"patch\",\"id\":\"1\",\"clientId\":\"2\",\"edits\":[{\"clientVersion\":1,\"serverVersion\":2,\"checksum\":\"sum\",\"diffs\":[{\"operation\":\"ADD\",\"text\":\"Hello\"}]}]}");
-        
-                                   
     }
     
     func testFromJson() {
