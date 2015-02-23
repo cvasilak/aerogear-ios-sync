@@ -36,28 +36,31 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     }
     
     public func asJson() -> String {
-        var str = "{\"msgType\":\"patch\",\"id\":\"" + documentId + "\",\"clientId\":\"" + clientId + "\""
-        str += ",\"edits\":["
-        let count = edits.count-1
-        for i in 0...count {
-            let edit = edits[i]
-            str += "{\"clientVersion\":\(edit.clientVersion)"
-            str += ",\"serverVersion\":\(edit.serverVersion)"
-            str += ",\"checksum\":\"\(edit.checksum)"
-            str += "\",\"diffs\":["
-            let diffscount = edit.diffs.count-1
-            for y in 0...diffscount {
-                let text = edit.diffs[y].text.stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                str += "{\"operation\":\"" + edit.diffs[y].operation.rawValue + "\",\"text\":\"" + text + "\"}"
-                if y != diffscount {
-                    str += ","
-                }
+        var dict = [String: AnyObject]()
+        
+        dict["msgType"] = "patch"
+        dict["id"] = documentId
+        dict["clientId"] = clientId
+        dict["edits"] = self.edits.map { (edit:DiffMatchPatchEdit) -> [String: AnyObject] in
+            var dict = [String: AnyObject]()
+            
+            dict["clientVersion"] = edit.clientVersion
+            dict["serverVersion"] = edit.serverVersion
+            dict["checksum"] = edit.checksum
+            
+            dict["diffs"] = edit.diffs.map { (diff:DiffMatchPatchDiff) -> [String: AnyObject] in
+                var dict = [String: AnyObject]()
+                
+                dict["operation"] = diff.operation.rawValue
+                dict["text"] = (diff.text as String).stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                return dict
             }
-            str += "]}]}"
+            return dict
         }
-        return str
+        
+        return asJsonString(dict)!
     }
-    
+
     public func fromJson(var json: String) -> DiffMatchPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String

@@ -18,36 +18,33 @@
 import UIKit
 import XCTest
 import AeroGearSync
-import AeroGearSyncDiffMatchPatch
+import AeroGearSyncJSONPatch
 
-class DiffMatchPatchMessageTests: XCTestCase {
+class JsonPatchMessageTests: XCTestCase {
     
-    var message: DiffMatchPatchMessage!
+    var message: JsonPatchMessage!
     var util: DocUtil!
-
+    
     override func setUp() {
         super.setUp()
-        let diff = DiffMatchPatchDiff(operation: DiffMatchPatchDiff.Operation.Add, text: "Hello")
-        let edit = DiffMatchPatchEdit(clientId: "2", documentId: "1", clientVersion: 1, serverVersion: 2, checksum: "sum", diffs: [diff])
-        self.message = DiffMatchPatchMessage(id: "1", clientId: "2", edits: [edit])
         self.util = DocUtil()
+        var doc1:[String:AnyObject] = ["key1": "value1"]
+        var doc2:[String:AnyObject] = ["key1": "value1", "key2": "value2"]
+        let updated = util.document(doc1)
+        let shadowDoc = util.shadow(doc2)
+        var clientSynchronizer = JsonPatchSynchronizer()
+        let edit = clientSynchronizer.clientDiff(updated, shadow: shadowDoc)
+        message = JsonPatchMessage(id: "1", clientId: "2", edits: [edit])        
     }
     
-    func testAsJsonAndFronJson() {
-        let shadowDoc = util.shadow("Do or do not, there is no try.")
-        let serverDoc = util.document("Do or do not, there is no try!")
-        
-        let jsonString = message.asJson()
+    func testAsJsonAndFromJson() {
+        let jsonString = self.message.asJson()
         let obj = message.fromJson(jsonString)!
-        
         XCTAssertEqual("2", obj.clientId)
         XCTAssertEqual("1", obj.documentId)
         XCTAssertEqual("2", obj.clientId)
         XCTAssertEqual(1, obj.edits.count)
         XCTAssertEqual(1, obj.edits[0].diffs.count)
-        XCTAssertEqual(obj.description, "DiffMatchPatchMessage[documentId=1, clientId=2, edits=[DiffMatchPatchEdit[clientId=2, documentId=1, clientVersion=1, serverVersion=2, checksum=sum, diffs=[DiffMatchPatchDiff[operation=ADD, text=Hello]]]]]");
+        XCTAssertEqual(obj.description, "JsonPatchMessage[documentId=1, clientId=2, edits=[JsonPatchEdit[clientId=2, documentId=1, clientVersion=0, serverVersion=0, checksum=, diffs=[JsonPatchDiff[operation=add, path=/key2 value=Optional(value2)]]]]]");
     }
-    
-
-    
 }
