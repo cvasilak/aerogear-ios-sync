@@ -16,6 +16,7 @@
 */
 
 import AeroGearSync
+import JSONTools
 
 public typealias JsonNode = [String: AnyObject]
 
