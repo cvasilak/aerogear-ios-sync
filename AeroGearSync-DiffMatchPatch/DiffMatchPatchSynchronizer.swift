@@ -16,6 +16,7 @@
 */
 
 import AeroGearSync
+import DiffMatchPatch
 
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
