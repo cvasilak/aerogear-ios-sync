@@ -34,7 +34,7 @@ public struct JsonPatchMessage: PatchMessage, Printable {
         self.clientId = clientId
         self.edits = edits
     }
-
+    
     public func asJson() -> String {
         var dict = [String: AnyObject]()
         
@@ -53,7 +53,9 @@ public struct JsonPatchMessage: PatchMessage, Printable {
                 
                 dict["op"] = diff.operation.rawValue
                 dict["path"] = diff.path
-                dict["value"] = (diff.value as String).stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                if let val = diff.value as? String {
+                    dict["value"] = val.stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                }
                 return dict
             }
             return dict
@@ -61,7 +63,7 @@ public struct JsonPatchMessage: PatchMessage, Printable {
         
         return asJsonString(dict)!
     }
-
+    
     public func fromJson(var json:String) -> JsonPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String
