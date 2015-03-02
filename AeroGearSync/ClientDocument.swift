@@ -17,15 +17,34 @@
 
 import Foundation
 
+/**
+A client document is used on both the server and client side and
+associates a client identifier with a Document.
+<br/><br/>
+```<T>``` the type of this documents content.
+*/
 public class ClientDocument<T>: Document<T>, Printable {
     
+    /**
+    Identifies a client or session to which this Document belongs.
+    */
     public let clientId: String
     
+    /**
+    Default init.
+    
+    :param: id of the document.
+    :param: clientId or session to which this Document belongs.
+    :param: content of the document.
+    */
     public init(id: String, clientId: String, content: T) {
         self.clientId = clientId
         super.init(id: id, content: content)
     }
-
+    
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public override var description: String {
         return "ClientDocument[clientId=\(clientId), documentId=\(super.id), content=\(super.content)]"
     }

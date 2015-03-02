@@ -17,23 +17,100 @@
 
 import Foundation
 
+/**
+A DataStore implementation is responsible for storing and serving data for a
+Differential Synchronization implementation.
+<br/><br/>
+```<T>``` the type of the Document that this data store can store.
+<br/>
+```<D>``` the type of Edits that this data store can store.
+*/
 public protocol DataStore {
     
     typealias T
     typealias D
 
+    /**
+    Saves a client document.
+    
+    :param: clientDocument the ClientDocument to save.
+    */
     func saveClientDocument(clientDocument: ClientDocument<T>)
+    
+    /**
+    Retrieves the ClientDocument matching the passed-in document documentId.
+    
+    :param: documentId the document id of the shadow document.
+    :param: clientId the client for which to retrieve the shadow document.
+    :return: ClientDocument the client document matching the documentId.
+    */
     func getClientDocument(documentId: String, clientId: String) -> ClientDocument<T>?
     
+    /**
+    Saves a shadow document.
+    
+    :param: shadowDocument the ShadowDocument to save.
+    */
     func saveShadowDocument(shadowDocument: ShadowDocument<T>)
+    
+    /**
+    Retrieves the ShadowDocument matching the passed-in document documentId.
+    
+    :param: documentId the document id of the shadow document.
+    :param: clientId the client for which to retrieve the shadow document.
+    :return:  ShadowDocument the shadow document matching the documentId.
+    */
     func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>?
     
+    /**
+    Saves a backup shadow document.
+    
+    :param: backupShadow the BackupShadowDocument to save.
+    */
     func saveBackupShadowDocument(backupShadowDocument: BackupShadowDocument<T>)
+    
+    /**
+    Retrieves the BackupShadowDocument matching the passed-in document documentId.
+    
+    :param: documentId the document identifier of the backup shadow document.
+    :param: clientId the client identifier for which to fetch the document.
+    :return: BackupShadowDocument the backup shadow document matching the documentId.
+    */
     func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>?
     
+    /**
+    Saves an Edit to the data store.
+    
+    :param: edit the edit to be saved.
+    :param: documentId the document identifier for the edit.
+    :param: clientId the client identifier for the edit.
+    */
     func saveEdits(edit: D)
+    
+    /**
+    Retreives the array of Edits for the specified document documentId.
+    
+    :param: documentId the document identifier of the edit.
+    :param: clientId the client identifier for which to fetch the document.
+    :return: [D] the edits for the document.
+    */
     func getEdits(documentId: String, clientId: String) -> [D]?
+    
+    /**
+    Removes the edit from the store.
+    
+    :param: edit the edit to be removed.
+    :param: documentId the document identifier for the edit.
+    :param: clientId the client identifier for the edit.
+    */
     func removeEdit(edit: D)
+    
+    /**
+    Removes all edits for the specific client and document pair.
+    
+    :param: documentId the document identifier of the edit.
+    :param: clientId the client identifier.
+    */
     func removeEdits(documentId: String, clientId: String)
     
 }

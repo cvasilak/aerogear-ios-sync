@@ -17,11 +17,26 @@
 
 import Foundation
 
+/**
+Represents something that can be exchanged in JSON format.
+<br/><br/>
+```<T>``` the type of the payload.
+*/
 public protocol Payload {
     
     typealias T
     
+    /**
+    Transforms this payload to a JSON String representation.
+    :return: s string representation of JSON object.
+    */
     func asJson() -> String
     
+    /**
+    Transforms the passed in string JSON representation into this payloads type.
+    
+    :param: json a string representation of this payloads type.
+    :return: T an instance of this payloads type.
+    */
     func fromJson(var json:String) -> T?
 }
