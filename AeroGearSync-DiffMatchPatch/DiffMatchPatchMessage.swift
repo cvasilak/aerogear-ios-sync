@@ -19,22 +19,51 @@ import Foundation
 import AeroGearSync
 
 public struct DiffMatchPatchMessage:PatchMessage, Printable {
+    
+    /**
+    Identifies the document that this edit is related to.
+    */
     public let documentId: String!
+    
+    /**
+    Identifies the client that this edit instance belongs to.
+    */
     public let clientId: String!
+    
+    /**
+    The list Edits.
+    */
     public let edits: [DiffMatchPatchEdit]!
     
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "DiffMatchPatchMessage[documentId=\(documentId), clientId=\(clientId), edits=\(edits)]"
     }
-    
+
+    /**
+    Default init.
+    */
     public init() {}
     
+    /**
+    Default init.
+    
+    :param: id represents an id of PatchMessage.
+    :param: clientId represents an id of the client session.
+    :param: diff list of differences.
+    */
     public init(id: String, clientId: String, edits: [DiffMatchPatchEdit]) {
         self.documentId = id
         self.clientId = clientId
         self.edits = edits
     }
     
+    /**
+    Transforms this payload to a JSON String representation.
+    :return: a string representation of JSON object.
+    */
     public func asJson() -> String {
         var dict = [String: AnyObject]()
         
@@ -60,7 +89,13 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
         
         return asJsonString(dict)!
     }
-
+    
+    /**
+    Transforms the passed in string JSON representation into this payloads type.
+    
+    :param: json a string representation of this payloads type.
+    :return: DiffMatchPatchMessage an instance of this payloads type.
+    */
     public func fromJson(var json: String) -> DiffMatchPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String

@@ -19,22 +19,48 @@ import Foundation
 import AeroGearSync
 
 public struct JsonPatchMessage: PatchMessage, Printable {
+    
+    /**
+    Identifies the document that this edit is related to.
+    */
     public let documentId: String!
+    
+    /**
+    Identifies the client that this edit instance belongs to.
+    */
     public let clientId: String!
+    
+    /**
+    The list Edits.
+    */
     public let edits: [JsonPatchEdit]!
     
     public var description: String {
         return "JsonPatchMessage[documentId=\(documentId), clientId=\(clientId), edits=\(edits)]"
     }
     
+    /**
+    Default init.
+    */
     public init() {}
     
+    /**
+    Default init.
+    
+    :param: pathMessageId unique id.
+    :param: client id to identify the client sesion.
+    :param: list of edits that makes the content of the patch.
+    */
     public init(id: String, clientId: String, edits: [JsonPatchEdit]) {
         self.documentId = id
         self.clientId = clientId
         self.edits = edits
     }
     
+    /**
+    Transforms this payload to a JSON String representation.
+    :return: s string representation of JSON object.
+    */
     public func asJson() -> String {
         var dict = [String: AnyObject]()
         
@@ -64,6 +90,12 @@ public struct JsonPatchMessage: PatchMessage, Printable {
         return asJsonString(dict)!
     }
     
+    /**
+    Transforms the passed in string JSON representation into this payloads type.
+    
+    :param: json a string representation of this payloads type.
+    :return: JsonPatchMessage an instance of this payloads type.
+    */
     public func fromJson(var json:String) -> JsonPatchMessage? {
         if let dict = asDictionary(json) {
             let id = dict["id"] as String

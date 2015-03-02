@@ -15,4 +15,10 @@
 * limitations under the License.
 */
 
+/**
+A marker interface that represents a diff or two versions of a document/object.
+<br/><br/>
+The actual implementation of a diff will vary depending on the type of content the
+ClientSynchronizer can handle.
+*/
 public protocol Difference: Printable {}

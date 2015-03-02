@@ -17,15 +17,37 @@
 
 import Foundation
 
+/**
+A backup of the ShadowDocument.
+<br/><br/>
+```<T>``` the type of the Document that this instance backups.
+*/
 public class BackupShadowDocument<T>: Printable {
+    
+    /**
+    Represents the version of this backup shadow.
+    */
     public let version: Int
+    
+    /**
+    The ShadowDocument that this instance is backing up.
+    */
     public let shadowDocument: ShadowDocument<T>
     
+    /**
+    Default init.
+    
+    :param: version of this backup shadow.
+    :param: shadowDocument that this instance is backing up.
+    */
     public init(version: Int, shadowDocument: ShadowDocument<T>) {
         self.version = version
         self.shadowDocument = shadowDocument
     }
 
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "BackupShadowDocument[version=\(version), shadowDocument=\(shadowDocument)]"
     }

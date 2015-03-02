@@ -17,13 +17,39 @@
 
 import Foundation
 
+/**
+Represents a stack of changes made on the server of client side.
+<br/><br/>
+A PatchMessage is what is passed between the client and the server. It contains an array of
+Edits that represent updates to be performed on the opposing sides document.
+<br/><br/>
+```<E>``` the type of the Edit that this PatchMessage holds.
+*/
 public protocol PatchMessage: Printable, Payload {
     
     typealias E: Edit
     
+    /**
+    Identifies the document that this edit is related to.
+    */
     var documentId: String! {get}
+    
+    /**
+    Identifies the client that this edit instance belongs to.
+    */
     var clientId: String! {get}
+    
+    /**
+    The list Edits.
+    */
     var edits: [E]! {get}
     
-    init(id: String, clientId: String, edits: [E])    
+    /**
+    Default init.
+    
+    :param: pathMessage unique id.
+    :param: client id to identify the client sesion.
+    :param: list of edits that makes the content of the patch.
+    */
+    init(id: String, clientId: String, edits: [E])
 }
