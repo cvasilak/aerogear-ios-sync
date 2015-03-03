@@ -35,17 +35,29 @@ To construct a client that uses the JSON Patch you would use the following code:
 ```var engine: ClientSyncEngine<JsonPatchSynchronizer, InMemoryDataStore<JsonNode, JsonPatchEdit>>
 engine = ClientSyncEngine(synchronizer: JsonPatchSynchronizer(), dataStore: InMemoryDataStore())```
 <br/><br/>
-The ClientSynchronizer generic type is the type taht this implementation can handle.
-The DataStore generic type is the type that this implementation can handle. The ClientSynchronizer and DataStore shoutl have
-compatible document type.
+The ClientSynchronizer generic type is the type that this implementation can handle.
+The DataStore generic type is the type that this implementation can handle. 
+The ClientSynchronizer and DataStore should have compatible document type.
 */
 public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D.T, CS.D == D.D, CS.P.E == CS.D > {
     
     typealias T = CS.T
     typealias E = CS.D
     typealias P = CS.P
+    
+    /**
+    The ClientSynchronizer in charge of providing the patching algorithm.
+    */
     let synchronizer: CS
+    
+    /**
+    The DataStore use for storing edits.
+    */
     let dataStore: D
+    
+    /**
+    The dictionary of callback closures.
+    */
     var callbacks = Dictionary<String, (ClientDocument<T>) -> ()>()
 
     /**
@@ -82,9 +94,9 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     <br/><br/>
     The returned PatchMessage instance is indended to be sent to the server engine
     for processing.
-    <br/><br/>
-    :param: document the updated document.
-    :return: PatchMessage containing the edits for the changes in the document.
+    
+    :param: document the updated document.    
+    :returns: PatchMessage containing the edits for the changes in the document.
     */
 
     public func diff(clientDocument: ClientDocument<T>) -> P? {
@@ -106,7 +118,7 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
     When updates happen on the server, the server will create an PatchMessage instance
     by calling the server engines diff method. This PatchMessage instance will then be
     sent to the client for processing which is done by this method.
-    <br/><br/>
+    
     :param: patchMessage the updates from the server.
     */
     public func patch(patchMessage: P) {
@@ -193,10 +205,22 @@ public class ClientSyncEngine<CS:ClientSynchronizer, D:DataStore where CS.T == D
         return Optional.None
     }
     
+    /**
+    Delegate to Synchronizer.patchMessageFronJson. Creates a PatchMessage by parsing the passed-in json.
+    
+    :param: json string representation.
+    :returns: PatchMessage created fron jsons string.
+    */
     public func patchMessageFromJson(json: String) -> P? {
         return synchronizer.patchMessageFromJson(json)
     }
-
+    
+    /**
+    Delegate to Synchronizer.addContent.
+    
+    :param: clientDocument the content itself.
+    :returns: String with all ClientDocument information.
+    */
     public func documentToJson(clientDocument:ClientDocument<T>) -> String {
         var str = "{\"msgType\":\"add\",\"id\":\"" + clientDocument.id + "\",\"clientId\":\"" + clientDocument.clientId + "\","
         synchronizer.addContent(clientDocument, fieldName: "content", objectNode: &str)

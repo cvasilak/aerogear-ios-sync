@@ -59,7 +59,7 @@ public struct JsonPatchMessage: PatchMessage, Printable {
     
     /**
     Transforms this payload to a JSON String representation.
-    :return: s string representation of JSON object.
+    :returns: s string representation of JSON object.
     */
     public func asJson() -> String {
         var dict = [String: AnyObject]()
@@ -94,7 +94,7 @@ public struct JsonPatchMessage: PatchMessage, Printable {
     Transforms the passed in string JSON representation into this payloads type.
     
     :param: json a string representation of this payloads type.
-    :return: JsonPatchMessage an instance of this payloads type.
+    :returns: JsonPatchMessage an instance of this payloads type.
     */
     public func fromJson(var json:String) -> JsonPatchMessage? {
         if let dict = asDictionary(json) {

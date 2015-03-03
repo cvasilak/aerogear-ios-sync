@@ -38,7 +38,7 @@ public protocol ClientSynchronizer {
     
     :param: edit the Edit containing the diffs/patches.
     :param: shadowDocument the ShadowDocument to be patched.
-    :return: ShadowDocument a new patched shadow document.
+    :returns: ShadowDocument a new patched shadow document.
     */
     func patchShadow(edit: D, shadow: ShadowDocument<T>) -> ShadowDocument<T>
     
@@ -47,7 +47,7 @@ public protocol ClientSynchronizer {
     
     :param: edit the Edit containing the diffs/patches.
     :param: document the ClientDocument to be patched.
-    :return: ClientDocument a new patched document.
+    :returns: ClientDocument a new patched document.
     */
     func patchDocument(edit: D, clientDocument: ClientDocument<T>) -> ClientDocument<T>
     
@@ -55,10 +55,10 @@ public protocol ClientSynchronizer {
     Produces a Edit containing the changes between updated ShadowDocument and the ClientDocument.
     This method would be called when the client receives an update from the server and need
     to produce an Edit to be able to patch the ClientDocument.
-    <br/><br/>
+    
     :param: shadowDocument the ShadowDocument patched with updates from the server
     :param: document the ClientDocument.
-    :return: Edit the edit representing the diff between the shadow document and the client document.
+    :returns: Edit the edit representing the diff between the shadow document and the client document.
     */
     func clientDiff(clientDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
     
@@ -69,10 +69,10 @@ public protocol ClientSynchronizer {
     Calling the method is the first step in when starting a client side synchronization. We need to
     gather the changes between the updates made by the client and the shadow document.
     The produced Edit can then be passed to the server side.
-    <br/><br/>
+    
     :param: document the ClientDocument containing updates made by the client.
     :param: shadowDocument the ShadowDocument for the ClientDocument.
-    :return: Edit the edit representing the diff between the client document and it's shadow document.
+    :returns: Edit the edit representing the diff between the client document and it's shadow document.
     */
     func serverDiff(serverDocument: ClientDocument<T>, shadow: ShadowDocument<T>) -> D
     
@@ -80,18 +80,18 @@ public protocol ClientSynchronizer {
     Creates a PatchMessage by parsing the passed-in json.
     
     :param: json the json representation of a PatchMessage.
-    :return: PatchMessage the created PatchMessage.
+    :returns: PatchMessage the created PatchMessage.
     */
     func patchMessageFromJson(json: String) -> P?
     
     /**
     Creates a new PatchMessage with the with the type of Edit that this
     synchronizer can handle.
-    <br/><br/>
+    
     :param: documentId the document identifier for the PatchMessage.
     :param: clientId the client identifier for the PatchMessage.
     :param: edits the Edits for the PatchMessage.
-    :return: PatchMessage the created PatchMessage.
+    :returns: PatchMessage the created PatchMessage.
     */
     func createPatchMessage(id: String, clientId: String, edits: [D]) -> P?
     

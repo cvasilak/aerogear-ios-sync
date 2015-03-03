@@ -54,7 +54,7 @@ public class InMemoryDataStore<T, E: Edit>: DataStore {
     
     :param: documentId the document id of the shadow document.
     :param: clientId the client for which to retrieve the shadow document.
-    :return:  ClientDocument the client document matching the documentId.
+    :returns:  ClientDocument the client document matching the documentId.
     */
     public func getClientDocument(documentId: String, clientId: String) -> ClientDocument<T>? {
         return documents[InMemoryDataStore.key(documentId, clientId)]
@@ -75,7 +75,7 @@ public class InMemoryDataStore<T, E: Edit>: DataStore {
     
     :param: documentId the document id of the shadow document.
     :param: clientId the client for which to retrieve the shadow document.
-    :return:  ShadowDocument the shadow document matching the documentId.
+    :returns:  ShadowDocument the shadow document matching the documentId.
     */
     public func getShadowDocument(documentId: String, clientId: String) -> ShadowDocument<T>? {
         return shadows[InMemoryDataStore.key(documentId, clientId)]
@@ -96,7 +96,7 @@ public class InMemoryDataStore<T, E: Edit>: DataStore {
     
     :param: documentId the document identifier of the backup shadow document.
     :param: clientId the client identifier for which to fetch the document.
-    :return: BackupShadowDocument the backup shadow document matching the documentId.
+    :returns: BackupShadowDocument the backup shadow document matching the documentId.
     */
     public func getBackupShadowDocument(documentId: String, clientId: String) -> BackupShadowDocument<T>? {
         return backups[InMemoryDataStore.key(documentId, clientId)]
@@ -124,7 +124,7 @@ public class InMemoryDataStore<T, E: Edit>: DataStore {
     
     :param: documentId the document identifier of the edit.
     :param: clientId the client identifier for which to fetch the document.
-    :return: [D] the edits for the document.
+    :returns: [D] the edits for the document.
     */
     public func getEdits(documentId: String, clientId: String) -> [E]? {
         return edits[InMemoryDataStore.key(documentId, clientId)]?
