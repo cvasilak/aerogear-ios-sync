@@ -62,7 +62,8 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     
     /**
     Transforms this payload to a JSON String representation.
-    :return: a string representation of JSON object.
+    
+    :returns: a string representation of JSON object.
     */
     public func asJson() -> String {
         var dict = [String: AnyObject]()
@@ -94,7 +95,7 @@ public struct DiffMatchPatchMessage:PatchMessage, Printable {
     Transforms the passed in string JSON representation into this payloads type.
     
     :param: json a string representation of this payloads type.
-    :return: DiffMatchPatchMessage an instance of this payloads type.
+    :returns: DiffMatchPatchMessage an instance of this payloads type.
     */
     public func fromJson(var json: String) -> DiffMatchPatchMessage? {
         if let dict = asDictionary(json) {
