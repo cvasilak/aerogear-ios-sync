@@ -17,9 +17,19 @@
 
 import AeroGearSync
 
+/**
+Implements the marker interface that represents a diff or two versions of a document/object.
+*/
 public struct DiffMatchPatchDiff: Difference {
     
+    /**
+    Defines type of operation: ADD, DELETe, UNCHANGED.
+    */
     public let operation: Operation
+    
+    /**
+    Represents the content of the difference.
+    */
     public let text: String
     
     public enum Operation : String, Printable {
@@ -31,11 +41,20 @@ public struct DiffMatchPatchDiff: Difference {
         }
     }
     
+    /**
+    Default init.
+    
+    :param: operation either ADD, DELETE, UNCHANGED.
+    :param: text the content of the diff itself.
+    */
     public init(operation: Operation, text: String) {
         self.operation = operation
         self.text = text
     }
     
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "DiffMatchPatchDiff[operation=\(operation), text=\(text)]"
     }

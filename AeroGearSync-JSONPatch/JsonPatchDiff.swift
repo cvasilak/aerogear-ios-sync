@@ -19,8 +19,19 @@ import AeroGearSync
 
 public struct JsonPatchDiff: Difference {
     
+    /**
+    Defines type of operation: Add, Remove etc...
+    */
     public let operation: Operation
+    
+    /**
+    Defines the path where the patch should be applied.
+    */
     public let path: String
+    
+    /**
+    Represents the content of the difference.
+    */
     public let value: AnyObject?
     
     public enum Operation : String, Printable {
@@ -37,18 +48,33 @@ public struct JsonPatchDiff: Difference {
         }
     }
     
+    /**
+    Default init.
+    
+    :param: operation either Add. copy, Replace...
+    :param: path in the JSON document on where to apply the patch.
+    :param: value the new JSON node. Could be nil for Remove.
+    */
     public init(operation: Operation, path: String, value: AnyObject?) {
         self.operation = operation
         self.path = path
         self.value = value
     }
     
+    /**
+    Convenience init.
+    
+    :param: operation used got Get operation only.
+    */
     public init(operation: Operation) {
         self.operation = operation
         self.path = ""
         self.value = nil
     }
     
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "JsonPatchDiff[operation=\(operation), path=\(path) value=\(value)]"
     }

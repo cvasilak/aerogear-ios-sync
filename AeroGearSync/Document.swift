@@ -17,16 +17,37 @@
 
 import Foundation
 
+/**
+Represents the server side version of a document.
+<br/><br/>
+```<T>``` the type of the document contents.
+*/
 public class Document<T>: Printable {
     
+    /**
+    The identifier for a document.
+    */
     public let id: String
+    
+    /**
+    The content for a document.
+    */
     public let content: T
     
+    /**
+    Default init.
+    
+    :param: document id.
+    :param: content of the document of generic type T.
+    */
     init(id: String, content: T) {
         self.id = id
         self.content = content
     }
-
+    
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "Document[id=\(id), content=\(content)]"
     }

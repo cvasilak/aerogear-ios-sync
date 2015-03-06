@@ -17,15 +17,44 @@
 
 import Foundation
 
+/**
+Represents a single edit. The typealias D refer to the type of the Diff comaptible with the Edit.
+*/
 public protocol Edit: Equatable, Printable {
 
     typealias D
     
+    /**
+    The clientId to identifie which client it is related to.
+    */
     var clientId: String {get}
+    
+    /**
+    The documentId to identifie which docuemnt the edit applies to.
+    */
     var documentId: String {get}
+    
+    /**
+    The client version that edit is related to.
+    */
     var clientVersion: Int {get}
+    
+    /**
+    The server version that edit is related to.
+    */
     var serverVersion: Int {get}
+    
+    /**
+    A checksum of the opposing sides shadow document.
+    The shadow document must patch strictly and this checksum is used to verify that the other sides
+    shadow document is in fact the same. This can then be used by before patching to make sure that
+    the shadow documents on both sides are in fact identical.
+    */
     var checksum: String {get}
+    
+    /**
+    The Diff for this edit.
+    */
     var diffs: [D] {get}
 }
 

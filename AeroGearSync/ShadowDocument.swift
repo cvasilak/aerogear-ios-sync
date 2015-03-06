@@ -17,17 +17,45 @@
 
 import Foundation
 
+/**
+A shadow document for each client will exist on the client side and also on the server side.
+<br/>
+A shadow document is updated after a successful patch has been performed.
+<br/><br/>
+```<T>``` the type of the Document that this instance shadows.
+*/
 public class ShadowDocument<T>: Printable {
+    /**
+    Represents the latest client version that this shadow document was based on.
+    */
     public let clientVersion: Int
+    
+    /**
+    Represents the latest server version that the this shadow document was based on.
+    */
     public let serverVersion: Int
+    
+    /**
+    The document itself.
+    */
     public let clientDocument: ClientDocument<T>
-
+    
+    /**
+    Default init.
+    
+    :param: clientVersion he latest client version that this shadow document was based on.
+    :param: serverVersion the latest server version that the this shadow document was based on.
+    :param: clientDocument.
+    */
     public init(clientVersion: Int, serverVersion: Int, clientDocument: ClientDocument<T>) {
         self.clientVersion = clientVersion
         self.serverVersion = serverVersion
         self.clientDocument = clientDocument
     }
-
+    
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "ShadowDocument[clientVersion=\(clientVersion), serverVersion=\(serverVersion), clientDocument=\(clientDocument)]"
     }

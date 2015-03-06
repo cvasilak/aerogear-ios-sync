@@ -18,13 +18,49 @@
 import AeroGearSync
 
 public struct DiffMatchPatchEdit: Edit {
+    /**
+    The clientId to identifie which client it is related to.
+    */
     public let clientId: String
+    
+    /**
+    The documentId to identifie which docuemnt the edit applies to.
+    */
     public let documentId: String
+    
+    /**
+    The client version that edit is related to.
+    */
     public let clientVersion: Int
+    
+    /**
+    The server version that edit is related to.
+    */
     public let serverVersion: Int
+    
+    /**
+    A checksum of the opposing sides shadow document.
+    The shadow document must patch strictly and this checksum is used to verify that the other sides
+    shadow document is in fact the same. This can then be used by before patching to make sure that
+    the shadow documents on both sides are in fact identical.
+    */
     public let checksum: String
+    
+    /**
+    The Diff for this edit.
+    */
     public let diffs: [DiffMatchPatchDiff]
     
+    /**
+    Default init.
+    
+    :param: clientId represents an id of the client session.
+    :param: documentId represents an id of the edit.
+    :param: clientVersion represents the version of the client edit.
+    :param: serverVersion represents an id of the server edit.
+    :param: checksum
+    :param: diff list of differences.
+    */
     public init(clientId: String, documentId: String, clientVersion: Int, serverVersion: Int, checksum: String, diffs: [DiffMatchPatchDiff]) {
         self.clientId = clientId
         self.documentId = documentId
@@ -34,6 +70,9 @@ public struct DiffMatchPatchEdit: Edit {
         self.diffs = diffs
     }
     
+    /**
+    Printable protocol implementation, provides a string representation of the object.
+    */
     public var description: String {
         return "DiffMatchPatchEdit[clientId=\(clientId), documentId=\(documentId), clientVersion=\(clientVersion), serverVersion=\(serverVersion), checksum=\(checksum), diffs=\(diffs)]"
     }
