@@ -20,6 +20,10 @@ import JSONTools
 
 public typealias JsonNode = [String: AnyObject]
 
+/**
+An instance of this class will be able to handle tasks needed to implement
+Differential Synchronization for a Json document.
+*/
 public class JsonPatchSynchronizer: ClientSynchronizer {
     
     public init() {}

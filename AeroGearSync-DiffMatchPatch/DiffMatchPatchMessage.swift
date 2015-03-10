@@ -18,6 +18,13 @@
 import Foundation
 import AeroGearSync
 
+/**
+Represents a stack of changes made on the server of client side.
+<br/><br/>
+A DiffMatchPatchMessage is what is passed between the client and the server. It contains an array of Edits that represent updates to be performed on the opposing sides document. 
+<br/><br/>
+DiffMatchPatchMessage works with JsonPatch Synchronizer.
+*/
 public struct DiffMatchPatchMessage:PatchMessage, Printable {
     
     /**

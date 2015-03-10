@@ -17,6 +17,9 @@
 
 import AeroGearSync
 
+/**
+Represents a single edit that goes with DiffMatchPatch Synchronizer.
+*/
 public struct DiffMatchPatchEdit: Edit {
     /**
     The clientId to identifie which client it is related to.

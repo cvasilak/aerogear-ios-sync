@@ -18,6 +18,10 @@
 import AeroGearSync
 import DiffMatchPatch
 
+/**
+An instance of this class will be able to handle tasks needed to implement
+Differential Synchronization for a text-based document.
+*/
 public class DiffMatchPatchSynchronizer: ClientSynchronizer {
 
     let dmp: DiffMatchPatch

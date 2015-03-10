@@ -16,7 +16,9 @@
 */
 
 import AeroGearSync
-
+/**
+A struct that represents a diff or two versions of a document/object.
+*/
 public struct JsonPatchDiff: Difference {
     
     /**

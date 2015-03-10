@@ -18,6 +18,14 @@
 import Foundation
 import AeroGearSync
 
+/**
+Represents a stack of changes made on the server of client side.
+<br/><br/>
+A JsonPatchMessage is what is passed between the client and the server. It contains an array of
+Edits that represent updates to be performed on the opposing sides document. 
+<br/><br/>
+JsonPatchMessage works with JsonPatch Synchronizer.
+*/
 public struct JsonPatchMessage: PatchMessage, Printable {
     
     /**

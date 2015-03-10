@@ -17,6 +17,9 @@
 
 import AeroGearSync
 
+/**
+Represents a single edit that goes with JsonPatch Synchronizer.
+*/
 public struct JsonPatchEdit: Edit {
     
     /**
