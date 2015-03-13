@@ -10,7 +10,7 @@ Synchronization (DS) Server](https://github.com/aerogear/aerogear-sync-server/).
 This project used [CocoaPods](http://cocoapods.org/) to managed its dependencies. The following command 
 must be run prior to building:
     
-    sudo gem install cocoapods --pre
+    sudo gem install cocoapods
     pod install
 
 ## Building
@@ -33,7 +33,7 @@ You can also run test from the command:
     xcodebuild -workspace AeroGearSync.xcworkspace -scheme AeroGearSync -destination 'platform=iOS Simulator,name=iPhone 5s' test
 
 ### [CocoaPods](http://cocoapods.org/) 
-At this time, Cocoapods support for Swift frameworks is supported in a [pre-release](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/).
+Support for Swift frameworks is supported from [CocoaPods-0.36 release](http://blog.cocoapods.org/CocoaPods-0.36/) upwards. In your ```Podfile``` add:
 
 To use AeroGearSync in your project add the following 'Podfile' to your project
 
