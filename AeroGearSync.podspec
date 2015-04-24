@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AeroGearSync"
-  s.version      = "0.2.0"
+  s.version      = "1.0.0-alpha.2"
   s.summary      = "An iOS Sync Engine for AeroGear Differential Synchronization"
   s.homepage     = "https://github.com/aerogear/aerogear-sync-server"
   s.license      = 'Apache License, Version 2.0'
